@@ -10,6 +10,17 @@ public class Reservation {
 	private String cID; // client ID
 	private String rID; // room ID
 	
+	// used when creating a reservation. The reservation ID has not yet
+	// been created by the DB
+	public Reservation(Date start, Date end, String cID, String rID) {
+		this.id = -1;
+		this.start = start;
+		this.end = end;
+		this.cID = cID;
+		this.rID = rID;
+	}
+
+	// used when reading a reservation from the DB
 	public Reservation(int id, Date start, Date end, String cID, String rID) {
 		this.id = id;
 		this.start = start;
