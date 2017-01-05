@@ -70,7 +70,7 @@ public enum DBManager {
 		}	
 	}
 	
-	// executes a query on the DB
+	// returns a list of clients from the DB
 	public static ArrayList<Client> getClientList() {
 		try {
 			DB.s = DB.c.createStatement();
