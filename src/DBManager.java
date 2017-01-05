@@ -1,6 +1,7 @@
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.util.ArrayList;
 
 /*
  * A singleton for managing the sqlite database we're using.
@@ -67,6 +68,28 @@ public enum DBManager {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			return 1;
 		}	
+	}
+	
+	// executes a query on the DB
+	public static ArrayList<Client> getClientList() {
+		try {
+			DB.s = DB.c.createStatement();
+			ArrayList<Client> cl = new ArrayList<Client>();
+			ResultSet rs = DB.s.executeQuery("select * from client;");
+			while (rs.next() ) {
+				String id = rs.getString("cid");
+				String name = rs.getString("name");
+				int phone = rs.getInt("phone");
+				Client c = new Client(id, name, phone);
+				cl.add(c);
+			}
+			rs.close();
+			DB.s.close();
+			return cl;
+		} catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			return null;
+		}
 	}
 	
 	// Add a Client in the DB
