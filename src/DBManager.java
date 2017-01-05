@@ -2,7 +2,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 
-// creates a singleton for the Database Manager
+/*
+ * A singleton for managing the sqlite database we're using.
+ * You can run SQL statements on the DB using:
+ * 		DBManager.DB.runStatement(yourStatement);
+ */
+
 public enum DBManager {
 	DB;
 
