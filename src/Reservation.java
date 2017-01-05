@@ -1,4 +1,5 @@
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -97,5 +98,63 @@ public class Reservation {
 	
 	public void setrID(String rID) {
 		this.rID = rID;
+	}
+
+	public static void main(String[] args) throws ParseException {
+		// testing
+		int retval;
+		System.out.println("Creating a new reservation:");
+		String sStart = "2017/01/10";
+		String sEnd = "2017/01/15";
+		// convert string dates to actual dates
+		DateFormat format = new SimpleDateFormat("yyyy/M/d");
+		Date start = format.parse(sStart);
+		Date end = format.parse(sEnd);
+		Reservation r = new Reservation(start, end, "AB123456", "201");
+		retval = r.addToDB();
+		if (retval == 0) {
+			System.out.println("OK");
+		} else {
+			System.out.println("NOK");
+		}
+		System.out.println(r);
+		System.out.println("Changing the start date:");
+		sStart = "2017/1/9";
+		start = format.parse(sStart);
+		r.setStart(start);
+		retval = r.updateDB();
+		if (retval == 0) {
+			System.out.println("OK");
+		} else {
+			System.out.println("NOK");
+		}
+		System.out.println(r);
+		System.out.println("Changing the end date:");
+		sEnd = "2017/1/17";
+		end = format.parse(sEnd);
+		r.setEnd(end);
+		retval = r.updateDB();
+		if (retval == 0) {
+			System.out.println("OK");
+		} else {
+			System.out.println("NOK");
+		}
+		System.out.println(r);
+		System.out.println("Changing room:");
+		r.setrID("202");
+		retval = r.updateDB();
+		if (retval == 0) {
+			System.out.println("OK");
+		} else {
+			System.out.println("NOK");
+		}
+		System.out.println(r);
+		System.out.println("Deleting from DB:");
+		retval = r.deleteFromDB();
+		if (retval == 0) {
+			System.out.println("OK");
+		} else {
+			System.out.println("NOK");
+		}
 	}
 }
