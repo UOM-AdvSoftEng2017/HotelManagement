@@ -1,8 +1,12 @@
+import java.util.ArrayList;
 
 public class HotelManagement {
 
 	public static void main(String[] args) {
-		System.out.println("Hellow world!");
+		ArrayList<Client> cl = ClientList.CL.getCL();
+		for (Client c: cl) {
+			System.out.println(c);
+		}
 	}
 
 }
