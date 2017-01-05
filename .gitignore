@@ -1,9 +1,4 @@
 *.class
-<<<<<<< HEAD
-
 *.xml
-
 HotelManagement.iml
-=======
 *.jar
->>>>>>> origin/master
