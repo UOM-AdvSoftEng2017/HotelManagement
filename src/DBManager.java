@@ -127,6 +127,58 @@ public enum DBManager {
 		return DBManager.run(new String(s));
 	}
 
+	// returns a list of rooms from the DB
+	public static ArrayList<Room> getRoomList() {
+		try {
+			DB.s = DB.c.createStatement();
+			ArrayList<Room> rl = new ArrayList<Room>();
+			ResultSet rs = DB.s.executeQuery("select * from room;");
+			while (rs.next() ) {
+				String id = rs.getString("rid");
+				int type = rs.getInt("type");
+				Room r = new Room(id, type);
+				rl.add(r);
+			}
+			rs.close();
+			DB.s.close();
+			return rl;
+		} catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			return null;
+		}
+	}
+	
+	// Add a Room in the DB
+	public static int addRoom(Room r) {
+		StringBuilder s = new StringBuilder();
+		s.append("insert into room (rid, type) values (\"");
+		s.append(r.getId());
+		s.append("\", \"");
+		s.append(r.getType());
+		s.append(");");
+		return run(new String(s));
+	}
+
+	// Update room details (room type) in the DB
+	public static int updateRoom(Room r) {
+		StringBuilder s = new StringBuilder();
+		s.append("update room set type = \"");
+		s.append(r.getType());
+		s.append(" where rid == \"");
+		s.append(r.getId());
+		s.append("\";");
+		return DBManager.run(new String(s));
+	}
+
+	// delete the client from the DB
+	public static int deleteRoom(Room r) {
+		StringBuilder s = new StringBuilder();
+		s.append("delete from room where rid == \"");
+		s.append(r.getId());
+		s.append("\";");
+		return DBManager.run(new String(s));
+	}
+	
 	public static void main(String[] args) {
 
 	}
