@@ -15,7 +15,7 @@ public enum DBManager {
 	final String filename = "hotel.db";
 	
 	// runs any SQL statement provided 
-	public static void runStatement(String sqlStatement) {
+	public static void run(String sqlStatement) {
 		Connection c = null;
 		Statement s = null;
 		try {
@@ -41,7 +41,7 @@ public enum DBManager {
 			// read the DB creation statements from a file. It would be ugly to
 			// put them all in a Java string.
 			String sql = new String(Files.readAllBytes(Paths.get("create_db.sql")), "utf8");
-			runStatement(sql);
+			run(sql);
 		} catch (Exception e) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
