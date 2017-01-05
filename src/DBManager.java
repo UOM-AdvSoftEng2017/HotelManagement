@@ -127,19 +127,7 @@ public enum DBManager {
 		return DBManager.run(new String(s));
 	}
 
-	public static int createEmptyDB() {
-		try {
-			// read the DB creation statements from a file. It would be ugly to
-			// put them all in a Java string.
-			String sql = new String(Files.readAllBytes(Paths.get("create_db.sql")), "utf8");
-			return run(sql);
-		} catch (Exception e) {
-			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-			return 2;
-		}
-	}
-
 	public static void main(String[] args) {
-		createEmptyDB();
+
 	}
 }
