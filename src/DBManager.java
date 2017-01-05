@@ -158,7 +158,7 @@ public enum DBManager {
 		s.append(r.getId());
 		s.append("\", \"");
 		s.append(r.getType());
-		s.append(");");
+		s.append("\");");
 		return run(new String(s));
 	}
 
@@ -167,7 +167,7 @@ public enum DBManager {
 		StringBuilder s = new StringBuilder();
 		s.append("update room set type = \"");
 		s.append(r.getType());
-		s.append(" where rid == \"");
+		s.append("\" where rid == \"");
 		s.append(r.getId());
 		s.append("\";");
 		return DBManager.run(new String(s));
