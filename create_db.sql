@@ -1,6 +1,6 @@
 pragma foreign_keys = ON; 
 BEGIN TRANSACTION;
-CREATE TABLE "Customer" (
+CREATE TABLE "Client" (
  "CID" TEXT NOT NULL UNIQUE,
  "Name" TEXT,
  "Phone" INTEGER,
@@ -16,9 +16,9 @@ CREATE TABLE "Reservation" (
  "RESID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
  "StartDate" TEXT,
  "EndDate" TEXT,
- "CustomerID" TEXT,
+ "ClientID" TEXT,
  "RoomID" TEXT,
- FOREIGN KEY("CustomerID") REFERENCES Customer("CID"),
+ FOREIGN KEY("ClientID") REFERENCES Client("CID"),
  FOREIGN KEY("RoomID") REFERENCES Room("RID")
 );
 CREATE TABLE "RoomType" (
