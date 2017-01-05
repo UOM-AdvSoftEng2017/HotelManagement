@@ -44,4 +44,35 @@ public class Room {
 	public void setType(int type) {
 		this.type = type;
 	}
+	
+	public static void main(String[] args) {
+		// testing
+		int retval;
+		System.out.println("Creating a new room:");
+		Room r = new Room("666", 1);
+		retval = r.addToDB();
+		if (retval == 0) {
+			System.out.println("OK");
+		} else {
+			System.out.println("NOK");
+		}
+		System.out.println(r);
+		System.out.println("Changing the type:");
+		r.setType(2);
+		retval = r.updateDB();
+		if (retval == 0) {
+			System.out.println("OK");
+		} else {
+			System.out.println("NOK");
+		}
+		System.out.println(r);
+		System.out.println("Deleting from DB:");
+		retval = r.deleteFromDB();
+		if (retval == 0) {
+			System.out.println("OK");
+		} else {
+			System.out.println("NOK");
+		}
+	}
+	
 }
