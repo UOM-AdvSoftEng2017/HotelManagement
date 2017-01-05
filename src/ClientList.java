@@ -10,6 +10,10 @@ public enum ClientList {
 		update(); // populate the client list when creating it for the 1st time
 	}
 	
+	public ArrayList<Client> getCL() {
+		return cl;
+	}
+	
 	// update the client list from the DB
 	public void update() {
 		cl = DBManager.getClientList();
