@@ -31,8 +31,8 @@ public enum DBManager {
 			s.close();
 			c.close();
 		} catch ( Exception e ) {
-		  System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		  System.exit(0);
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			System.exit(0);
 		}	
 	}
 	
@@ -43,15 +43,12 @@ public enum DBManager {
 			String sql = new String(Files.readAllBytes(Paths.get("create_db.sql")), "utf8");
 			runStatement(sql);
 		} catch (Exception e) {
-			  System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-			  System.exit(0);
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			System.exit(0);
 		}
-
-
 	}
 	
 	public static void main(String[] args) {
 		createEmptyDB();
 	}
-
 }
