@@ -1,7 +1,10 @@
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /*
  * A singleton for managing the sqlite database we're using.
@@ -174,6 +177,75 @@ public enum DBManager {
 	public static int deleteRoom(Room r) {
 		StringBuilder s = new StringBuilder();
 		s.append("delete from room where rid == \"");
+		s.append(r.getId());
+		s.append("\";");
+		return DBManager.run(new String(s));
+	}
+
+	// returns a list of reservations from the DB
+	public static ArrayList<Reservation> getReservationList() {
+		try {
+			DB.s = DB.c.createStatement();
+			ArrayList<Reservation> rl = new ArrayList<Reservation>();
+			ResultSet rs = DB.s.executeQuery("select * from reservation;");
+			while (rs.next() ) {
+				int id = rs.getInt("resid");
+				String sStart = rs.getString("startdate");
+				String sEnd = rs.getString("enddate");
+				// convert string dates to actual dates
+				DateFormat format = new SimpleDateFormat("yyyy/M/d");
+				Date start = format.parse(sStart);
+				Date end = format.parse(sEnd);
+				String cID = rs.getString("clientid");
+				String rID = rs.getString("roomid");
+				Reservation r = new Reservation(id, start, end, cID, rID);
+				rl.add(r);
+			}
+			rs.close();
+			DB.s.close();
+			return rl;
+		} catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			return null;
+		}
+	}
+	
+	// Add a reservation in the DB
+	public static int addReservation(Reservation r) {
+		StringBuilder s = new StringBuilder();
+		s.append("insert into reservation (startdate, enddate, clientid, roomid) values (\"");
+		s.append(r.getStartDateString());
+		s.append("\", \"");
+		s.append(r.getEndDateString());
+		s.append("\", \"");
+		s.append(r.getcID());
+		s.append("\", \"");
+		s.append(r.getrID());
+		s.append("\");");
+		return run(new String(s));
+	}
+
+	// Update reservation details in the DB
+	public static int updateReservation(Reservation r) {
+		StringBuilder s = new StringBuilder();
+		s.append("update reservation set startdate = \"");
+		s.append(r.getStartDateString());
+		s.append("\", enddate = \"");
+		s.append(r.getEndDateString());
+		s.append("\", clientid = \"");
+		s.append(r.getcID());
+		s.append("\", roomid = \"");
+		s.append(r.getrID());
+		s.append("\" where resid == \"");
+		s.append(r.getId());
+		s.append("\";");
+		return DBManager.run(new String(s));
+	}
+
+	// delete a reservation from the DB
+	public static int deleteReservation(Reservation r) {
+		StringBuilder s = new StringBuilder();
+		s.append("delete from reservation where resid == \"");
 		s.append(r.getId());
 		s.append("\";");
 		return DBManager.run(new String(s));
