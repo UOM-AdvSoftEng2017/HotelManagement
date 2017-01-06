@@ -7,6 +7,10 @@ public class HotelManagement {
 		for (Client c: cl) {
 			System.out.println(c);
 		}
+
+		MainVIew main = new MainVIew();
+		main.show();
+
 	}
 
 }
