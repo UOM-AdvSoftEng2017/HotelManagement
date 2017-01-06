@@ -12,7 +12,7 @@ new FormModel {
 					name: "contentPanel"
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label1"
-						"text": "Hotel Managmen App"
+						"text": "Hotel Managment App"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 0
 						"y": 0
