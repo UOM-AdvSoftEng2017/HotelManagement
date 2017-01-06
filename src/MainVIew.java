@@ -1,16 +1,14 @@
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.*;
 /*
- * Created by JFormDesigner on Fri Jan 06 12:24:18 EET 2017
+ * Created by JFormDesigner on Fri Jan 06 13:11:43 EET 2017
  */
 
 
 
 /**
- * @author unknown
+ * @author Manos kakogian
  */
-
 public class MainVIew extends JFrame {
     public MainVIew() {
         initComponents();
@@ -19,77 +17,58 @@ public class MainVIew extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Manos kakogian
-        dialogPane = new JPanel();
-        contentPanel = new JPanel();
         label1 = new JLabel();
-        buttonBar = new JPanel();
-        okButton = new JButton();
-        cancelButton = new JButton();
+        button1 = new JButton();
+        label2 = new JLabel();
+        button2 = new JButton();
+        button3 = new JButton();
 
         //======== this ========
         Container contentPane = getContentPane();
-        contentPane.setLayout(new BorderLayout());
+        contentPane.setLayout(null);
 
-        //======== dialogPane ========
-        {
-            dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
+        //---- label1 ----
+        label1.setText("Hotel Managment");
+        label1.setFont(new Font(".SF NS Text", Font.ITALIC, 36));
+        contentPane.add(label1);
+        label1.setBounds(95, 0, 400, 85);
 
-            // JFormDesigner evaluation mark
-            dialogPane.setBorder(new javax.swing.border.CompoundBorder(
-                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                    "", javax.swing.border.TitledBorder.CENTER,
-                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                    java.awt.Color.red), dialogPane.getBorder())); dialogPane.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+        //---- button1 ----
+        button1.setText("Reservations");
+        button1.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
+        contentPane.add(button1);
+        button1.setBounds(115, 110, 250, 50);
 
-            dialogPane.setLayout(new BorderLayout());
+        //---- label2 ----
+        label2.setText("Some stats:100");
+        contentPane.add(label2);
+        label2.setBounds(25, 390, 390, 35);
 
-            //======== contentPanel ========
-            {
-                contentPanel.setLayout(null);
+        //---- button2 ----
+        button2.setText("Clients");
+        button2.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
+        contentPane.add(button2);
+        button2.setBounds(115, 200, 250, 50);
 
-                //---- label1 ----
-                label1.setText("Hotel Managment App");
-                contentPanel.add(label1);
-                label1.setBounds(0, 0, 325, 40);
+        //---- button3 ----
+        button3.setText("Rooms");
+        button3.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
+        contentPane.add(button3);
+        button3.setBounds(115, 290, 250, 50);
 
-                { // compute preferred size
-                    Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < contentPanel.getComponentCount(); i++) {
-                        Rectangle bounds = contentPanel.getComponent(i).getBounds();
-                        preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                        preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                    }
-                    Insets insets = contentPanel.getInsets();
-                    preferredSize.width += insets.right;
-                    preferredSize.height += insets.bottom;
-                    contentPanel.setMinimumSize(preferredSize);
-                    contentPanel.setPreferredSize(preferredSize);
-                }
+        { // compute preferred size
+            Dimension preferredSize = new Dimension();
+            for(int i = 0; i < contentPane.getComponentCount(); i++) {
+                Rectangle bounds = contentPane.getComponent(i).getBounds();
+                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
             }
-            dialogPane.add(contentPanel, BorderLayout.CENTER);
-
-            //======== buttonBar ========
-            {
-                buttonBar.setBorder(new EmptyBorder(12, 0, 0, 0));
-                buttonBar.setLayout(new GridBagLayout());
-                ((GridBagLayout)buttonBar.getLayout()).columnWidths = new int[] {0, 85, 80};
-                ((GridBagLayout)buttonBar.getLayout()).columnWeights = new double[] {1.0, 0.0, 0.0};
-
-                //---- okButton ----
-                okButton.setText("OK");
-                buttonBar.add(okButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 0, 5), 0, 0));
-
-                //---- cancelButton ----
-                cancelButton.setText("Cancel");
-                buttonBar.add(cancelButton, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 0, 0), 0, 0));
-            }
-            dialogPane.add(buttonBar, BorderLayout.SOUTH);
+            Insets insets = contentPane.getInsets();
+            preferredSize.width += insets.right;
+            preferredSize.height += insets.bottom;
+            contentPane.setMinimumSize(preferredSize);
+            contentPane.setPreferredSize(preferredSize);
         }
-        contentPane.add(dialogPane, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -97,11 +76,10 @@ public class MainVIew extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Manos kakogian
-    private JPanel dialogPane;
-    private JPanel contentPanel;
     private JLabel label1;
-    private JPanel buttonBar;
-    private JButton okButton;
-    private JButton cancelButton;
+    private JButton button1;
+    private JLabel label2;
+    private JButton button2;
+    private JButton button3;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
