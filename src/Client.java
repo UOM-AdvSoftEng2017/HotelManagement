@@ -22,7 +22,7 @@ public class Client {
 
     // delete the Client from the DB
     public int deleteFromDB() {
-        return DBManager.deleteClient(this);
+        return DBManager.deleteClient(this.id);
     }
 
     public String getId() {

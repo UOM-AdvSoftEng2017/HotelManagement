@@ -3,16 +3,42 @@
  */
 
 import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.StringJoiner;
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 
 /**
  * @author Manos kakogian
  */
 public class ClientListView extends JFrame {
+
+
+    ArrayList<String> clintsDbIds ;
+
     public ClientListView() {
         initComponents();
+    }
+
+    private void button1ActionPerformed(ActionEvent e) {
+        Long tsLong = System.currentTimeMillis() / 1000;
+        Client c = new Client(""+tsLong,"",0);
+        DBManager.addClient(c);
+        loadTable();
+    }
+
+    private void button2ActionPerformed(ActionEvent e) {
+
+        int selected = table1.getSelectedRow();
+        String selctedClintId = clintsDbIds.get(selected);
+        DBManager.deleteClient(selctedClintId);
+        loadTable();
+    }
+
+    private void button3ActionPerformed(ActionEvent e) {
+
+        JRow
+
     }
 
     private void initComponents() {
@@ -20,22 +46,9 @@ public class ClientListView extends JFrame {
         // Generated using JFormDesigner Evaluation license - Manos kakogian
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
-        ArrayList<Client> cl;
-        cl = DBManager.getClientList();
-
-        Object rowData[][] = new Object[cl.size()][3];
-        Object columnNames[] = { "Client Id", "Name", "Phone"};
-
-        int i=0;
-        for (Client c: cl) {
-            rowData[i][0]=c.getId();
-            rowData[i][1]=c.getName();
-            rowData[i][2]=c.getPhone();
-            i++;
-        }
-
-
-        table1 = new JTable(rowData, columnNames);
+        button1 = new JButton();
+        button2 = new JButton();
+        button3 = new JButton();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -46,7 +59,25 @@ public class ClientListView extends JFrame {
             scrollPane1.setViewportView(table1);
         }
         contentPane.add(scrollPane1);
-        scrollPane1.setBounds(0, 50, 630, 480);
+        scrollPane1.setBounds(0, 40, 630, scrollPane1.getPreferredSize().height);
+
+        //---- button1 ----
+        button1.setText("New");
+        button1.addActionListener(e -> button1ActionPerformed(e));
+        contentPane.add(button1);
+        button1.setBounds(new Rectangle(new Point(455, 5), button1.getPreferredSize()));
+
+        //---- button2 ----
+        button2.setText("Delete");
+        button2.addActionListener(e -> button2ActionPerformed(e));
+        contentPane.add(button2);
+        button2.setBounds(new Rectangle(new Point(535, 5), button2.getPreferredSize()));
+
+        //---- button3 ----
+        button3.setText("Save");
+        button3.addActionListener(e -> button3ActionPerformed(e));
+        contentPane.add(button3);
+        button3.setBounds(new Rectangle(new Point(375, 5), button3.getPreferredSize()));
 
         contentPane.setPreferredSize(new Dimension(630, 480));
         pack();
@@ -54,9 +85,30 @@ public class ClientListView extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
+    private void loadTable() {
+        clintsDbIds = new ArrayList<>();
+        ArrayList<Client> cl;
+        cl = DBManager.getClientList();
+        Object rowData[][] = new Object[cl.size()][3];
+        Object columnNames[] = { "Client Id", "Name", "Phone"};
+        int i=0;
+        for (Client c: cl) {
+            clintsDbIds .add(c.getId());
+            rowData[i][0]=c.getId();
+            rowData[i][1]=c.getName();
+            rowData[i][2]=c.getPhone();
+            i++;
+        }
+        table1 = new JTable(rowData, columnNames);
+        scrollPane1.setViewportView(table1);
+    }
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Manos kakogian
     private JScrollPane scrollPane1;
     private JTable table1;
+    private JButton button1;
+    private JButton button2;
+    private JButton button3;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

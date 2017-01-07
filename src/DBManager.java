@@ -120,10 +120,10 @@ public enum DBManager {
 	}
 
 	// delete the Client from the DB
-	public static int deleteClient(Client c) {
+	public static int deleteClient(String cId) {
 		StringBuilder s = new StringBuilder();
 		s.append("delete from Client where cid == \"");
-		s.append(c.getId());
+		s.append(cId);
 		s.append("\";");
 		return DBManager.run(new String(s));
 	}
