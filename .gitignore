@@ -7,3 +7,5 @@ hotel.db
 HotelManagement.eml
 
 bin/MainVIew.jfd
+
+bin/ClientListView.jfd

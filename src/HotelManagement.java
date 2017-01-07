@@ -11,6 +11,9 @@ public class HotelManagement {
 		MainVIew main = new MainVIew();
 		main.show();
 
+		ClientListView cList = new ClientListView();
+		cList.show();
+
 	}
 
 }

@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,6 +9,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.Properties;
 import javax.swing.JButton;
 import javax.swing.SpringLayout;
@@ -90,4 +90,6 @@ public class CalendarTestFrame extends JFrame {
 		springLayout.putConstraint(SpringLayout.EAST, buttonOK, -149, SpringLayout.EAST, datePicker);
 		
 	}
+
+
 }

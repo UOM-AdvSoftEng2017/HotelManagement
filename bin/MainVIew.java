@@ -1,7 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 /*
- * Created by JFormDesigner on Fri Jan 06 13:11:43 EET 2017
+ * Created by JFormDesigner on Sat Jan 07 20:09:53 EET 2017
  */
 
 
@@ -22,7 +22,6 @@ public class MainVIew extends JFrame {
         label2 = new JLabel();
         button2 = new JButton();
         button3 = new JButton();
-        button4 = new JButton();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -40,9 +39,13 @@ public class MainVIew extends JFrame {
         contentPane.add(button1);
         button1.setBounds(115, 110, 250, 50);
 
+        //---- label2 ----
+        label2.setText("Some stats:100");
+        contentPane.add(label2);
+        label2.setBounds(25, 390, 390, 35);
 
         //---- button2 ----
-        button2.setText("Calendar");
+        button2.setText("Clients");
         button2.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
         contentPane.add(button2);
         button2.setBounds(115, 200, 250, 50);
@@ -52,18 +55,6 @@ public class MainVIew extends JFrame {
         button3.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
         contentPane.add(button3);
         button3.setBounds(115, 290, 250, 50);
-
-        //---- button3 ----
-        button4.setText("Clients");
-        button4.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
-        contentPane.add(button4);
-        button4.setBounds(115, 380, 250, 50);
-
-        //---- label2 ----
-        label2.setText("Some stats:100");
-        contentPane.add(label2);
-        label2.setBounds(25, 480, 390, 35);
-
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -75,8 +66,8 @@ public class MainVIew extends JFrame {
             Insets insets = contentPane.getInsets();
             preferredSize.width += insets.right;
             preferredSize.height += insets.bottom;
-            contentPane.setMinimumSize(preferredSize);
-            contentPane.setPreferredSize(preferredSize);
+            ((JComponent)contentPane).setMinimumSize(preferredSize);
+            ((JComponent)contentPane).setPreferredSize(preferredSize);
         }
         pack();
         setLocationRelativeTo(getOwner());
@@ -90,7 +81,5 @@ public class MainVIew extends JFrame {
     private JLabel label2;
     private JButton button2;
     private JButton button3;
-    private JButton button4;
-
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

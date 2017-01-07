@@ -71,12 +71,12 @@ public enum DBManager {
 		}	
 	}
 	
-	// returns a list of clients from the DB
+	// returns a list of lients from the DB
 	public static ArrayList<Client> getClientList() {
 		try {
 			DB.s = DB.c.createStatement();
 			ArrayList<Client> cl = new ArrayList<Client>();
-			ResultSet rs = DB.s.executeQuery("select * from client;");
+			ResultSet rs = DB.s.executeQuery("select * from Client;");
 			while (rs.next() ) {
 				String id = rs.getString("cid");
 				String name = rs.getString("name");
@@ -96,7 +96,7 @@ public enum DBManager {
 	// Add a Client in the DB
 	public static int addClient(Client c) {
 		StringBuilder s = new StringBuilder();
-		s.append("insert into client (cid, name, phone) values (\"");
+		s.append("insert into Client (cid, name, phone) values (\"");
 		s.append(c.getId());
 		s.append("\", \"");
 		s.append(c.getName());
@@ -106,10 +106,10 @@ public enum DBManager {
 		return run(new String(s));
 	}
 
-	// Update client details in the DB
+	// Update Client details in the DB
 	public static int updateClient(Client c) {
 		StringBuilder s = new StringBuilder();
-		s.append("update client set name = \"");
+		s.append("update Client set name = \"");
 		s.append(c.getName());
 		s.append("\", phone = ");
 		s.append(c.getPhone());
@@ -119,10 +119,10 @@ public enum DBManager {
 		return DBManager.run(new String(s));
 	}
 
-	// delete the client from the DB
+	// delete the Client from the DB
 	public static int deleteClient(Client c) {
 		StringBuilder s = new StringBuilder();
-		s.append("delete from client where cid == \"");
+		s.append("delete from Client where cid == \"");
 		s.append(c.getId());
 		s.append("\";");
 		return DBManager.run(new String(s));
@@ -171,7 +171,7 @@ public enum DBManager {
 		return DBManager.run(new String(s));
 	}
 
-	// delete the client from the DB
+	// delete the Client from the DB
 	public static int deleteRoom(Room r) {
 		StringBuilder s = new StringBuilder();
 		s.append("delete from room where rid == \"");
@@ -194,7 +194,7 @@ public enum DBManager {
 				DateFormat format = new SimpleDateFormat("yyyy/M/d");
 				Date start = format.parse(sStart);
 				Date end = format.parse(sEnd);
-				String cID = rs.getString("clientid");
+				String cID = rs.getString("Clientid");
 				String rID = rs.getString("roomid");
 				Reservation r = new Reservation(id, start, end, cID, rID);
 				rl.add(r);
@@ -211,7 +211,7 @@ public enum DBManager {
 	// Add a reservation in the DB
 	public static int addReservation(Reservation r) {
 		StringBuilder s = new StringBuilder();
-		s.append("insert into reservation (startdate, enddate, clientid, roomid) values (\"");
+		s.append("insert into reservation (startdate, enddate, Clientid, roomid) values (\"");
 		s.append(r.getStartDateString());
 		s.append("\", \"");
 		s.append(r.getEndDateString());
@@ -230,7 +230,7 @@ public enum DBManager {
 		s.append(r.getStartDateString());
 		s.append("\", enddate = \"");
 		s.append(r.getEndDateString());
-		s.append("\", clientid = \"");
+		s.append("\", Clientid = \"");
 		s.append(r.getcID());
 		s.append("\", roomid = \"");
 		s.append(r.getrID());
