@@ -37,7 +37,12 @@ public class ClientListView extends JFrame {
 
     private void button3ActionPerformed(ActionEvent e) {
 
-        JRow
+        int selected = table1.getSelectedRow();
+        String selctedClintId = clintsDbIds.get(selected);
+        String selctedClintName = table1.getValueAt(selected, 1).toString();
+        int selctedClintPhone = (table1.getValueAt(selected, 2).toString().isEmpty()?0:Integer.parseInt(table1.getValueAt(selected, 2).toString()));
+        Client c = new Client( selctedClintId,selctedClintName,selctedClintPhone);
+        DBManager.updateClient(c);
 
     }
 
@@ -45,7 +50,7 @@ public class ClientListView extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Manos kakogian
         scrollPane1 = new JScrollPane();
-        table1 = new JTable();
+        loadTable();
         button1 = new JButton();
         button2 = new JButton();
         button3 = new JButton();
@@ -54,10 +59,7 @@ public class ClientListView extends JFrame {
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
-        //======== scrollPane1 ========
-        {
-            scrollPane1.setViewportView(table1);
-        }
+
         contentPane.add(scrollPane1);
         scrollPane1.setBounds(0, 40, 630, scrollPane1.getPreferredSize().height);
 
