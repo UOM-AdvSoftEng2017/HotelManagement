@@ -95,8 +95,8 @@ public final class ClientListView extends JFrame {
                 dispose();
             }
             catch ( Exception e1){
-                JOptionPane.showMessageDialog(null, "Phone number can be only integer." , "Error",
-                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Phone number can be only integer!" , "Error",
+                        JOptionPane.WARNING_MESSAGE);
                 // table1.setValueAt("0",currentRow,2);
             }
 
@@ -208,8 +208,8 @@ public final class ClientListView extends JFrame {
                         JOptionPane.ERROR_MESSAGE);
         }
         catch ( Exception e){
-            JOptionPane.showMessageDialog(null, "Phone number can be only integer." , "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Phone number can be only integer!" , "Error",
+                    JOptionPane.WARNING_MESSAGE);
            // table1.setValueAt("0",currentRow,2);
         }
 
