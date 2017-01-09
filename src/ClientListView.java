@@ -73,6 +73,9 @@ public final class ClientListView extends JFrame {
             if (rv != 0)
                 JOptionPane.showMessageDialog(null, "Unable to delete selected Client", "Error",
                         JOptionPane.ERROR_MESSAGE);
+            else
+                currentRow =-1;
+
         }
         loadTable();
     }
@@ -102,6 +105,8 @@ public final class ClientListView extends JFrame {
 
 
         }
+        else
+            dispose();
 
 
 

@@ -30,6 +30,7 @@ public class MainVIew extends JFrame {
     private void button2ActionPerformed(ActionEvent e) {
         ClientListView cList = ClientListView.getInstance();
         cList.show();
+        label2.setVisible(false);
     }
 
     private void initComponents() {
