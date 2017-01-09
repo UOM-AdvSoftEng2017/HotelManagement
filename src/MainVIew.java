@@ -16,7 +16,7 @@ public class MainVIew extends JFrame {
     }
 
     private void button2ActionPerformed(ActionEvent e) {
-        ClientListView cList = new ClientListView();
+        ClientListView cList = ClientListView.getInstance();
         cList.show();
     }
 

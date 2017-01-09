@@ -11,13 +11,21 @@ import javax.swing.*;
 /**
  * @author Manos kakogian
  */
-public class ClientListView extends JFrame {
+public final class ClientListView extends JFrame {
 
+    // the ClientListView is a singleton, so that it's impossible to get multiple
+    // windows of the same kind
+    private static ClientListView INSTANCE = null;
 
     ArrayList<String> clintsDbIds ;
 
-    public ClientListView() {
+    private ClientListView() {
         initComponents();
+    }
+
+    public static ClientListView getInstance() {
+        if (INSTANCE == null) INSTANCE = new ClientListView();
+        return INSTANCE;
     }
 
     private void button1ActionPerformed(ActionEvent e) {
