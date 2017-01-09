@@ -7,6 +7,10 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.StringJoiner;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.TableColumnModelEvent;
+import javax.swing.event.TableColumnModelListener;
 
 /**
  * @author Manos kakogian
@@ -16,7 +20,8 @@ public final class ClientListView extends JFrame {
     // the ClientListView is a singleton, so that it's impossible to get multiple
     // windows of the same kind
     private static ClientListView INSTANCE = null;
-
+    private int columnValue = -1;
+    private int columnNewValue = -1;
     ArrayList<String> clintsDbIds ;
 
     private ClientListView() {
@@ -58,7 +63,7 @@ public final class ClientListView extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Manos kakogian
         scrollPane1 = new JScrollPane();
-        table1 = new JTable();
+        loadTable();
         button1 = new JButton();
         button2 = new JButton();
         button3 = new JButton();
@@ -96,6 +101,9 @@ public final class ClientListView extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
+
+
+
     }
 
     private void loadTable() {
@@ -112,8 +120,18 @@ public final class ClientListView extends JFrame {
             rowData[i][2]=c.getPhone();
             i++;
         }
-        table1 = new JTable(rowData, columnNames);
-        scrollPane1.setViewportView(table1);
+        table1 = new JTable(
+        new javax.swing.table.DefaultTableModel(
+                rowData,
+                columnNames) {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                if (columnIndex==0)
+                    return false;
+                else
+                    return  true;
+            }
+        });
+
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
