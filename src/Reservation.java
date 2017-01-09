@@ -30,6 +30,23 @@ public class Reservation {
 		this.rID = rID;
 	}
 	
+	public boolean valid() {
+	    for (Reservation r: ReservationList.RL.getRL()) {
+	        if (this.rID.equals(r.rID)){
+	            System.out.println("Same room ID");
+	            if ((this.getEnd().compareTo(r.getStart()) > 0) && (this.getEnd().compareTo(r.getEnd()) <= 0)) {
+	                System.out.println("this ends in between");
+	                return false;
+	            }
+                if ((r.getEnd().compareTo(this.getStart()) > 0) && (r.getEnd().compareTo(this.getEnd()) <= 0)) {
+                    System.out.println("other ends in between");
+                    return false;
+                }
+	        }
+	    }
+	    return true;
+	}
+
 	// add the room to the DB
 	public int addToDB() {
 		return DBManager.addReservation(this);
@@ -42,6 +59,7 @@ public class Reservation {
 
 	// delete the room from the DB
 	public int deleteFromDB() {
+	    if (this.id == -1) return 3;
 		return DBManager.deleteReservation(this);
 	}
 	
@@ -104,19 +122,34 @@ public class Reservation {
 		// testing
 		int retval;
 		System.out.println("Creating a new reservation:");
-		String sStart = "2017/01/10";
-		String sEnd = "2017/01/15";
+		String sStart = "2017/01/13";
+		String sEnd = "2017/01/17";
 		// convert string dates to actual dates
 		DateFormat format = new SimpleDateFormat("yyyy/M/d");
 		Date start = format.parse(sStart);
 		Date end = format.parse(sEnd);
 		Reservation r = new Reservation(start, end, "AB123456", "201");
+		if (r.valid()) System.out.println("Reservation is valid");
+		else System.out.println("Reservation is invalid");
+		System.out.println("Creating a new reservation:");
+        sStart = "2017/01/10";
+        sEnd = "2017/01/15";
+        start = format.parse(sStart);
+        end = format.parse(sEnd);
+        r = new Reservation(start, end, "AB123456", "201");
+        //Reservation invalid = new Reservation(start, end, "AB123456", "201");
+        //if (invalid.valid()) System.out.println("Reservation is valid");
+        //else System.out.println("Reservation is invalid");
 		retval = r.addToDB();
 		if (retval == 0) {
 			System.out.println("OK");
 		} else {
 			System.out.println("NOK");
 		}
+		System.out.println("Updating the reservation list.");
+		ReservationList.RL.update();
+	    System.out.println("Getting the last reservation from the DB");
+	    r = ReservationList.RL.getRL().get(ReservationList.RL.getRL().size() - 1);
 		System.out.println(r);
 		System.out.println("Changing the start date:");
 		sStart = "2017/1/9";
