@@ -50,7 +50,7 @@ public class ClientListView extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Manos kakogian
         scrollPane1 = new JScrollPane();
-        loadTable();
+        table1 = new JTable();
         button1 = new JButton();
         button2 = new JButton();
         button3 = new JButton();
@@ -59,7 +59,10 @@ public class ClientListView extends JFrame {
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
-
+        //======== scrollPane1 ========
+        {
+            scrollPane1.setViewportView(table1);
+        }
         contentPane.add(scrollPane1);
         scrollPane1.setBounds(0, 40, 630, scrollPane1.getPreferredSize().height);
 
