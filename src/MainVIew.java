@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
 /*
  * Created by JFormDesigner on Fri Jan 06 13:11:43 EET 2017
@@ -58,8 +59,9 @@ public class MainVIew extends JFrame {
 
         //---- label2 ----
         label2.setText("Some stats:100");
+        label2.setFont(new Font(".SF NS Text", Font.PLAIN, 14));
         contentPane.add(label2);
-        label2.setBounds(25, 390, 390, 35);
+        label2.setBounds(45, 395, 390, 35);
 
         //---- button2 ----
         button2.setText("Clients");
@@ -90,6 +92,15 @@ public class MainVIew extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
+
+
+
+        ArrayList<Client> cl = DBManager.getClientList();
+        ArrayList<Room> rooms = DBManager.getRoomList();
+        ArrayList<Reservation> rs = DBManager.getReservationList();
+
+        label2.setText("Currently we Have "+cl.size()+" Clients "+rs.size()+" Reservations and "+rooms.size()+" Rooms");
+
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables

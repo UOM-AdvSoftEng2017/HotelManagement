@@ -28,9 +28,10 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
 				"text": "Some stats:100"
+				"font": new java.awt.Font( ".SF NS Text", 0, 14 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 25
-				"y": 390
+				"x": 45
+				"y": 395
 				"width": 390
 				"height": 35
 			} )
