@@ -15,7 +15,7 @@ public final class ClientListView extends JFrame {
 
     // the ClientListView is a singleton, so that it's impossible to get multiple
     // windows of the same kind
-    private static final ClientListView INSTANCE = new ClientListView();
+    private static ClientListView INSTANCE = null;
 
     ArrayList<String> clintsDbIds ;
 
@@ -24,7 +24,8 @@ public final class ClientListView extends JFrame {
     }
 
     public static ClientListView getInstance() {
-        return ClientListView.INSTANCE;
+        if (INSTANCE == null) INSTANCE = new ClientListView();
+        return INSTANCE;
     }
 
     private void button1ActionPerformed(ActionEvent e) {
