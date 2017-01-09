@@ -12,6 +12,19 @@ import javax.swing.*;
  */
 public class MainVIew extends JFrame {
     public MainVIew() {
+
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                DBManager.close();
+                System.exit(0);
+                e.getWindow().dispose();
+
+            }
+        });
+
+
         initComponents();
     }
 

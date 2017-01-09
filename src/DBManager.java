@@ -34,7 +34,7 @@ public enum DBManager {
 
 	// this closes the database connection. Should be run when the application
 	// is exited
-	public int close() {
+	public static int close() {
 		try {
 			// close DB connection
 			DB.c.close();

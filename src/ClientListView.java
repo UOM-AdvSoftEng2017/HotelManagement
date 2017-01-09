@@ -17,14 +17,30 @@ import javax.swing.event.TableColumnModelListener;
  */
 public final class ClientListView extends JFrame {
 
+
+
     // the ClientListView is a singleton, so that it's impossible to get multiple
     // windows of the same kind
     private static ClientListView INSTANCE = null;
-    private int columnValue = -1;
-    private int columnNewValue = -1;
+    private int currentRow = -1;
     ArrayList<String> clintsDbIds ;
 
     private ClientListView() {
+
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Closed");
+
+                if (currentRow!=-1)
+                saveThePreviewsCollumn();
+                e.getWindow().dispose();
+
+            }
+        });
+
+
         initComponents();
     }
 
@@ -36,26 +52,59 @@ public final class ClientListView extends JFrame {
     private void button1ActionPerformed(ActionEvent e) {
         Long tsLong = System.currentTimeMillis() / 1000;
         Client c = new Client(""+tsLong,"",0);
-        DBManager.addClient(c);
+        int rv = DBManager.addClient(c);
+        if (rv != 0)
+            JOptionPane.showMessageDialog(null, "Unable to create new Client", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         loadTable();
     }
 
     private void button2ActionPerformed(ActionEvent e) {
 
         int selected = table1.getSelectedRow();
-        String selctedClintId = clintsDbIds.get(selected);
-        DBManager.deleteClient(selctedClintId);
+
+        if (selected == -1){
+            JOptionPane.showMessageDialog(null, "Please first select one Client from table!", "Error",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+        else {
+            String selctedClintId = clintsDbIds.get(selected);
+            int rv = DBManager.deleteClient(selctedClintId);
+            if (rv != 0)
+                JOptionPane.showMessageDialog(null, "Unable to delete selected Client", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+        }
         loadTable();
     }
 
     private void button3ActionPerformed(ActionEvent e) {
 
         int selected = table1.getSelectedRow();
-        String selctedClintId = clintsDbIds.get(selected);
-        String selctedClintName = table1.getValueAt(selected, 1).toString();
-        int selctedClintPhone = (table1.getValueAt(selected, 2).toString().isEmpty()?0:Integer.parseInt(table1.getValueAt(selected, 2).toString()));
-        Client c = new Client( selctedClintId,selctedClintName,selctedClintPhone);
-        DBManager.updateClient(c);
+        if (selected!=-1) {
+            String selctedClintId = clintsDbIds.get(selected);
+            String selctedClintName = table1.getValueAt(selected, 1).toString();
+
+            try {
+                int selctedClintPhone = (table1.getValueAt(selected, 2).toString().isEmpty() ? 0 : Integer.parseInt(table1.getValueAt(selected, 2).toString()));
+                Client c = new Client(selctedClintId, selctedClintName, selctedClintPhone);
+                int rv = DBManager.updateClient(c);
+                if (rv != 0)
+                    JOptionPane.showMessageDialog(null, "Unable to update selected Client", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+
+                dispose();
+            }
+            catch ( Exception e1){
+                JOptionPane.showMessageDialog(null, "Phone number can be only integer." , "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                // table1.setValueAt("0",currentRow,2);
+            }
+
+
+        }
+
+
+
 
     }
 
@@ -72,18 +121,15 @@ public final class ClientListView extends JFrame {
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
-        //======== scrollPane1 ========
-        {
-            scrollPane1.setViewportView(table1);
-        }
+
         contentPane.add(scrollPane1);
-        scrollPane1.setBounds(0, 40, 630, scrollPane1.getPreferredSize().height);
+        scrollPane1.setBounds(0, 40, 630, 365);
 
         //---- button1 ----
         button1.setText("New");
         button1.addActionListener(e -> button1ActionPerformed(e));
         contentPane.add(button1);
-        button1.setBounds(new Rectangle(new Point(455, 5), button1.getPreferredSize()));
+        button1.setBounds(new Rectangle(new Point(465, 5), button1.getPreferredSize()));
 
         //---- button2 ----
         button2.setText("Delete");
@@ -92,12 +138,12 @@ public final class ClientListView extends JFrame {
         button2.setBounds(new Rectangle(new Point(535, 5), button2.getPreferredSize()));
 
         //---- button3 ----
-        button3.setText("Save");
+        button3.setText("Exit");
         button3.addActionListener(e -> button3ActionPerformed(e));
         contentPane.add(button3);
-        button3.setBounds(new Rectangle(new Point(375, 5), button3.getPreferredSize()));
+        button3.setBounds(new Rectangle(new Point(550, 410), button3.getPreferredSize()));
 
-        contentPane.setPreferredSize(new Dimension(630, 480));
+        contentPane.setPreferredSize(new Dimension(630, 440));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -125,12 +171,48 @@ public final class ClientListView extends JFrame {
                 rowData,
                 columnNames) {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
+
+                if (currentRow!=-1){
+
+                    if (currentRow!=rowIndex){
+                        saveThePreviewsCollumn();
+                        currentRow = rowIndex;
+                    }
+
+                }
+                else
+                    currentRow = rowIndex;
+
                 if (columnIndex==0)
                     return false;
                 else
                     return  true;
             }
         });
+        //======== scrollPane1 ========
+        {
+            scrollPane1.setViewportView(table1);
+        }
+    }
+
+    private void saveThePreviewsCollumn() {
+        String selctedClintId = clintsDbIds.get(currentRow);
+        String selctedClintName = table1.getValueAt(currentRow, 1).toString();
+
+        try {
+            int  selctedClintPhone = (table1.getValueAt(currentRow, 2).toString().isEmpty() ? 0 : Integer.parseInt(table1.getValueAt(currentRow, 2).toString()));
+            Client c = new Client( selctedClintId,selctedClintName,selctedClintPhone);
+            int rv = DBManager.updateClient(c);
+            if (rv != 0)
+                JOptionPane.showMessageDialog(null, "Unable to update Client: "+selctedClintName , "Error",
+                        JOptionPane.ERROR_MESSAGE);
+        }
+        catch ( Exception e){
+            JOptionPane.showMessageDialog(null, "Phone number can be only integer." , "Error",
+                    JOptionPane.ERROR_MESSAGE);
+           // table1.setValueAt("0",currentRow,2);
+        }
+
 
     }
 
@@ -142,4 +224,8 @@ public final class ClientListView extends JFrame {
     private JButton button2;
     private JButton button3;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+
+
+
 }
