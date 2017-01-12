@@ -79,7 +79,7 @@ public class Reservation {
 	// returns the start date formatted as a string
 	// (we don't care about time of day)
 	public String getStartDateString() {
-		DateFormat df = new SimpleDateFormat("yyyy/M/d");
+		DateFormat df = new SimpleDateFormat("d/M/yyyy");
 		return df.format(this.start);
 	}
 	
@@ -94,7 +94,7 @@ public class Reservation {
 	// returns the end date formatted as a string
 	// (we don't care about time of day)
 	public String getEndDateString() {
-		DateFormat df = new SimpleDateFormat("yyyy/M/d");
+		DateFormat df = new SimpleDateFormat("d/M/yyyy");
 		return df.format(this.end);
 	}
 	
