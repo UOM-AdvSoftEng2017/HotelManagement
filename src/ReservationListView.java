@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.border.*;
 /*
@@ -23,6 +25,7 @@ public class ReservationListView extends JFrame {
     
     public static ReservationListView getInstance() {
         if (INSTANCE == null) INSTANCE = new ReservationListView();
+        INSTANCE.updateTable();
         return INSTANCE;
     }
 
@@ -39,7 +42,8 @@ public class ReservationListView extends JFrame {
     }
 
     private void buttonAddActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        AddReservationFrame arf = new AddReservationFrame();
+        arf.show();
     }
 
     private void buttonDeleteActionPerformed(ActionEvent e) {
@@ -51,13 +55,33 @@ public class ReservationListView extends JFrame {
     }
 
     private void updateTable() {
-        ArrayList<Reservation> rl = DBManager.getReservationList();
-        Object rowData[][] = new Object[rl.size()][3];
-        Object columnNames[] = { "Client", "Room", "Arrival", "Departure"};
-        tableReservations = new JTable(rowData, columnNames);
-        System.out.println(rl.size());
-        //INSTANCE.tableReservations.setModel(dataModel);
-        
+        ReservationList rl = ReservationList.RL;
+        ClientList cl = ClientList.CL;
+        RoomList rooms = RoomList.RL;
+        // define table structure
+        Object columnNames[] = {"Reservation ID", "Client", "Room", "Arrival", "Departure"};
+        Object rowData[][] = new Object[rl.getRL().size()][5];
+        // add data to table
+        for (int i = 0; i < rl.getRL().size(); i++) {
+            rowData[i][0] = rl.getRL().get(i).getId();
+            String clientID = rl.getRL().get(i).getcID();
+            Client c = cl.getClient(clientID);
+            rowData[i][1] = c.getName();
+            
+            String roomID = rl.getRL().get(i).getrID();
+            Room room = rooms.getRoom(roomID);
+            rowData[i][2] = room.getId();
+            
+            rowData[i][3] = rl.getRL().get(i).getStartDateString();
+            rowData[i][4] = rl.getRL().get(i).getEndDateString();
+        }
+        tableReservations = new JTable(rowData, columnNames) {
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
+        };
+       
+        scrollPaneReservations.setViewportView(tableReservations);
     }
 
     private void initComponents() {
