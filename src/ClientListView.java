@@ -160,8 +160,7 @@ public final class ClientListView extends JFrame {
 
     private void loadTable() {
         clintsDbIds = new ArrayList<>();
-        ArrayList<Client> cl;
-        cl = DBManager.getClientList();
+        ArrayList<Client> cl = DBManager.getClientList().getCL();
         Object rowData[][] = new Object[cl.size()][3];
         Object columnNames[] = { "Client Id", "Name", "Phone"};
         int i=0;
