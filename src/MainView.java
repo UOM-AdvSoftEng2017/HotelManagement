@@ -48,6 +48,7 @@ public class MainView extends JFrame {
         buttonRooms = new JButton();
 
         //======== this ========
+        setTitle("Hotel Management");
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
