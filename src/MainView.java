@@ -35,8 +35,7 @@ public class MainView extends JFrame {
 
     private void buttonReservationsActionPerformed(ActionEvent e) {
         ReservationListView resList = ReservationListView.getInstance();
-        //ReservationListView resList = new ReservationListView();
-        resList.setVisible(true);
+        resList.show();
     }
 
     private void initComponents() {
