@@ -72,10 +72,10 @@ public enum DBManager {
 	}
 	
 	// returns a list of lients from the DB
-	public static ClientList getClientList() {
+	public static ArrayList<Client> getClientList() {
 		try {
 			DB.s = DB.c.createStatement();
-			ClientList cl = ClientList.CL;
+			ArrayList<Client> cl = new ArrayList<Client>();
 			ResultSet rs = DB.s.executeQuery("select * from Client;");
 			while (rs.next() ) {
 				String id = rs.getString("cid");
@@ -129,10 +129,10 @@ public enum DBManager {
 	}
 
 	// returns a list of rooms from the DB
-	public static RoomList getRoomList() {
+	public static ArrayList<Room> getRoomList() {
 		try {
 			DB.s = DB.c.createStatement();
-			RoomList rl = RoomList.RL;
+			ArrayList<Room> rl = new ArrayList<Room>();
 			ResultSet rs = DB.s.executeQuery("select * from room;");
 			while (rs.next() ) {
 				String id = rs.getString("rid");
@@ -181,10 +181,10 @@ public enum DBManager {
 	}
 
 	// returns a list of reservations from the DB
-	public static ReservationList getReservationList() {
+	public static ArrayList<Reservation> getReservationList() {
 		try {
 			DB.s = DB.c.createStatement();
-			ReservationList rl = ReservationList.RL;
+			ArrayList<Reservation> rl = new ArrayList<Reservation>();
 			ResultSet rs = DB.s.executeQuery("select * from reservation;");
 			while (rs.next() ) {
 				int id = rs.getInt("resid");

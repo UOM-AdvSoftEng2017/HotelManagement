@@ -16,18 +16,7 @@ public enum RoomList {
 	
 	// update the room list from the DB
 	public void update() {
-		rl = DBManager.getRoomList().getRL();
-	}
-	
-	public void add(Room r) {
-	    rl.add(r);
-	}
-	
-	public Room getRoom(String roomID) {
-       for (Room r: RL.rl) {
-            if (r.getId().equals(roomID)) return r;
-       }
-       return null;
+		rl = DBManager.getRoomList();
 	}
 	
 	public static void main(String[] args) {

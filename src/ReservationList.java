@@ -14,13 +14,9 @@ public enum ReservationList {
 		return rl;
 	}
 	
-	public void add(Reservation r) {
-	    rl.add(r);
-	}
-	
 	// update the reservation list from the DB
 	public void update() {
-		rl = DBManager.getReservationList().getRL();
+		rl = DBManager.getReservationList();
 	}
 	
 	public static void main(String[] args) {
