@@ -27,7 +27,7 @@ public class MainView extends JFrame {
         initComponents();
     }
 
-    private void button2ActionPerformed(ActionEvent e) {
+    private void buttonClientsActionPerformed(ActionEvent e) {
         ClientListView cList = ClientListView.getInstance();
         cList.show();
         label2.setVisible(false);
@@ -39,7 +39,7 @@ public class MainView extends JFrame {
         label1 = new JLabel();
         button1 = new JButton();
         label2 = new JLabel();
-        button2 = new JButton();
+        buttonClients = new JButton();
         button3 = new JButton();
 
         //======== this ========
@@ -65,12 +65,12 @@ public class MainView extends JFrame {
         contentPane.add(label2);
         label2.setBounds(45, 395, 390, 35);
 
-        //---- button2 ----
-        button2.setText("Clients");
-        button2.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
-        button2.addActionListener(e -> button2ActionPerformed(e));
-        contentPane.add(button2);
-        button2.setBounds(115, 200, 250, 50);
+        //---- buttonClients ----
+        buttonClients.setText("Clients");
+        buttonClients.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
+        buttonClients.addActionListener(e -> buttonClientsActionPerformed(e));
+        contentPane.add(buttonClients);
+        buttonClients.setBounds(115, 200, 250, 50);
 
         //---- button3 ----
         button3.setText("Rooms");
@@ -110,7 +110,7 @@ public class MainView extends JFrame {
     private JLabel label1;
     private JButton button1;
     private JLabel label2;
-    private JButton button2;
+    private JButton buttonClients;
     private JButton button3;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

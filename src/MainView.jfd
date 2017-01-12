@@ -37,7 +37,7 @@ new FormModel {
 				"height": 35
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button2"
+				name: "buttonClients"
 				"text": "Clients"
 				"font": #Font0
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button2ActionPerformed", true ) )
