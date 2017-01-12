@@ -64,6 +64,7 @@ public class ReservationListView extends JFrame {
         buttonEdit = new JButton();
 
         //======== this ========
+        setTitle("Reservation List");
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
