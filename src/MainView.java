@@ -49,6 +49,7 @@ public class MainView extends JFrame {
 
         //======== this ========
         setTitle("Hotel Management");
+        setResizable(false);
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
@@ -70,7 +71,7 @@ public class MainView extends JFrame {
         label2.setText("Some stats:100");
         label2.setFont(new Font(".SF NS Text", Font.PLAIN, 14));
         contentPane.add(label2);
-        label2.setBounds(45, 395, 390, 35);
+        label2.setBounds(5, 395, 495, 35);
 
         //---- buttonClients ----
         buttonClients.setText("Clients");
