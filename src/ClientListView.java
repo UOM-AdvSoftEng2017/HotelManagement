@@ -123,6 +123,7 @@ public final class ClientListView extends JFrame {
         button3 = new JButton();
 
         //======== this ========
+        setTitle("Client List");
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 

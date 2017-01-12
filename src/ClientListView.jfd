@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.2.5.1.342" Java: "1.8.0_112-release" encoding: "UTF-8"
+JFDML JFormDesigner: "5.2.5.0.333" Java: "1.8.0_91" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -7,6 +7,7 @@ new FormModel {
 			"autoSize": false
 		} ) {
 			name: "this"
+			"title": "Client List"
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTable" ) {
