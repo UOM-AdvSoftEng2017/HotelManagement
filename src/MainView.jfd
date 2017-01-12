@@ -17,7 +17,7 @@ new FormModel {
 				"height": 85
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button1"
+				name: "buttonReservations"
 				"text": "Reservations"
 				"font": &Font0 new java.awt.Font( ".SF NS Text", 0, 22 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -48,7 +48,7 @@ new FormModel {
 				"y": 200
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button3"
+				name: "buttonRooms"
 				"text": "Rooms"
 				"font": #Font0
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {

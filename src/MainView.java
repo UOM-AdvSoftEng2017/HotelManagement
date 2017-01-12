@@ -33,14 +33,18 @@ public class MainView extends JFrame {
         label2.setVisible(false);
     }
 
+    private void button2ActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - George Vlahavas
         label1 = new JLabel();
-        button1 = new JButton();
+        buttonReservations = new JButton();
         label2 = new JLabel();
         buttonClients = new JButton();
-        button3 = new JButton();
+        buttonRooms = new JButton();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -53,11 +57,11 @@ public class MainView extends JFrame {
         contentPane.add(label1);
         label1.setBounds(55, 0, 400, 85);
 
-        //---- button1 ----
-        button1.setText("Reservations");
-        button1.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
-        contentPane.add(button1);
-        button1.setBounds(115, 110, 250, 50);
+        //---- buttonReservations ----
+        buttonReservations.setText("Reservations");
+        buttonReservations.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
+        contentPane.add(buttonReservations);
+        buttonReservations.setBounds(115, 110, 250, 50);
 
         //---- label2 ----
         label2.setText("Some stats:100");
@@ -68,15 +72,15 @@ public class MainView extends JFrame {
         //---- buttonClients ----
         buttonClients.setText("Clients");
         buttonClients.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
-        buttonClients.addActionListener(e -> buttonClientsActionPerformed(e));
+        buttonClients.addActionListener(e -> button2ActionPerformed(e));
         contentPane.add(buttonClients);
         buttonClients.setBounds(115, 200, 250, 50);
 
-        //---- button3 ----
-        button3.setText("Rooms");
-        button3.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
-        contentPane.add(button3);
-        button3.setBounds(115, 290, 250, 50);
+        //---- buttonRooms ----
+        buttonRooms.setText("Rooms");
+        buttonRooms.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
+        contentPane.add(buttonRooms);
+        buttonRooms.setBounds(115, 290, 250, 50);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -108,9 +112,9 @@ public class MainView extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - George Vlahavas
     private JLabel label1;
-    private JButton button1;
+    private JButton buttonReservations;
     private JLabel label2;
     private JButton buttonClients;
-    private JButton button3;
+    private JButton buttonRooms;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
