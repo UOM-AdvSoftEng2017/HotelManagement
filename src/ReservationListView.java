@@ -53,7 +53,7 @@ public class ReservationListView extends JFrame {
         buttonBar = new JPanel();
         buttonOK = new JButton();
         scrollPane1 = new JScrollPane();
-        table1 = new JTable();
+        tableReservations = new JTable();
         label1 = new JLabel();
         buttonAdd = new JButton();
         buttonDelete = new JButton();
@@ -92,7 +92,7 @@ public class ReservationListView extends JFrame {
 
             //======== scrollPane1 ========
             {
-                scrollPane1.setViewportView(table1);
+                scrollPane1.setViewportView(tableReservations);
             }
             dialogPane.add(scrollPane1);
             scrollPane1.setBounds(15, 35, 480, 410);
@@ -141,7 +141,7 @@ public class ReservationListView extends JFrame {
     private JPanel buttonBar;
     private JButton buttonOK;
     private JScrollPane scrollPane1;
-    private JTable table1;
+    private JTable tableReservations;
     private JLabel label1;
     private JButton buttonAdd;
     private JButton buttonDelete;
