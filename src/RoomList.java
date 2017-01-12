@@ -14,6 +14,13 @@ public enum RoomList {
 		return rl;
 	}
 	
+	public Room getRoom(String roomID) {
+	    for (Room r: RL.rl) {
+	        if (roomID.equals(r.getId())) return r;
+	    }
+	    return null;
+	}
+	
 	// update the room list from the DB
 	public void update() {
 		rl = DBManager.getRoomList();
