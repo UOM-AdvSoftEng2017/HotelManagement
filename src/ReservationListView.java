@@ -46,6 +46,10 @@ public class ReservationListView extends JFrame {
         // TODO add your code here
     }
 
+    private void buttonEditActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - George Vlahavas
@@ -57,6 +61,7 @@ public class ReservationListView extends JFrame {
         label1 = new JLabel();
         buttonAdd = new JButton();
         buttonDelete = new JButton();
+        buttonEdit = new JButton();
 
         //======== this ========
         addWindowListener(new WindowAdapter() {
@@ -113,7 +118,13 @@ public class ReservationListView extends JFrame {
             buttonDelete.setText("Delete");
             buttonDelete.addActionListener(e -> buttonDeleteActionPerformed(e));
             dialogPane.add(buttonDelete);
-            buttonDelete.setBounds(505, 70, 90, buttonDelete.getPreferredSize().height);
+            buttonDelete.setBounds(505, 105, 90, buttonDelete.getPreferredSize().height);
+
+            //---- buttonEdit ----
+            buttonEdit.setText("Edit");
+            buttonEdit.addActionListener(e -> buttonEditActionPerformed(e));
+            dialogPane.add(buttonEdit);
+            buttonEdit.setBounds(505, 70, 90, buttonEdit.getPreferredSize().height);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -145,5 +156,6 @@ public class ReservationListView extends JFrame {
     private JLabel label1;
     private JButton buttonAdd;
     private JButton buttonDelete;
+    private JButton buttonEdit;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
