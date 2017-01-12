@@ -33,7 +33,7 @@ public class MainView extends JFrame {
         label2.setVisible(false);
     }
 
-    private void button2ActionPerformed(ActionEvent e) {
+    private void buttonReservationsActionPerformed(ActionEvent e) {
         // TODO add your code here
     }
 
@@ -72,7 +72,7 @@ public class MainView extends JFrame {
         //---- buttonClients ----
         buttonClients.setText("Clients");
         buttonClients.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
-        buttonClients.addActionListener(e -> button2ActionPerformed(e));
+        buttonClients.addActionListener(e -> buttonClientsActionPerformed(e));
         contentPane.add(buttonClients);
         buttonClients.setBounds(115, 200, 250, 50);
 
