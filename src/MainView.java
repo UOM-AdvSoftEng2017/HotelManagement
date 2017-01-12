@@ -105,9 +105,9 @@ public class MainView extends JFrame {
 
 
 
-        ArrayList<Client> cl = DBManager.getClientList();
-        ArrayList<Room> rooms = DBManager.getRoomList();
-        ArrayList<Reservation> rs = DBManager.getReservationList();
+        ArrayList<Client> cl = DBManager.getClientList().getCL();
+        ArrayList<Room> rooms = DBManager.getRoomList().getRL();
+        ArrayList<Reservation> rs = DBManager.getReservationList().getRL();
 
         label2.setText("Currently we Have "+cl.size()+" Clients "+rs.size()+" Reservations and "+rooms.size()+" Rooms");
 

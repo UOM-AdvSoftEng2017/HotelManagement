@@ -16,9 +16,20 @@ public enum ClientList {
 
     // update the Client list from the DB
     public void update() {
-        cl = DBManager.getClientList();
+        cl = DBManager.getClientList().getCL();
     }
 
+    public void add(Client c) {
+        cl.add(c);
+    }
+    
+    public Client getClient(String clientID) {
+        for (Client c: CL.cl) {
+            if (c.getId().equals(clientID)) return c;
+        }
+        return null;
+    }
+    
     public static void main(String[] args) {
         // testing
         for (Client c: CL.cl) {
