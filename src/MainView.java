@@ -40,7 +40,7 @@ public class MainView extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - George Vlahavas
+        // Generated using JFormDesigner Evaluation license - Manos kakogian
         label1 = new JLabel();
         buttonReservations = new JButton();
         label2 = new JLabel();
@@ -114,11 +114,31 @@ public class MainView extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - George Vlahavas
+    // Generated using JFormDesigner Evaluation license - Manos kakogian
     private JLabel label1;
     private JButton buttonReservations;
     private JLabel label2;
     private JButton buttonClients;
     private JButton buttonRooms;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+public class MainVIew extends JFrame {
+    public MainVIew() {
+        initComponents();
+    }
+
+    private void button2ActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        // Generated using JFormDesigner Evaluation license - Manos kakogian
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - Manos kakogian
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
+}
 }
