@@ -50,13 +50,23 @@ public class ReservationListView extends JFrame {
         // TODO add your code here
     }
 
+    private void updateTable() {
+        ArrayList<Reservation> rl = DBManager.getReservationList();
+        Object rowData[][] = new Object[rl.size()][3];
+        Object columnNames[] = { "Client", "Room", "Arrival", "Departure"};
+        tableReservations = new JTable(rowData, columnNames);
+        System.out.println(rl.size());
+        //INSTANCE.tableReservations.setModel(dataModel);
+        
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - George Vlahavas
         dialogPane = new JPanel();
         buttonBar = new JPanel();
         buttonOK = new JButton();
-        scrollPane1 = new JScrollPane();
+        scrollPaneReservations = new JScrollPane();
         tableReservations = new JTable();
         label1 = new JLabel();
         buttonAdd = new JButton();
@@ -96,12 +106,12 @@ public class ReservationListView extends JFrame {
             dialogPane.add(buttonOK);
             buttonOK.setBounds(505, 430, 90, buttonOK.getPreferredSize().height);
 
-            //======== scrollPane1 ========
+            //======== scrollPaneReservations ========
             {
-                scrollPane1.setViewportView(tableReservations);
+                scrollPaneReservations.setViewportView(tableReservations);
             }
-            dialogPane.add(scrollPane1);
-            scrollPane1.setBounds(15, 35, 480, 410);
+            dialogPane.add(scrollPaneReservations);
+            scrollPaneReservations.setBounds(15, 35, 480, 410);
 
             //---- label1 ----
             label1.setText("Reservation List");
@@ -152,7 +162,7 @@ public class ReservationListView extends JFrame {
     private JPanel dialogPane;
     private JPanel buttonBar;
     private JButton buttonOK;
-    private JScrollPane scrollPane1;
+    private JScrollPane scrollPaneReservations;
     private JTable tableReservations;
     private JLabel label1;
     private JButton buttonAdd;
