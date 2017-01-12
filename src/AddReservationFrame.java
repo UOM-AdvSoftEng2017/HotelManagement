@@ -33,7 +33,7 @@ public class AddReservationFrame extends JFrame {
     }
 
     private void buttonSelectClientActionPerformed(ActionEvent e) {
-        ClientSelectionFrame csf = new ClientSelectionFrame();
+        ClientSelectionFrame csf = new ClientSelectionFrame(textFieldClientID, textFieldClientName);
         csf.show();
     }
     
@@ -69,6 +69,12 @@ public class AddReservationFrame extends JFrame {
         buttonSelectClient = new JButton();
         labelClientName = new JLabel();
         textFieldClientName = new JTextField();
+        label4 = new JLabel();
+        textFieldClientID = new JTextField();
+        separator1 = new JSeparator();
+        label5 = new JLabel();
+        separator2 = new JSeparator();
+        label6 = new JLabel();
         buttonBar = new JPanel();
         ButtonOK = new JButton();
         buttonCancel = new JButton();
@@ -95,26 +101,26 @@ public class AddReservationFrame extends JFrame {
             {
                 contentPanel.setLayout(null);
                 contentPanel.add(comboBoxRoom);
-                comboBoxRoom.setBounds(45, 165, 200, comboBoxRoom.getPreferredSize().height);
+                comboBoxRoom.setBounds(45, 250, 200, comboBoxRoom.getPreferredSize().height);
 
                 //---- label1 ----
                 label1.setText("Room:");
                 contentPanel.add(label1);
-                label1.setBounds(new Rectangle(new Point(0, 170), label1.getPreferredSize()));
+                label1.setBounds(new Rectangle(new Point(0, 255), label1.getPreferredSize()));
                 contentPanel.add(datePickerFrom);
-                datePickerFrom.setBounds(45, 85, 200, datePickerFrom.getPreferredSize().height);
+                datePickerFrom.setBounds(45, 135, 200, datePickerFrom.getPreferredSize().height);
                 contentPanel.add(datePickerTo);
-                datePickerTo.setBounds(45, 120, 200, datePickerTo.getPreferredSize().height);
+                datePickerTo.setBounds(45, 170, 200, datePickerTo.getPreferredSize().height);
 
                 //---- label2 ----
                 label2.setText("From:");
                 contentPanel.add(label2);
-                label2.setBounds(new Rectangle(new Point(0, 90), label2.getPreferredSize()));
+                label2.setBounds(new Rectangle(new Point(0, 140), label2.getPreferredSize()));
 
                 //---- label3 ----
                 label3.setText("To:");
                 contentPanel.add(label3);
-                label3.setBounds(new Rectangle(new Point(0, 125), label3.getPreferredSize()));
+                label3.setBounds(new Rectangle(new Point(0, 175), label3.getPreferredSize()));
 
                 //---- buttonSelectClient ----
                 buttonSelectClient.setText("Select Client");
@@ -125,12 +131,39 @@ public class AddReservationFrame extends JFrame {
                 //---- labelClientName ----
                 labelClientName.setText("Client name:");
                 contentPanel.add(labelClientName);
-                labelClientName.setBounds(new Rectangle(new Point(0, 40), labelClientName.getPreferredSize()));
+                labelClientName.setBounds(new Rectangle(new Point(0, 65), labelClientName.getPreferredSize()));
 
                 //---- textFieldClientName ----
                 textFieldClientName.setText("N/A");
+                textFieldClientName.setEditable(false);
                 contentPanel.add(textFieldClientName);
-                textFieldClientName.setBounds(95, 40, 280, textFieldClientName.getPreferredSize().height);
+                textFieldClientName.setBounds(95, 65, 280, textFieldClientName.getPreferredSize().height);
+
+                //---- label4 ----
+                label4.setText("Client ID:");
+                contentPanel.add(label4);
+                label4.setBounds(new Rectangle(new Point(0, 35), label4.getPreferredSize()));
+
+                //---- textFieldClientID ----
+                textFieldClientID.setText("N/A");
+                textFieldClientID.setEditable(false);
+                contentPanel.add(textFieldClientID);
+                textFieldClientID.setBounds(95, 35, 280, textFieldClientID.getPreferredSize().height);
+                contentPanel.add(separator1);
+                separator1.setBounds(0, 100, 375, 2);
+
+                //---- label5 ----
+                label5.setText("Reservation Dates:");
+                contentPanel.add(label5);
+                label5.setBounds(new Rectangle(new Point(0, 110), label5.getPreferredSize()));
+                contentPanel.add(separator2);
+                separator2.setBounds(0, 205, 380, 7);
+
+                //---- label6 ----
+                label6.setText("Select a client and reservation dates to get a list of rooms");
+                label6.setFont(new Font("Dialog", Font.ITALIC, 12));
+                contentPanel.add(label6);
+                label6.setBounds(0, 215, 380, 25);
 
                 { // compute preferred size
                     Dimension preferredSize = new Dimension();
@@ -172,7 +205,7 @@ public class AddReservationFrame extends JFrame {
             dialogPane.add(buttonBar, BorderLayout.SOUTH);
         }
         contentPane.add(dialogPane, BorderLayout.CENTER);
-        setSize(415, 300);
+        setSize(415, 370);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         
@@ -199,6 +232,12 @@ public class AddReservationFrame extends JFrame {
     private JButton buttonSelectClient;
     private JLabel labelClientName;
     private JTextField textFieldClientName;
+    private JLabel label4;
+    private JTextField textFieldClientID;
+    private JSeparator separator1;
+    private JLabel label5;
+    private JSeparator separator2;
+    private JLabel label6;
     private JPanel buttonBar;
     private JButton ButtonOK;
     private JButton buttonCancel;

@@ -18,7 +18,7 @@ new FormModel {
 						name: "comboBoxRoom"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 45
-						"y": 165
+						"y": 250
 						"width": 200
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -26,20 +26,20 @@ new FormModel {
 						"text": "Room:"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 0
-						"y": 170
+						"y": 255
 					} )
 					add( new FormComponent( "com.github.lgooddatepicker.components.DatePicker" ) {
 						name: "datePickerFrom"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 45
-						"y": 85
+						"y": 135
 						"width": 200
 					} )
 					add( new FormComponent( "com.github.lgooddatepicker.components.DatePicker" ) {
 						name: "datePickerTo"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 45
-						"y": 120
+						"y": 170
 						"width": 200
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -47,14 +47,14 @@ new FormModel {
 						"text": "From:"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 0
-						"y": 90
+						"y": 140
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label3"
 						"text": "To:"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 0
-						"y": 125
+						"y": 175
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "buttonSelectClient"
@@ -69,15 +69,65 @@ new FormModel {
 						"text": "Client name:"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 0
-						"y": 40
+						"y": 65
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "textFieldClientName"
 						"text": "N/A"
+						"editable": false
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 95
-						"y": 40
+						"y": 65
 						"width": 280
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label4"
+						"text": "Client ID:"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 0
+						"y": 35
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "textFieldClientID"
+						"text": "N/A"
+						"editable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 95
+						"y": 35
+						"width": 280
+					} )
+					add( new FormComponent( "javax.swing.JSeparator" ) {
+						name: "separator1"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 0
+						"y": 100
+						"height": 2
+						"width": 375
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label5"
+						"text": "Reservation Dates:"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 0
+						"y": 110
+					} )
+					add( new FormComponent( "javax.swing.JSeparator" ) {
+						name: "separator2"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 0
+						"y": 205
+						"width": 380
+						"height": 7
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label6"
+						"text": "Select a client and reservation dates to get a list of rooms"
+						"font": new java.awt.Font( "Dialog", 2, 12 )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 0
+						"y": 215
+						"height": 25
+						"width": 380
 					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "Center"
@@ -114,7 +164,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 415, 300 )
+			"size": new java.awt.Dimension( 415, 370 )
 		} )
 	}
 }
