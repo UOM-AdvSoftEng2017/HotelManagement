@@ -14,6 +14,13 @@ public enum ReservationList {
 		return rl;
 	}
 	
+	public Reservation getReservation(int id) {
+	    for (Reservation r: RL.rl) {
+	        if (id == r.getId()) return r;
+	    }
+	    return null;
+	}
+	
 	// update the reservation list from the DB
 	public void update() {
 		rl = DBManager.getReservationList();
