@@ -35,7 +35,7 @@ public class MainVIew extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Manos kakogian
+        // Generated using JFormDesigner Evaluation license - George Vlahavas
         label1 = new JLabel();
         button1 = new JButton();
         label2 = new JLabel();
@@ -47,10 +47,11 @@ public class MainVIew extends JFrame {
         contentPane.setLayout(null);
 
         //---- label1 ----
-        label1.setText("Hotel Managment");
+        label1.setText("Hotel Management");
         label1.setFont(new Font(".SF NS Text", Font.ITALIC, 36));
+        label1.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(label1);
-        label1.setBounds(95, 0, 400, 85);
+        label1.setBounds(55, 0, 400, 85);
 
         //---- button1 ----
         button1.setText("Reservations");
@@ -105,7 +106,7 @@ public class MainVIew extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Manos kakogian
+    // Generated using JFormDesigner Evaluation license - George Vlahavas
     private JLabel label1;
     private JButton button1;
     private JLabel label2;
