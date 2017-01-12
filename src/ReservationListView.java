@@ -76,6 +76,7 @@ public class ReservationListView extends JFrame {
             rowData[i][4] = rl.getRL().get(i).getEndDateString();
         }
         tableReservations = new JTable(rowData, columnNames) {
+            // make table cells non-editable
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
             }
