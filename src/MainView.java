@@ -34,7 +34,9 @@ public class MainView extends JFrame {
     }
 
     private void buttonReservationsActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        ReservationListView resList = ReservationListView.getInstance();
+        //ReservationListView resList = new ReservationListView();
+        resList.setVisible(true);
     }
 
     private void initComponents() {
@@ -60,6 +62,7 @@ public class MainView extends JFrame {
         //---- buttonReservations ----
         buttonReservations.setText("Reservations");
         buttonReservations.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
+        buttonReservations.addActionListener(e -> buttonReservationsActionPerformed(e));
         contentPane.add(buttonReservations);
         buttonReservations.setBounds(115, 110, 250, 50);
 
