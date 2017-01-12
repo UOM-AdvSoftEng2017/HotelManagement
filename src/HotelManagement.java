@@ -8,7 +8,7 @@ public class HotelManagement {
 			System.out.println(c);
 		}
 
-		MainVIew main = new MainVIew();
+		MainView main = new MainView();
 		main.show();
 
 

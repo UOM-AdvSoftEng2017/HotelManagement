@@ -11,8 +11,8 @@ import javax.swing.*;
 /**
  * @author Manos kakogian
  */
-public class MainVIew extends JFrame {
-    public MainVIew() {
+public class MainView extends JFrame {
+    public MainView() {
 
         addWindowListener(new WindowAdapter() {
             @Override
