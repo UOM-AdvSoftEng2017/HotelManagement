@@ -144,8 +144,14 @@ public class AddReservationFrame extends JFrame {
                 label1.setText("Room:");
                 contentPanel.add(label1);
                 label1.setBounds(new Rectangle(new Point(0, 255), label1.getPreferredSize()));
+
+                //---- datePickerFrom ----
+                datePickerFrom.addPropertyChangeListener("date", e -> datePickerFromPropertyChange(e));
                 contentPanel.add(datePickerFrom);
                 datePickerFrom.setBounds(45, 135, 200, datePickerFrom.getPreferredSize().height);
+
+                //---- datePickerTo ----
+                datePickerTo.addPropertyChangeListener("date", e -> datePickerToPropertyChange(e));
                 contentPanel.add(datePickerTo);
                 datePickerTo.setBounds(45, 170, 200, datePickerTo.getPreferredSize().height);
 
