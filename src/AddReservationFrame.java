@@ -122,11 +122,6 @@ public class AddReservationFrame extends JDialog {
                         if (availableRooms.contains(room)) availableRooms.remove(room);
                     }
                 }
-                for (Reservation r: ReservationList.RL.getRL()) {
-                    Date resStart = r.getStart();
-                    Date resEnd = r.getEnd();
-                    String rID = r.getrID();
-                }
                 // Populate the room list
                 comboBoxRoom.removeAllItems();
                 for (Room room: availableRooms) {
