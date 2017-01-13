@@ -33,13 +33,10 @@ public class Reservation {
 	public boolean valid() {
 	    for (Reservation r: ReservationList.RL.getRL()) {
 	        if (this.rID.equals(r.rID)){
-	            System.out.println("Same room ID");
 	            if ((this.getEnd().compareTo(r.getStart()) > 0) && (this.getEnd().compareTo(r.getEnd()) <= 0)) {
-	                System.out.println("this ends in between");
 	                return false;
 	            }
                 if ((r.getEnd().compareTo(this.getStart()) > 0) && (r.getEnd().compareTo(this.getEnd()) <= 0)) {
-                    System.out.println("other ends in between");
                     return false;
                 }
 	        }
