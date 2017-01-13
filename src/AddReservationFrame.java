@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -52,7 +55,26 @@ public class AddReservationFrame extends JFrame {
                     JOptionPane.ERROR_MESSAGE);
             close = false;
         }
-        if (close) this.dispose();
+        String clientID = textFieldClientID.getText();
+        Client c = ClientList.CL.getClient(clientID);
+        String roomID = comboBoxRoom.getSelectedItem().toString();
+        Room room = RoomList.RL.getRoom(roomID);
+        //(Date start, Date end, String cID, String rID)
+        Instant instantFrom = from.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+        Instant instantTo = to.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+        Date dateFrom = Date.from(instantFrom);
+        Date dateTo = Date.from(instantTo);
+        Reservation r = new Reservation(dateFrom, dateTo, clientID, roomID);
+        if (!r.valid()) {
+            JOptionPane.showMessageDialog(null, "Reservation is invalid!", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            close = false;
+        }
+        if (close) {
+            DBManager.addReservation(r);
+            ReservationList.RL.update();
+            this.dispose();
+        }
     }
 
     private void initComponents() {
