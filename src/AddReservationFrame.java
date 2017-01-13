@@ -1,8 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.*;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -86,9 +88,63 @@ public class AddReservationFrame extends JFrame {
             close = false;
         }
         if (close) {
-            DBManager.addReservation(r);
-            ReservationList.RL.update();
-            this.dispose();
+            int rv = DBManager.addReservation(r);
+            if (rv == 0) {
+                ReservationList.RL.update();
+                ReservationListView.getInstance().updateTable();
+                this.dispose();
+            } else {
+                // this should never happen. Added it just in case something weird happens with
+                // the DB.
+                JOptionPane.showMessageDialog(null, "Could not add reservation to database.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void datePickerFromPropertyChange(PropertyChangeEvent e) {
+        updateAvailableRooms();
+    }
+
+    private void datePickerToPropertyChange(PropertyChangeEvent e) {
+        updateAvailableRooms();
+    }
+
+    private void updateAvailableRooms() {
+        try {
+            LocalDate from = datePickerFrom.getDate();
+            LocalDate to = datePickerTo.getDate();
+            Date fromDate = getDateFromLocalDate(from);
+            Date toDate = getDateFromLocalDate(to);
+            if (to.isAfter(from)) {
+                System.out.println("Updating room list");
+                // get a list of all rooms
+                ArrayList<Room> availableRooms = new ArrayList<Room>();
+                for (Room room: RoomList.RL.getRL()) {
+                    availableRooms.add(room);
+                }
+                for (Room room: RoomList.RL.getRL()) {
+                    Reservation res = new Reservation(fromDate, toDate, "test", room.getId());
+                    if (!res.valid()) {
+                        if (availableRooms.contains(room)) availableRooms.remove(room);
+                    }
+                }
+                for (Reservation r: ReservationList.RL.getRL()) {
+                    Date resStart = r.getStart();
+                    Date resEnd = r.getEnd();
+                    String rID = r.getrID();
+                }
+                // Populate the room list
+                comboBoxRoom.removeAllItems();
+                for (Room room: availableRooms) {
+                    comboBoxRoom.addItem(room.getId());
+                }
+            }
+        } catch (NullPointerException e) {
+            // this exception only pops up when creating a window for the first
+            // time. It's because the widgets on the window have not been initialized yet.
+            // Nothing to worry about.
+            System.out.println("Caught exception while creating window: " + e);
         }
     }
 
@@ -203,7 +259,7 @@ public class AddReservationFrame extends JFrame {
                 separator2.setBounds(0, 205, 380, 7);
 
                 //---- label6 ----
-                label6.setText("Select a client and reservation dates to get a list of rooms");
+                label6.setText("Select reservation dates to get a list of rooms");
                 label6.setFont(new Font("Dialog", Font.ITALIC, 12));
                 contentPanel.add(label6);
                 label6.setBounds(0, 215, 380, 25);

@@ -123,7 +123,7 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label6"
-						"text": "Select a client and reservation dates to get a list of rooms"
+						"text": "Select reservation dates to get a list of rooms"
 						"font": new java.awt.Font( "Dialog", 2, 12 )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 0
