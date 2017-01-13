@@ -67,7 +67,7 @@ public class ClientSelectionFrame extends JFrame {
         // Generated using JFormDesigner Evaluation license - Manos kakogian
         dialogPane = new JPanel();
         contentPanel = new JPanel();
-        scrollPane1 = new JScrollPane();
+        scrollPaneClients = new JScrollPane();
         tableClientList = new JTable();
         buttonBar = new JPanel();
         okButton = new JButton();
@@ -103,10 +103,10 @@ public class ClientSelectionFrame extends JFrame {
 
                 //======== scrollPane1 ========
                 {
-                    scrollPane1.setViewportView(tableClientList);
+                    scrollPaneClients.setViewportView(tableClientList);
                 }
-                contentPanel.add(scrollPane1);
-                scrollPane1.setBounds(5, 5, scrollPane1.getPreferredSize().width, 345);
+                contentPanel.add(scrollPaneClients);
+                scrollPaneClients.setBounds(5, 5, scrollPaneClients.getPreferredSize().width, 345);
 
                 { // compute preferred size
                     Dimension preferredSize = new Dimension();
@@ -150,7 +150,7 @@ public class ClientSelectionFrame extends JFrame {
     // Generated using JFormDesigner Evaluation license - Manos kakogian
     private JPanel dialogPane;
     private JPanel contentPanel;
-    private JScrollPane scrollPane1;
+    private JScrollPane scrollPaneClients;
     private JTable tableClientList;
     private JPanel buttonBar;
     private JButton okButton;
