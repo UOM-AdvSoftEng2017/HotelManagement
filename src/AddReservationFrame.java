@@ -45,15 +45,6 @@ public class AddReservationFrame extends JDialog {
         csf.show();
     }
     
-    private static Date getDateFromLocalDate(LocalDate l) {
-        int day = l.getDayOfMonth();
-        int month = l.getMonthValue();
-        int year = l.getYear();
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month, day);
-        return cal.getTime();
-    }
-    
     // checks to see if everything is OK with the reservation, adds it to the reservation list and
     // closes the window
     private void close() {
@@ -81,8 +72,8 @@ public class AddReservationFrame extends JDialog {
         String roomID = comboBoxRoom.getSelectedItem().toString();
         Room room = RoomList.RL.getRoom(roomID);
         //(Date start, Date end, String cID, String rID)
-        Date dateFrom = getDateFromLocalDate(from);
-        Date dateTo = getDateFromLocalDate(to);
+        Date dateFrom = DateConverter.getDate(from);
+        Date dateTo = DateConverter.getDate(to);
         Reservation r = new Reservation(dateFrom, dateTo, clientID, roomID);
         if (!r.valid()) {
             JOptionPane.showMessageDialog(null, "Reservation is invalid!", "Error",
@@ -116,8 +107,8 @@ public class AddReservationFrame extends JDialog {
         try {
             LocalDate from = datePickerFrom.getDate();
             LocalDate to = datePickerTo.getDate();
-            Date fromDate = getDateFromLocalDate(from);
-            Date toDate = getDateFromLocalDate(to);
+            Date fromDate = DateConverter.getDate(from);
+            Date toDate = DateConverter.getDate(to);
             if (to.isAfter(from)) {
                 System.out.println("Updating room list");
                 // get a list of all rooms
