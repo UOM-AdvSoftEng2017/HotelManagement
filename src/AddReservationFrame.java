@@ -252,11 +252,6 @@ public class AddReservationFrame extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         
-        // Populate the room list
-        for (Room r: RoomList.RL.getRL()) {
-            comboBoxRoom.addItem(r.getId());
-        }
-        
         // set From and To dates to today
         datePickerFrom.setDateToToday();
         datePickerTo.setDateToToday();
