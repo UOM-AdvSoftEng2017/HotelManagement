@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,5 +14,10 @@ public class DateConverter {
         Calendar cal = Calendar.getInstance();
         cal.set(year, month, day);
         return cal.getTime();
+    }
+
+    // converts Date to LocalDate
+    public static LocalDate getLocalDate(Date d) {
+        return d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 }
