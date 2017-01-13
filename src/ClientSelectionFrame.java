@@ -53,7 +53,7 @@ public class ClientSelectionFrame extends JFrame {
     private void close() {
         boolean close = true;
         int row = tableClientList.getSelectedRow();
-        if (row != -1) {
+        if (row != -1) { // -1 means nothing is selected
             String clientID = tableClientList.getValueAt(row, 0).toString();
             String clientName = tableClientList.getValueAt(row, 1).toString();
             textFieldClientID.setText(clientID);
