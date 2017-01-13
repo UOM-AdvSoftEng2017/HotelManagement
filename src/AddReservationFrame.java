@@ -24,7 +24,7 @@ public class AddReservationFrame extends JFrame {
     }
 
     private void thisWindowClosing(WindowEvent e) {
-        this.close();
+        this.dispose();
     }
 
     private void okButtonActionPerformed(ActionEvent e) {
