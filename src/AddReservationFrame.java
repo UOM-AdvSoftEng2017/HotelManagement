@@ -114,7 +114,6 @@ public class AddReservationFrame extends JDialog {
             Date fromDate = DateConverter.getDate(from);
             Date toDate = DateConverter.getDate(to);
             if (to.isAfter(from)) {
-                System.out.println("Updating room list");
                 // get a list of all rooms
                 ArrayList<Room> availableRooms = new ArrayList<Room>();
                 for (Room room: RoomList.RL.getRL()) {
