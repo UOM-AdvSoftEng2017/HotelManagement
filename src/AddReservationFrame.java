@@ -20,9 +20,10 @@ import com.github.lgooddatepicker.components.*;
 /**
  * @author George Vlahavas
  */
-public class AddReservationFrame extends JFrame {
+public class AddReservationFrame extends JDialog {
     
-    public AddReservationFrame() {
+    public AddReservationFrame(Frame owner) {
+        super(owner);
         initComponents();
     }
 
@@ -39,7 +40,8 @@ public class AddReservationFrame extends JFrame {
     }
 
     private void buttonSelectClientActionPerformed(ActionEvent e) {
-        ClientSelectionFrame csf = new ClientSelectionFrame(textFieldClientID, textFieldClientName);
+        ClientSelectionFrame csf = new ClientSelectionFrame(this, textFieldClientID, textFieldClientName);
+        csf.setModal(true);
         csf.show();
     }
     

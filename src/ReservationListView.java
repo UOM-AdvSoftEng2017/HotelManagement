@@ -42,7 +42,8 @@ public class ReservationListView extends JFrame {
     }
 
     private void buttonAddActionPerformed(ActionEvent e) {
-        AddReservationFrame arf = new AddReservationFrame();
+        AddReservationFrame arf = new AddReservationFrame(this);
+        arf.setModal(true);
         arf.show();
     }
 

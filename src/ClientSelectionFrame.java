@@ -13,12 +13,13 @@ import javax.swing.border.*;
 /**
  * @author George Vlahavas
  */
-public class ClientSelectionFrame extends JFrame {
+public class ClientSelectionFrame extends JDialog {
     
     JTextField textFieldClientID;
     JTextField textFieldClientName;
     
-    public ClientSelectionFrame(JTextField textFieldClientID, JTextField textFieldClientName) {
+    public ClientSelectionFrame(Dialog owner, JTextField textFieldClientID, JTextField textFieldClientName) {
+        super(owner);
         this.textFieldClientID = textFieldClientID;
         this.textFieldClientName = textFieldClientName;
         initComponents();
