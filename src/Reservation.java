@@ -125,7 +125,7 @@ public class Reservation {
 		String sStart = "2017/01/13";
 		String sEnd = "2017/01/17";
 		// convert string dates to actual dates
-		DateFormat format = new SimpleDateFormat("yyyy/M/d");
+		DateFormat format = new SimpleDateFormat("d/M/yyyy");
 		Date start = format.parse(sStart);
 		Date end = format.parse(sEnd);
 		Reservation r = new Reservation(start, end, "AB123456", "201");

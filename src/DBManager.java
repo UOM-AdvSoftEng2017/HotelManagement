@@ -191,7 +191,7 @@ public enum DBManager {
 				String sStart = rs.getString("startdate");
 				String sEnd = rs.getString("enddate");
 				// convert string dates to actual dates
-				DateFormat format = new SimpleDateFormat("yyyy/M/d");
+				DateFormat format = new SimpleDateFormat("d/M/yyyy");
 				Date start = format.parse(sStart);
 				Date end = format.parse(sEnd);
 				String cID = rs.getString("Clientid");
