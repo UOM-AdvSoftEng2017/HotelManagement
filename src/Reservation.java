@@ -122,8 +122,8 @@ public class Reservation {
 		// testing
 		int retval;
 		System.out.println("Creating a new reservation:");
-		String sStart = "2017/01/13";
-		String sEnd = "2017/01/17";
+		String sStart = "13/01/2017";
+		String sEnd = "17/01/2017";
 		// convert string dates to actual dates
 		DateFormat format = new SimpleDateFormat("d/M/yyyy");
 		Date start = format.parse(sStart);
@@ -132,8 +132,8 @@ public class Reservation {
 		if (r.valid()) System.out.println("Reservation is valid");
 		else System.out.println("Reservation is invalid");
 		System.out.println("Creating a new reservation:");
-        sStart = "2017/01/10";
-        sEnd = "2017/01/15";
+        sStart = "10/01/2017";
+        sEnd = "15/01/2017";
         start = format.parse(sStart);
         end = format.parse(sEnd);
         r = new Reservation(start, end, "AB123456", "201");
@@ -152,7 +152,7 @@ public class Reservation {
 	    r = ReservationList.RL.getRL().get(ReservationList.RL.getRL().size() - 1);
 		System.out.println(r);
 		System.out.println("Changing the start date:");
-		sStart = "2017/1/9";
+		sStart = "9/1/2017";
 		start = format.parse(sStart);
 		r.setStart(start);
 		retval = r.updateDB();
@@ -163,7 +163,7 @@ public class Reservation {
 		}
 		System.out.println(r);
 		System.out.println("Changing the end date:");
-		sEnd = "2017/1/17";
+		sEnd = "17/1/2017";
 		end = format.parse(sEnd);
 		r.setEnd(end);
 		retval = r.updateDB();
