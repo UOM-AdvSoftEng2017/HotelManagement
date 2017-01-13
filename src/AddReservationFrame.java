@@ -25,6 +25,10 @@ public class AddReservationFrame extends JDialog {
     public AddReservationFrame(Frame owner) {
         super(owner);
         initComponents();
+
+        // set From and To dates to today
+        datePickerFrom.setDateToToday();
+        datePickerTo.setDateToToday();
     }
 
     private void thisWindowClosing(WindowEvent e) {
@@ -295,10 +299,6 @@ public class AddReservationFrame extends JDialog {
         setSize(415, 370);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
-        
-        // set From and To dates to today
-        datePickerFrom.setDateToToday();
-        datePickerTo.setDateToToday();
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
