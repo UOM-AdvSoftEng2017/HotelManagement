@@ -3,6 +3,7 @@ import java.awt.event.*;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.*;
@@ -40,6 +41,15 @@ public class AddReservationFrame extends JFrame {
         csf.show();
     }
     
+    private static Date getDateFromLocalDate(LocalDate l) {
+        int day = l.getDayOfMonth();
+        int month = l.getMonthValue();
+        int year = l.getYear();
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, day);
+        return cal.getTime();
+    }
+    
     // checks to see if everything is OK with the reservation, adds it to the reservation list and
     // closes the window
     private void close() {
@@ -56,16 +66,19 @@ public class AddReservationFrame extends JFrame {
             JOptionPane.showMessageDialog(null, "Invalid dates!", "Error",
                     JOptionPane.ERROR_MESSAGE);
             close = false;
+        } else if (from.isBefore(LocalDate.now())) {
+            // a reservation cannot start in the past
+            JOptionPane.showMessageDialog(null, "You cannot start a reservation in the past!", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            close = false;
         }
         String clientID = textFieldClientID.getText();
         Client c = ClientList.CL.getClient(clientID);
         String roomID = comboBoxRoom.getSelectedItem().toString();
         Room room = RoomList.RL.getRoom(roomID);
         //(Date start, Date end, String cID, String rID)
-        Instant instantFrom = from.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-        Instant instantTo = to.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-        Date dateFrom = Date.from(instantFrom);
-        Date dateTo = Date.from(instantTo);
+        Date dateFrom = getDateFromLocalDate(from);
+        Date dateTo = getDateFromLocalDate(to);
         Reservation r = new Reservation(dateFrom, dateTo, clientID, roomID);
         if (!r.valid()) {
             JOptionPane.showMessageDialog(null, "Reservation is invalid!", "Error",
