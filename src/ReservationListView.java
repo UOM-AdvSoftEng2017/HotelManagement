@@ -58,7 +58,14 @@ public class ReservationListView extends JFrame {
     }
 
     private void buttonEditActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        int row = tableReservations.getSelectedRow();
+        if (row != -1) { // -1 means nothing is selected
+            int resID = Integer.parseInt(tableReservations.getValueAt(row, 0).toString());
+            Reservation r = ReservationList.RL.getReservation(resID);
+            EditReservationFrame erf = new EditReservationFrame(this, r);
+            erf.setModal(true);
+            erf.show();
+        }
     }
 
     public void updateTable() {
