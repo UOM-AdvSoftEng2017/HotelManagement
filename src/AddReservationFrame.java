@@ -40,6 +40,8 @@ public class AddReservationFrame extends JFrame {
         csf.show();
     }
     
+    // checks to see if everything is OK with the reservation, adds it to the reservation list and
+    // closes the window
     private void close() {
         Boolean close = true;
         LocalDate from = datePickerFrom.getDate();
