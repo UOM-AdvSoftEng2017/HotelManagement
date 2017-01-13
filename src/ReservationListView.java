@@ -54,7 +54,7 @@ public class ReservationListView extends JFrame {
         // TODO add your code here
     }
 
-    private void updateTable() {
+    public void updateTable() {
         ReservationList rl = ReservationList.RL;
         ClientList cl = ClientList.CL;
         RoomList rooms = RoomList.RL;
