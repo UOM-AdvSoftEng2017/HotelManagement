@@ -100,6 +100,7 @@ public class AddReservationFrame extends JDialog {
     }
 
     private void datePickerFromPropertyChange(PropertyChangeEvent e) {
+        
         updateAvailableRooms();
     }
 
@@ -111,6 +112,11 @@ public class AddReservationFrame extends JDialog {
         try {
             LocalDate from = datePickerFrom.getDate();
             LocalDate to = datePickerTo.getDate();
+            // the Departure date must be at least one day
+            // after the Arrival
+            if (!to.isAfter(from)) {
+                datePickerTo.setDate(from.plusDays(1));
+            }
             Date fromDate = DateConverter.getDate(from);
             Date toDate = DateConverter.getDate(to);
             if (to.isAfter(from)) {
