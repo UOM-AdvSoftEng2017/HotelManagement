@@ -33,10 +33,24 @@ public class Reservation {
 	public boolean valid() {
 	    for (Reservation r: ReservationList.RL.getRL()) {
 	        if (this.rID.equals(r.rID)){
+	            // this: ------
+	            // r:      ------
 	            if ((this.getEnd().compareTo(r.getStart()) > 0) && (this.getEnd().compareTo(r.getEnd()) <= 0)) {
 	                return false;
 	            }
+	            // this:   -------
+	            // r:    ------
                 if ((r.getEnd().compareTo(this.getStart()) > 0) && (r.getEnd().compareTo(this.getEnd()) <= 0)) {
+                    return false;
+                }
+                // this: -----------
+                // r:      -----
+                if ((this.getStart().compareTo(r.getStart()) <= 0) && (this.getEnd().compareTo(r.getEnd()) >= 0)) {
+                    return false;
+                }
+                // this:   -----
+                // r:    -----------
+                if ((this.getStart().compareTo(r.getStart()) >= 0) && (this.getEnd().compareTo(r.getEnd()) <= 0)) {
                     return false;
                 }
 	        }
