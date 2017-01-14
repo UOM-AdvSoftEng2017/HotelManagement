@@ -59,21 +59,32 @@ public class EditReservationFrame extends JDialog {
         try {
             LocalDate from = datePickerFrom.getDate();
             LocalDate to = datePickerTo.getDate();
+            // the Departure date must be at least one day
+            // after the Arrival
+            if (!to.isAfter(from)) {
+                datePickerTo.setDate(from.plusDays(1));
+            }
             Date fromDate = DateConverter.getDate(from);
             Date toDate = DateConverter.getDate(to);
-            if (to.isAfter(from)) {
-                // get a list of all rooms
-                ArrayList<Room> availableRooms = new ArrayList<Room>();
-                for (Room room: RoomList.RL.getRL()) {
-                    availableRooms.add(room);
+            // get a list of all rooms
+            ArrayList<Room> availableRooms = new ArrayList<Room>();
+            for (Room room: RoomList.RL.getRL()) {
+                availableRooms.add(room);
+            }
+            Reservation newRes = new Reservation(fromDate, toDate, this.r.getcID(), this.r.getrID());
+            // keep only available rooms in the list
+            for (Reservation res: ReservationList.RL.getRL()) {
+                Date resFromDate = res.getStart();
+                Date resToDate = res.getEnd();
+                Room resRoom = RoomList.RL.getRoom(res.getrID());
+                if ((res.getId() != this.r.getId()) && (res.dateConflicts(newRes)) && availableRooms.contains(resRoom)) {
+                    availableRooms.remove(resRoom);
                 }
-                // TODO: keep only available rooms in the list
-                
-                // Populate the room list
-                comboBoxRoom.removeAllItems();
-                for (Room room: availableRooms) {
-                    comboBoxRoom.addItem(room.getId());
-                }
+            }
+            // Populate the room list
+            comboBoxRoom.removeAllItems();
+            for (Room room: availableRooms) {
+                comboBoxRoom.addItem(room.getId());
             }
         } catch (NullPointerException e) {
             // this exception only pops up when creating a window for the first
