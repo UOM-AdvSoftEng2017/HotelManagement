@@ -180,6 +180,61 @@ public enum DBManager {
 		return DBManager.run(new String(s));
 	}
 
+    // returns a list of room types from the DB
+    public static ArrayList<RoomType> getRoomTypeList() {
+        try {
+            DB.s = DB.c.createStatement();
+            ArrayList<RoomType> rtl = new ArrayList<RoomType>();
+            ResultSet rs = DB.s.executeQuery("select * from roomtype;");
+            while (rs.next() ) {
+                int id = rs.getInt("rtid");
+                String name = rs.getString("name");
+                long price = rs.getLong("price");
+                RoomType rt = new RoomType(id, name, price);
+                rtl.add(rt);
+            }
+            rs.close();
+            DB.s.close();
+            return rtl;
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            return null;
+        }
+    }
+
+    // Add a RoomType in the DB
+    public static int addRoomType(RoomType rt) {
+        StringBuilder s = new StringBuilder();
+        s.append("insert into roomtype (name, price) values (\"");
+        s.append(rt.getName());
+        s.append("\", \"");
+        s.append(rt.getPrice());
+        s.append("\");");
+        return run(new String(s));
+    }
+
+    // Update room type details in the DB
+    public static int updateRoomType(RoomType rt) {
+        StringBuilder s = new StringBuilder();
+        s.append("update roomtype set name = \"");
+        s.append(rt.getName());
+        s.append("\", price = ");
+        s.append(rt.getPrice());
+        s.append("\" where rtid == \"");
+        s.append(rt.getId());
+        s.append("\";");
+        return DBManager.run(new String(s));
+    }
+
+    // delete the Client from the DB
+    public static int deleteRoomType(RoomType rt) {
+        StringBuilder s = new StringBuilder();
+        s.append("delete from roomtype where rtid == \"");
+        s.append(rt.getId());
+        s.append("\";");
+        return DBManager.run(new String(s));
+    }
+
 	// returns a list of reservations from the DB
 	public static ArrayList<Reservation> getReservationList() {
 		try {
