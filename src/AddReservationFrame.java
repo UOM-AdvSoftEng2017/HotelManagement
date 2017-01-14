@@ -52,49 +52,48 @@ public class AddReservationFrame extends JDialog {
     // checks to see if everything is OK with the reservation, adds it to the reservation list and
     // closes the window
     private void close() {
-        Boolean close = true;
         LocalDate from = datePickerFrom.getDate();
         LocalDate to = datePickerTo.getDate();
         // check if a client has been selected
         if (textFieldClientName.getText().equals("N/A")) {
             JOptionPane.showMessageDialog(null, "You need to select a client!", "Error",
                     JOptionPane.ERROR_MESSAGE);
-            close = false;
         } else if ((from.isAfter(to)) || (from.equals(to))) {
             // check if dates are valid
             JOptionPane.showMessageDialog(null, "Invalid dates!", "Error",
                     JOptionPane.ERROR_MESSAGE);
-            close = false;
         } else if (from.isBefore(LocalDate.now())) {
             // a reservation cannot start in the past
             JOptionPane.showMessageDialog(null, "You cannot start a reservation in the past!", "Error",
                     JOptionPane.ERROR_MESSAGE);
-            close = false;
-        }
-        String clientID = textFieldClientID.getText();
-        Client c = ClientList.CL.getClient(clientID);
-        String roomID = comboBoxRoom.getSelectedItem().toString();
-        Room room = RoomList.RL.getRoom(roomID);
-        //(Date start, Date end, String cID, String rID)
-        Date dateFrom = DateConverter.getDate(from);
-        Date dateTo = DateConverter.getDate(to);
-        Reservation r = new Reservation(dateFrom, dateTo, clientID, roomID);
-        if (!r.valid()) {
-            JOptionPane.showMessageDialog(null, "Reservation is invalid!", "Error",
+        } else if (comboBoxRoom.getItemCount() == 0) {
+            // no available rooms
+            JOptionPane.showMessageDialog(null, "No available rooms for that time period.", "Error",
                     JOptionPane.ERROR_MESSAGE);
-            close = false;
-        }
-        if (close) {
-            int rv = DBManager.addReservation(r);
-            if (rv == 0) {
-                ReservationList.RL.update();
-                ReservationListView.getInstance().updateTable();
-                this.dispose();
-            } else {
-                // this should never happen. Added it just in case something weird happens with
-                // the DB.
-                JOptionPane.showMessageDialog(null, "Could not add reservation to database.", "Error",
+        } else {
+            String clientID = textFieldClientID.getText();
+            Client c = ClientList.CL.getClient(clientID);
+            String roomID = comboBoxRoom.getSelectedItem().toString();
+            Room room = RoomList.RL.getRoom(roomID);
+            //(Date start, Date end, String cID, String rID)
+            Date dateFrom = DateConverter.getDate(from);
+            Date dateTo = DateConverter.getDate(to);
+            Reservation r = new Reservation(dateFrom, dateTo, clientID, roomID);
+            if (!r.valid()) {
+                JOptionPane.showMessageDialog(null, "Reservation is invalid!", "Error",
                         JOptionPane.ERROR_MESSAGE);
+            } else {
+                int rv = DBManager.addReservation(r);
+                if (rv == 0) {
+                    ReservationList.RL.update();
+                    ReservationListView.getInstance().updateTable();
+                    this.dispose();
+                } else {
+                    // this should never happen. Added it just in case something weird happens with
+                    // the DB.
+                    JOptionPane.showMessageDialog(null, "Could not add reservation to database.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }
