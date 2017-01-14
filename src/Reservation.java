@@ -10,24 +10,40 @@ public class Reservation {
 	private Date end;
 	private String cID; // client ID
 	private String rID; // room ID
+	private long price;
+	private boolean paid;
 	
 	// used when creating a reservation. The reservation ID has not yet
 	// been created by the DB
 	public Reservation(Date start, Date end, String cID, String rID) {
 		this.id = -1;
-		this.start = start;
-		this.end = end;
-		this.cID = cID;
-		this.rID = rID;
+		initVars(start, end, cID, rID);
+        updatePrice();
 	}
 
 	// used when reading a reservation from the DB
-	public Reservation(int id, Date start, Date end, String cID, String rID) {
-		this.id = id;
-		this.start = start;
-		this.end = end;
-		this.cID = cID;
-		this.rID = rID;
+	public Reservation(int id, Date start, Date end, String cID, String rID, long price, int paid) {
+        this.id = id;
+        if (paid == 0) this.paid = false;
+        else this.paid = true;
+        initVars(start, end, cID, rID);
+    }
+	
+	// initialize common variables. To be used in the different constructors.
+	private void initVars(Date start, Date end, String cID, String rID) {
+	    this.start = start;
+        this.end = end;
+        this.cID = cID;
+        this.rID = rID;
+        this.paid = false;
+	}
+	
+	public void updatePrice() {
+	    Room room = RoomList.RL.getRoom(this.rID);
+	    RoomType roomType = RoomTypeList.RTL.getRoomType(room.getType());
+	    long pricePerNight = roomType.getPrice();
+	    int timeDiff = (int) Math.ceil((this.end.getTime() - this.start.getTime()) / (1000 * 60 * 60 * 24));
+	    this.price = pricePerNight * timeDiff;
 	}
 	
 	public boolean valid() {
@@ -133,8 +149,24 @@ public class Reservation {
 	public void setrID(String rID) {
 		this.rID = rID;
 	}
+	
+	public long getPrice() {
+        return price;
+    }
 
-	public static void main(String[] args) throws ParseException {
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
+    }
+
+    public static void main(String[] args) throws ParseException {
 		// testing
 		int retval;
 		System.out.println("Creating a new reservation:");

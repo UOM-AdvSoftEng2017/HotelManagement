@@ -251,7 +251,9 @@ public enum DBManager {
 				Date end = format.parse(sEnd);
 				String cID = rs.getString("Clientid");
 				String rID = rs.getString("roomid");
-				Reservation r = new Reservation(id, start, end, cID, rID);
+				long price = rs.getLong("Price");
+				int paid = rs.getInt("Paid");
+				Reservation r = new Reservation(id, start, end, cID, rID, price, paid);
 				rl.add(r);
 			}
 			rs.close();
@@ -265,8 +267,10 @@ public enum DBManager {
 	
 	// Add a reservation in the DB
 	public static int addReservation(Reservation r) {
+	    int paid = 0;
+	    if (r.isPaid()) paid = 1;
 		StringBuilder s = new StringBuilder();
-		s.append("insert into reservation (startdate, enddate, Clientid, roomid) values (\"");
+		s.append("insert into reservation (startdate, enddate, Clientid, roomid, price, paid) values (\"");
 		s.append(r.getStartDateString());
 		s.append("\", \"");
 		s.append(r.getEndDateString());
@@ -274,12 +278,18 @@ public enum DBManager {
 		s.append(r.getcID());
 		s.append("\", \"");
 		s.append(r.getrID());
+		s.append("\", \"");
+		s.append(r.getPrice());
+		s.append("\", \"");
+		s.append(paid);
 		s.append("\");");
 		return run(new String(s));
 	}
 
 	// Update reservation details in the DB
 	public static int updateReservation(Reservation r) {
+	    int paid = 0;
+	    if (r.isPaid()) paid = 1;
 		StringBuilder s = new StringBuilder();
 		s.append("update reservation set startdate = \"");
 		s.append(r.getStartDateString());
@@ -289,6 +299,10 @@ public enum DBManager {
 		s.append(r.getcID());
 		s.append("\", roomid = \"");
 		s.append(r.getrID());
+		s.append("\", price = \"");
+		s.append(r.getPrice());
+		s.append("\", paid = \"");
+		s.append(paid);
 		s.append("\" where resid == \"");
 		s.append(r.getId());
 		s.append("\";");

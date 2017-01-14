@@ -103,6 +103,7 @@ public class EditReservationFrame extends JDialog {
         this.r.setStart(fromDate);
         this.r.setEnd(toDate);
         this.r.setrID(rID);
+        this.r.updatePrice();
         int rv = DBManager.updateReservation(this.r);
         if (rv == 0) {
             ReservationList.RL.update();
