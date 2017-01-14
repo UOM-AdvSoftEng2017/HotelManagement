@@ -103,9 +103,25 @@ public class ReservationListView extends JFrame {
         scrollPaneReservations.setViewportView(tableReservations);
     }
 
+    private void buttonPaidActionPerformed(ActionEvent e) {
+        int row = tableReservations.getSelectedRow();
+        if (row != -1) { // -1 means nothing is selected
+            int resID = Integer.parseInt(tableReservations.getValueAt(row, 0).toString());
+            Reservation r = ReservationList.RL.getReservation(resID);
+            r.setPaid(!r.isPaid());
+            int rv = DBManager.updateReservation(r);
+            if (rv == 0) {
+                updateTable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Could not update reservation in database.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Manos kakogian
+        // Generated using JFormDesigner Evaluation license - George Vlahavas
         dialogPane = new JPanel();
         buttonBar = new JPanel();
         buttonOK = new JButton();
@@ -115,6 +131,8 @@ public class ReservationListView extends JFrame {
         buttonAdd = new JButton();
         buttonDelete = new JButton();
         buttonEdit = new JButton();
+        separator1 = new JSeparator();
+        buttonPaid = new JButton();
 
         //======== this ========
         setTitle("Reservation List");
@@ -179,6 +197,14 @@ public class ReservationListView extends JFrame {
             buttonEdit.addActionListener(e -> buttonEditActionPerformed(e));
             dialogPane.add(buttonEdit);
             buttonEdit.setBounds(505, 70, 90, buttonEdit.getPreferredSize().height);
+            dialogPane.add(separator1);
+            separator1.setBounds(505, 140, 90, separator1.getPreferredSize().height);
+
+            //---- buttonPaid ----
+            buttonPaid.setText("Paid");
+            buttonPaid.addActionListener(e -> buttonPaidActionPerformed(e));
+            dialogPane.add(buttonPaid);
+            buttonPaid.setBounds(505, 150, 90, buttonPaid.getPreferredSize().height);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -201,7 +227,7 @@ public class ReservationListView extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Manos kakogian
+    // Generated using JFormDesigner Evaluation license - George Vlahavas
     private JPanel dialogPane;
     private JPanel buttonBar;
     private JButton buttonOK;
@@ -211,5 +237,7 @@ public class ReservationListView extends JFrame {
     private JButton buttonAdd;
     private JButton buttonDelete;
     private JButton buttonEdit;
+    private JSeparator separator1;
+    private JButton buttonPaid;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
