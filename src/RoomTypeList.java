@@ -7,7 +7,7 @@ public enum RoomTypeList {
     
     private RoomTypeList() {
         rtl = new ArrayList<RoomType>();
-        update(); // populate the room list when creating it for the 1st time
+        update(); // populate the room type list when creating it for the 1st time
     }
     
     public ArrayList<RoomType> getRTL() {
@@ -21,7 +21,7 @@ public enum RoomTypeList {
         return null;
     }
     
-    // update the room list from the DB
+    // update the room type list from the DB
     public void update() {
         rtl = DBManager.getRoomTypeList();
     }

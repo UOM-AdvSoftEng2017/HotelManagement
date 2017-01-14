@@ -17,17 +17,17 @@ public class RoomType {
         this.price = price;
     }
     
-    // add the room to the DB
+    // add the room type to the DB
     public int addToDB() {
         return DBManager.addRoomType(this);
     }
 
-    // update the DB with the room's details
+    // update the DB with the room type's details
     public int updateDB() {
         return DBManager.updateRoomType(this);
     }
 
-    // delete the room from the DB
+    // delete the room type from the DB
     public int deleteFromDB() {
         return DBManager.deleteRoomType(this);
     }
