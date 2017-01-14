@@ -9,7 +9,7 @@ public class DateConverter {
     // converts LocalDate to Date
     public static Date getDate(LocalDate l) {
         int day = l.getDayOfMonth();
-        int month = l.getMonthValue();
+        int month = l.getMonthValue() - 1;
         int year = l.getYear();
         Calendar cal = Calendar.getInstance();
         cal.set(year, month, day);
