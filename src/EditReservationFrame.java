@@ -95,8 +95,25 @@ public class EditReservationFrame extends JDialog {
     }
 
     private void okButtonActionPerformed(ActionEvent e) {
-        // TODO: write the changes to the DB
-        this.dispose();
+        LocalDate from = datePickerFrom.getDate();
+        LocalDate to = datePickerTo.getDate();
+        Date fromDate = DateConverter.getDate(from);
+        Date toDate = DateConverter.getDate(to);
+        String rID = comboBoxRoom.getSelectedItem().toString();
+        this.r.setStart(fromDate);
+        this.r.setEnd(toDate);
+        this.r.setrID(rID);
+        int rv = DBManager.updateReservation(this.r);
+        if (rv == 0) {
+            ReservationList.RL.update();
+            ReservationListView.getInstance().updateTable();
+            this.dispose();
+        } else {
+            // this should never happen. Added it just in case something weird happens with
+            // the DB.
+            JOptionPane.showMessageDialog(null, "Could not update reservation int database.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void cancelButtonActionPerformed(ActionEvent e) {
