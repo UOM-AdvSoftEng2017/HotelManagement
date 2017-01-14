@@ -24,6 +24,7 @@ public class Reservation {
 	// used when reading a reservation from the DB
 	public Reservation(int id, Date start, Date end, String cID, String rID, long price, int paid) {
         this.id = id;
+        this.price = price;
         if (paid == 0) this.paid = false;
         else this.paid = true;
         initVars(start, end, cID, rID);
