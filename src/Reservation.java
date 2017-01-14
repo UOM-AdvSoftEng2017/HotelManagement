@@ -33,31 +33,36 @@ public class Reservation {
 	public boolean valid() {
 	    for (Reservation r: ReservationList.RL.getRL()) {
 	        if (this.rID.equals(r.rID)){
-	            // this: ------
-	            // r:      ------
-	            if ((this.getEnd().compareTo(r.getStart()) > 0) && (this.getEnd().compareTo(r.getEnd()) <= 0)) {
-	                return false;
-	            }
-	            // this:   -------
-	            // r:    ------
-                if ((r.getEnd().compareTo(this.getStart()) > 0) && (r.getEnd().compareTo(this.getEnd()) <= 0)) {
-                    return false;
-                }
-                // this: -----------
-                // r:      -----
-                if ((this.getStart().compareTo(r.getStart()) <= 0) && (this.getEnd().compareTo(r.getEnd()) >= 0)) {
-                    return false;
-                }
-                // this:   -----
-                // r:    -----------
-                if ((this.getStart().compareTo(r.getStart()) >= 0) && (this.getEnd().compareTo(r.getEnd()) <= 0)) {
-                    return false;
-                }
+	            if (this.dateConflicts(r)) return false;
 	        }
 	    }
 	    return true;
 	}
 
+	public boolean dateConflicts(Reservation that) {
+        // this: ------
+        // that:    ------
+	    if ((DateConverter.compareDates(this.getEnd(), that.getStart()) > 0) && (DateConverter.compareDates(this.getEnd(), that.getEnd()) <= 0)) {
+            return true;
+        }
+        // this:    -------
+        // that: ------
+	    if ((DateConverter.compareDates(that.getEnd(), this.getStart()) > 0) && (DateConverter.compareDates(that.getEnd(), this.getEnd()) <= 0)) {
+            return true;
+        }
+        // this: -----------
+        // that:   -----
+	    if ((DateConverter.compareDates(this.getStart(), that.getStart()) <= 0) && (DateConverter.compareDates(this.getEnd(), that.getEnd()) >= 0)) {
+            return true;
+        }
+        // this:   -----
+        // that: -----------
+	    if ((DateConverter.compareDates(this.getStart(), that.getStart()) >= 0) && (DateConverter.compareDates(this.getEnd(), that.getEnd()) <= 0)) {
+            return true;
+        }
+        return false;
+	}
+	
 	// add the room to the DB
 	public int addToDB() {
 		return DBManager.addReservation(this);
