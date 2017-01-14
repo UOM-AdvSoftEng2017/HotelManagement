@@ -18,6 +18,8 @@ CREATE TABLE "Reservation" (
  "EndDate" TEXT,
  "ClientID" TEXT,
  "RoomID" TEXT,
+ "Price" NUMERIC,
+ "Paid" INTEGER,
  FOREIGN KEY("ClientID") REFERENCES Client("CID"),
  FOREIGN KEY("RoomID") REFERENCES Room("RID")
 );
