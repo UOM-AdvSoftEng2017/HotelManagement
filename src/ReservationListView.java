@@ -73,8 +73,8 @@ public class ReservationListView extends JFrame {
         ClientList cl = ClientList.CL;
         RoomList rooms = RoomList.RL;
         // define table structure
-        Object columnNames[] = {"Reservation ID", "Client", "Room", "Arrival", "Departure"};
-        Object rowData[][] = new Object[rl.getRL().size()][5];
+        Object columnNames[] = {"Reservation ID", "Client", "Room", "Arrival", "Departure", "Total Price", "Paid"};
+        Object rowData[][] = new Object[rl.getRL().size()][7];
         // add data to table
         for (int i = 0; i < rl.getRL().size(); i++) {
             rowData[i][0] = rl.getRL().get(i).getId();
@@ -88,6 +88,10 @@ public class ReservationListView extends JFrame {
             
             rowData[i][3] = rl.getRL().get(i).getStartDateString();
             rowData[i][4] = rl.getRL().get(i).getEndDateString();
+            rowData[i][5] = rl.getRL().get(i).getPrice();
+            String paid = "No";
+            if (rl.getRL().get(i).isPaid()) paid = "Yes";
+            rowData[i][6] = paid;
         }
         tableReservations = new JTable(rowData, columnNames) {
             // make table cells non-editable
