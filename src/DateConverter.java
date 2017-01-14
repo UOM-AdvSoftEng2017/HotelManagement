@@ -24,6 +24,18 @@ public class DateConverter {
         return d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
+    // compare between two dates. Although it's using deprecated functions, it's
+    // the easiest way to compare dates without taking time into account.
+    public static int compareDates(Date d1, Date d2) {
+        if (d1.getYear() > d2.getYear()) return 1;
+        if (d1.getYear() < d2.getYear()) return -1;
+        if (d1.getMonth() > d2.getMonth()) return 1;
+        if (d1.getMonth() < d2.getMonth()) return -1;
+        if (d1.getDate() > d2.getDate()) return 1;
+        if (d1.getDate() < d2.getDate()) return -1;
+        return 0;
+    }
+
     public static void main(String[] args) throws ParseException {
         // convert from Date to LocalDate
         String ds1 = "13/01/2017";
