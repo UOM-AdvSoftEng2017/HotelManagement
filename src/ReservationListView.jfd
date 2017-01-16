@@ -78,6 +78,22 @@ new FormModel {
 					"y": 70
 					"width": 90
 				} )
+				add( new FormComponent( "javax.swing.JSeparator" ) {
+					name: "separator1"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 505
+					"y": 140
+					"width": 90
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonPaid"
+					"text": "Paid"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonPaidActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 505
+					"y": 150
+					"width": 90
+				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
 			} )
@@ -87,4 +103,3 @@ new FormModel {
 		} )
 	}
 }
-

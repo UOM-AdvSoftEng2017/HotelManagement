@@ -180,6 +180,61 @@ public enum DBManager {
 		return DBManager.run(new String(s));
 	}
 
+    // returns a list of room types from the DB
+    public static ArrayList<RoomType> getRoomTypeList() {
+        try {
+            DB.s = DB.c.createStatement();
+            ArrayList<RoomType> rtl = new ArrayList<RoomType>();
+            ResultSet rs = DB.s.executeQuery("select * from roomtype;");
+            while (rs.next() ) {
+                int id = rs.getInt("rtid");
+                String name = rs.getString("name");
+                long price = rs.getLong("price");
+                RoomType rt = new RoomType(id, name, price);
+                rtl.add(rt);
+            }
+            rs.close();
+            DB.s.close();
+            return rtl;
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            return null;
+        }
+    }
+
+    // Add a RoomType in the DB
+    public static int addRoomType(RoomType rt) {
+        StringBuilder s = new StringBuilder();
+        s.append("insert into roomtype (name, price) values (\"");
+        s.append(rt.getName());
+        s.append("\", \"");
+        s.append(rt.getPrice());
+        s.append("\");");
+        return run(new String(s));
+    }
+
+    // Update room type details in the DB
+    public static int updateRoomType(RoomType rt) {
+        StringBuilder s = new StringBuilder();
+        s.append("update roomtype set name = \"");
+        s.append(rt.getName());
+        s.append("\", price = ");
+        s.append(rt.getPrice());
+        s.append("\" where rtid == \"");
+        s.append(rt.getId());
+        s.append("\";");
+        return DBManager.run(new String(s));
+    }
+
+    // delete the Client from the DB
+    public static int deleteRoomType(RoomType rt) {
+        StringBuilder s = new StringBuilder();
+        s.append("delete from roomtype where rtid == \"");
+        s.append(rt.getId());
+        s.append("\";");
+        return DBManager.run(new String(s));
+    }
+
 	// returns a list of reservations from the DB
 	public static ArrayList<Reservation> getReservationList() {
 		try {
@@ -191,12 +246,14 @@ public enum DBManager {
 				String sStart = rs.getString("startdate");
 				String sEnd = rs.getString("enddate");
 				// convert string dates to actual dates
-				DateFormat format = new SimpleDateFormat("yyyy/M/d");
+				DateFormat format = new SimpleDateFormat("d/M/yyyy");
 				Date start = format.parse(sStart);
 				Date end = format.parse(sEnd);
 				String cID = rs.getString("Clientid");
 				String rID = rs.getString("roomid");
-				Reservation r = new Reservation(id, start, end, cID, rID);
+				long price = rs.getLong("Price");
+				int paid = rs.getInt("Paid");
+				Reservation r = new Reservation(id, start, end, cID, rID, price, paid);
 				rl.add(r);
 			}
 			rs.close();
@@ -210,8 +267,10 @@ public enum DBManager {
 	
 	// Add a reservation in the DB
 	public static int addReservation(Reservation r) {
+	    int paid = 0;
+	    if (r.isPaid()) paid = 1;
 		StringBuilder s = new StringBuilder();
-		s.append("insert into reservation (startdate, enddate, Clientid, roomid) values (\"");
+		s.append("insert into reservation (startdate, enddate, Clientid, roomid, price, paid) values (\"");
 		s.append(r.getStartDateString());
 		s.append("\", \"");
 		s.append(r.getEndDateString());
@@ -219,12 +278,18 @@ public enum DBManager {
 		s.append(r.getcID());
 		s.append("\", \"");
 		s.append(r.getrID());
+		s.append("\", \"");
+		s.append(r.getPrice());
+		s.append("\", \"");
+		s.append(paid);
 		s.append("\");");
 		return run(new String(s));
 	}
 
 	// Update reservation details in the DB
 	public static int updateReservation(Reservation r) {
+	    int paid = 0;
+	    if (r.isPaid()) paid = 1;
 		StringBuilder s = new StringBuilder();
 		s.append("update reservation set startdate = \"");
 		s.append(r.getStartDateString());
@@ -234,6 +299,10 @@ public enum DBManager {
 		s.append(r.getcID());
 		s.append("\", roomid = \"");
 		s.append(r.getrID());
+		s.append("\", price = \"");
+		s.append(r.getPrice());
+		s.append("\", paid = \"");
+		s.append(paid);
 		s.append("\" where resid == \"");
 		s.append(r.getId());
 		s.append("\";");

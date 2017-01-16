@@ -1,8 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.*;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.*;
@@ -18,14 +21,23 @@ import com.github.lgooddatepicker.components.*;
  * @author George Vlahavas
  * @param <datePickerTo>
  */
+<<<<<<< HEAD
 public class AddReservationFrame<datePickerTo> extends JFrame {
+=======
+public class AddReservationFrame extends JDialog {
+>>>>>>> e55fcfeee97abe9eff0d9537d0a38cfc5d74ebf8
     
-    public AddReservationFrame() {
+    public AddReservationFrame(Frame owner) {
+        super(owner);
         initComponents();
+
+        // set From and To dates to today
+        datePickerFrom.setDateToToday();
+        datePickerTo.setDateToToday();
     }
 
     private void thisWindowClosing(WindowEvent e) {
-        this.close();
+        this.dispose();
     }
 
     private void okButtonActionPerformed(ActionEvent e) {
@@ -37,44 +49,103 @@ public class AddReservationFrame<datePickerTo> extends JFrame {
     }
 
     private void buttonSelectClientActionPerformed(ActionEvent e) {
-        ClientSelectionFrame csf = new ClientSelectionFrame(textFieldClientID, textFieldClientName);
+        ClientSelectionFrame csf = new ClientSelectionFrame(this, textFieldClientID, textFieldClientName);
+        csf.setModal(true);
         csf.show();
     }
     
+    // checks to see if everything is OK with the reservation, adds it to the reservation list and
+    // closes the window
     private void close() {
-        Boolean close = true;
         LocalDate from = datePickerFrom.getDate();
         LocalDate to = datePickerTo.getDate();
         // check if a client has been selected
         if (textFieldClientName.getText().equals("N/A")) {
             JOptionPane.showMessageDialog(null, "You need to select a client!", "Error",
                     JOptionPane.ERROR_MESSAGE);
-            close = false;
         } else if ((from.isAfter(to)) || (from.equals(to))) {
             // check if dates are valid
             JOptionPane.showMessageDialog(null, "Invalid dates!", "Error",
                     JOptionPane.ERROR_MESSAGE);
-            close = false;
-        }
-        String clientID = textFieldClientID.getText();
-        Client c = ClientList.CL.getClient(clientID);
-        String roomID = comboBoxRoom.getSelectedItem().toString();
-        Room room = RoomList.RL.getRoom(roomID);
-        //(Date start, Date end, String cID, String rID)
-        Instant instantFrom = from.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-        Instant instantTo = to.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-        Date dateFrom = Date.from(instantFrom);
-        Date dateTo = Date.from(instantTo);
-        Reservation r = new Reservation(dateFrom, dateTo, clientID, roomID);
-        if (!r.valid()) {
-            JOptionPane.showMessageDialog(null, "Reservation is invalid!", "Error",
+        } else if (from.isBefore(LocalDate.now())) {
+            // a reservation cannot start in the past
+            JOptionPane.showMessageDialog(null, "You cannot start a reservation in the past!", "Error",
                     JOptionPane.ERROR_MESSAGE);
-            close = false;
+        } else if (comboBoxRoom.getItemCount() == 0) {
+            // no available rooms
+            JOptionPane.showMessageDialog(null, "No available rooms for that time period.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            String clientID = textFieldClientID.getText();
+            Client c = ClientList.CL.getClient(clientID);
+            String roomID = comboBoxRoom.getSelectedItem().toString();
+            Room room = RoomList.RL.getRoom(roomID);
+            //(Date start, Date end, String cID, String rID)
+            Date dateFrom = DateConverter.getDate(from);
+            Date dateTo = DateConverter.getDate(to);
+            Reservation r = new Reservation(dateFrom, dateTo, clientID, roomID);
+            if (!r.valid()) {
+                JOptionPane.showMessageDialog(null, "Reservation is invalid!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                int rv = DBManager.addReservation(r);
+                if (rv == 0) {
+                    ReservationList.RL.update();
+                    ReservationListView.getInstance().updateTable();
+                    this.dispose();
+                } else {
+                    // this should never happen. Added it just in case something weird happens with
+                    // the DB.
+                    JOptionPane.showMessageDialog(null, "Could not add reservation to database.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
-        if (close) {
-            DBManager.addReservation(r);
-            ReservationList.RL.update();
-            this.dispose();
+    }
+
+    private void datePickerFromPropertyChange(PropertyChangeEvent e) {
+        
+        updateAvailableRooms();
+    }
+
+    private void datePickerToPropertyChange(PropertyChangeEvent e) {
+        updateAvailableRooms();
+    }
+
+    private void updateAvailableRooms() {
+        try {
+            LocalDate from = datePickerFrom.getDate();
+            LocalDate to = datePickerTo.getDate();
+            // the Departure date must be at least one day
+            // after the Arrival
+            if (!to.isAfter(from)) {
+                datePickerTo.setDate(from.plusDays(1));
+            }
+            Date fromDate = DateConverter.getDate(from);
+            Date toDate = DateConverter.getDate(to);
+            if (to.isAfter(from)) {
+                // get a list of all rooms
+                ArrayList<Room> availableRooms = new ArrayList<Room>();
+                for (Room room: RoomList.RL.getRL()) {
+                    availableRooms.add(room);
+                }
+                for (Room room: RoomList.RL.getRL()) {
+                    Reservation res = new Reservation(fromDate, toDate, "test", room.getId());
+                    if (!res.valid()) {
+                        if (availableRooms.contains(room)) availableRooms.remove(room);
+                    }
+                }
+                // Populate the room list
+                comboBoxRoom.removeAllItems();
+                for (Room room: availableRooms) {
+                    comboBoxRoom.addItem(room.getId());
+                }
+            }
+        } catch (NullPointerException e) {
+            // this exception only pops up when creating a window for the first
+            // time. It's because the widgets on the window have not been initialized yet.
+            // Nothing to worry about.
+            System.out.println("Caught exception while creating window: " + e);
         }
     }
 
@@ -130,8 +201,14 @@ public class AddReservationFrame<datePickerTo> extends JFrame {
                 label1.setText("Room:");
                 contentPanel.add(label1);
                 label1.setBounds(new Rectangle(new Point(0, 255), label1.getPreferredSize()));
+
+                //---- datePickerFrom ----
+                datePickerFrom.addPropertyChangeListener("date", e -> datePickerFromPropertyChange(e));
                 contentPanel.add(datePickerFrom);
                 datePickerFrom.setBounds(45, 135, 200, datePickerFrom.getPreferredSize().height);
+
+                //---- datePickerTo ----
+                datePickerTo.addPropertyChangeListener("date", e -> datePickerToPropertyChange(e));
                 contentPanel.add(datePickerTo);
                 datePickerTo.setBounds(45, 170, 200, datePickerTo.getPreferredSize().height);
 
@@ -183,7 +260,7 @@ public class AddReservationFrame<datePickerTo> extends JFrame {
                 separator2.setBounds(0, 205, 380, 7);
 
                 //---- label6 ----
-                label6.setText("Select a client and reservation dates to get a list of rooms");
+                label6.setText("Select reservation dates to get a list of rooms");
                 label6.setFont(new Font("Dialog", Font.ITALIC, 12));
                 contentPanel.add(label6);
                 label6.setBounds(0, 215, 380, 25);
@@ -231,15 +308,6 @@ public class AddReservationFrame<datePickerTo> extends JFrame {
         setSize(415, 370);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
-        
-        // Populate the room list
-        for (Room r: RoomList.RL.getRL()) {
-            comboBoxRoom.addItem(r.getId());
-        }
-        
-        // set From and To dates to today
-        datePickerFrom.setDateToToday();
-        datePickerTo.setDateToToday();
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables

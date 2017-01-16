@@ -13,7 +13,7 @@ insert into room (rid, type) values ("102", 2);
 insert into room (rid, type) values ("201", 1);
 insert into room (rid, type) values ("202", 2);
 
-insert into reservation (startdate, enddate, clientid, roomid) values ("2017/1/1", "2017/1/2", "AB123456", "101");
-insert into reservation (startdate, enddate, clientid, roomid) values ("2017/1/3", "2017/1/4", "QW765234", "102");
+insert into reservation (startdate, enddate, clientid, roomid, price, paid) values ("1/2/2017", "2/2/2017", "AB123456", "101", "40", "0");
+insert into reservation (startdate, enddate, clientid, roomid, price, paid) values ("3/2/2017", "5/2/2017", "QW765234", "102", "50", "0");
 
 commit;

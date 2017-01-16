@@ -10,43 +10,76 @@ public class Reservation {
 	private Date end;
 	private String cID; // client ID
 	private String rID; // room ID
+	private long price;
+	private boolean paid;
 	
 	// used when creating a reservation. The reservation ID has not yet
 	// been created by the DB
 	public Reservation(Date start, Date end, String cID, String rID) {
 		this.id = -1;
-		this.start = start;
-		this.end = end;
-		this.cID = cID;
-		this.rID = rID;
+		initVars(start, end, cID, rID);
+        updatePrice();
 	}
 
 	// used when reading a reservation from the DB
-	public Reservation(int id, Date start, Date end, String cID, String rID) {
-		this.id = id;
-		this.start = start;
-		this.end = end;
-		this.cID = cID;
-		this.rID = rID;
+	public Reservation(int id, Date start, Date end, String cID, String rID, long price, int paid) {
+        this.id = id;
+        this.price = price;
+        if (paid == 0) this.paid = false;
+        else this.paid = true;
+        initVars(start, end, cID, rID);
+    }
+	
+	// initialize common variables. To be used in the different constructors.
+	private void initVars(Date start, Date end, String cID, String rID) {
+	    this.start = start;
+        this.end = end;
+        this.cID = cID;
+        this.rID = rID;
+        this.paid = false;
+	}
+	
+	public void updatePrice() {
+	    Room room = RoomList.RL.getRoom(this.rID);
+	    RoomType roomType = RoomTypeList.RTL.getRoomType(room.getType());
+	    long pricePerNight = roomType.getPrice();
+	    int timeDiff = (int) Math.ceil((this.end.getTime() - this.start.getTime()) / (1000 * 60 * 60 * 24));
+	    this.price = pricePerNight * timeDiff;
 	}
 	
 	public boolean valid() {
 	    for (Reservation r: ReservationList.RL.getRL()) {
 	        if (this.rID.equals(r.rID)){
-	            System.out.println("Same room ID");
-	            if ((this.getEnd().compareTo(r.getStart()) > 0) && (this.getEnd().compareTo(r.getEnd()) <= 0)) {
-	                System.out.println("this ends in between");
-	                return false;
-	            }
-                if ((r.getEnd().compareTo(this.getStart()) > 0) && (r.getEnd().compareTo(this.getEnd()) <= 0)) {
-                    System.out.println("other ends in between");
-                    return false;
-                }
+	            if (this.dateConflicts(r)) return false;
 	        }
 	    }
 	    return true;
 	}
 
+	public boolean dateConflicts(Reservation that) {
+        // this: ------
+        // that:    ------
+	    if ((DateConverter.compareDates(this.getEnd(), that.getStart()) > 0) && (DateConverter.compareDates(this.getEnd(), that.getEnd()) <= 0)) {
+            return true;
+        }
+        // this:    -------
+        // that: ------
+	    if ((DateConverter.compareDates(that.getEnd(), this.getStart()) > 0) && (DateConverter.compareDates(that.getEnd(), this.getEnd()) <= 0)) {
+            return true;
+        }
+        // this: -----------
+        // that:   -----
+	    if ((DateConverter.compareDates(this.getStart(), that.getStart()) <= 0) && (DateConverter.compareDates(this.getEnd(), that.getEnd()) >= 0)) {
+            return true;
+        }
+        // this:   -----
+        // that: -----------
+	    if ((DateConverter.compareDates(this.getStart(), that.getStart()) >= 0) && (DateConverter.compareDates(this.getEnd(), that.getEnd()) <= 0)) {
+            return true;
+        }
+        return false;
+	}
+	
 	// add the room to the DB
 	public int addToDB() {
 		return DBManager.addReservation(this);
@@ -117,23 +150,39 @@ public class Reservation {
 	public void setrID(String rID) {
 		this.rID = rID;
 	}
+	
+	public long getPrice() {
+        return price;
+    }
 
-	public static void main(String[] args) throws ParseException {
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
+    }
+
+    public static void main(String[] args) throws ParseException {
 		// testing
 		int retval;
 		System.out.println("Creating a new reservation:");
-		String sStart = "2017/01/13";
-		String sEnd = "2017/01/17";
+		String sStart = "13/01/2017";
+		String sEnd = "17/01/2017";
 		// convert string dates to actual dates
-		DateFormat format = new SimpleDateFormat("yyyy/M/d");
+		DateFormat format = new SimpleDateFormat("d/M/yyyy");
 		Date start = format.parse(sStart);
 		Date end = format.parse(sEnd);
 		Reservation r = new Reservation(start, end, "AB123456", "201");
 		if (r.valid()) System.out.println("Reservation is valid");
 		else System.out.println("Reservation is invalid");
 		System.out.println("Creating a new reservation:");
-        sStart = "2017/01/10";
-        sEnd = "2017/01/15";
+        sStart = "10/01/2017";
+        sEnd = "15/01/2017";
         start = format.parse(sStart);
         end = format.parse(sEnd);
         r = new Reservation(start, end, "AB123456", "201");
@@ -152,7 +201,7 @@ public class Reservation {
 	    r = ReservationList.RL.getRL().get(ReservationList.RL.getRL().size() - 1);
 		System.out.println(r);
 		System.out.println("Changing the start date:");
-		sStart = "2017/1/9";
+		sStart = "9/1/2017";
 		start = format.parse(sStart);
 		r.setStart(start);
 		retval = r.updateDB();
@@ -163,7 +212,7 @@ public class Reservation {
 		}
 		System.out.println(r);
 		System.out.println("Changing the end date:");
-		sEnd = "2017/1/17";
+		sEnd = "17/1/2017";
 		end = format.parse(sEnd);
 		r.setEnd(end);
 		retval = r.updateDB();

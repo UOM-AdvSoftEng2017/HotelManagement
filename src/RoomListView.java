@@ -37,9 +37,9 @@ public class RoomListView extends JFrame {
 		button1 = new JButton();
 		button2 = new JButton();
 		button3 = new JButton();
-		button4 = new JButton();
 		label1 = new JLabel();
 		textField1 = new JTextField();
+		button5 = new JButton();
 
 		//======== this ========
 		setTitle("Room List");
@@ -71,12 +71,6 @@ public class RoomListView extends JFrame {
 		contentPane.add(button3);
 		button3.setBounds(525, 385, 90, button3.getPreferredSize().height);
 
-		//---- button4 ----
-		button4.setText("Delete");
-		button4.addActionListener(e -> button2ActionPerformed(e));
-		contentPane.add(button4);
-		button4.setBounds(0, 415, 90, 22);
-
 		//---- label1 ----
 		label1.setText("Room List");
 		label1.setFont(new Font("Dialog", Font.BOLD, 14));
@@ -84,6 +78,11 @@ public class RoomListView extends JFrame {
 		label1.setBounds(10, 20, 117, 17);
 		contentPane.add(textField1);
 		textField1.setBounds(new Rectangle(new Point(20, 20), textField1.getPreferredSize()));
+
+		//---- button5 ----
+		button5.setText("Delete");
+		contentPane.add(button5);
+		button5.setBounds(530, 110, 85, button5.getPreferredSize().height);
 
 		contentPane.setPreferredSize(new Dimension(635, 440));
 		pack();
@@ -98,8 +97,8 @@ public class RoomListView extends JFrame {
 	private JButton button1;
 	private JButton button2;
 	private JButton button3;
-	private JButton button4;
 	private JLabel label1;
 	private JTextField textField1;
+	private JButton button5;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

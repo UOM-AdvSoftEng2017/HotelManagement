@@ -13,12 +13,13 @@ import javax.swing.border.*;
 /**
  * @author George Vlahavas
  */
-public class ClientSelectionFrame extends JFrame {
+public class ClientSelectionFrame extends JDialog {
     
     JTextField textFieldClientID;
     JTextField textFieldClientName;
     
-    public ClientSelectionFrame(JTextField textFieldClientID, JTextField textFieldClientName) {
+    public ClientSelectionFrame(Dialog owner, JTextField textFieldClientID, JTextField textFieldClientName) {
+        super(owner);
         this.textFieldClientID = textFieldClientID;
         this.textFieldClientName = textFieldClientName;
         initComponents();
@@ -53,7 +54,7 @@ public class ClientSelectionFrame extends JFrame {
     private void close() {
         boolean close = true;
         int row = tableClientList.getSelectedRow();
-        if (row != -1) {
+        if (row != -1) { // -1 means nothing is selected
             String clientID = tableClientList.getValueAt(row, 0).toString();
             String clientName = tableClientList.getValueAt(row, 1).toString();
             textFieldClientID.setText(clientID);
@@ -87,13 +88,6 @@ public class ClientSelectionFrame extends JFrame {
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-
-            // JFormDesigner evaluation mark
-            dialogPane.setBorder(new javax.swing.border.CompoundBorder(
-                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                    java.awt.Color.red), dialogPane.getBorder())); dialogPane.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
             dialogPane.setLayout(new BorderLayout());
 
