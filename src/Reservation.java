@@ -48,7 +48,7 @@ public class Reservation {
 	}
 	
 	public boolean valid() {
-	    for (Reservation r: ReservationList.RL.getRL()) {
+	    for (Reservation r: ReservationList.INSTANCE.getRL()) {
 	        if (this.rID.equals(r.rID)){
 	            if (this.dateConflicts(r)) return false;
 	        }
@@ -196,9 +196,9 @@ public class Reservation {
 			System.out.println("NOK");
 		}
 		System.out.println("Updating the reservation list.");
-		ReservationList.RL.update();
+		ReservationList.INSTANCE.update();
 	    System.out.println("Getting the last reservation from the DB");
-	    r = ReservationList.RL.getRL().get(ReservationList.RL.getRL().size() - 1);
+	    r = ReservationList.INSTANCE.getRL().get(ReservationList.INSTANCE.getRL().size() - 1);
 		System.out.println(r);
 		System.out.println("Changing the start date:");
 		sStart = "9/1/2017";

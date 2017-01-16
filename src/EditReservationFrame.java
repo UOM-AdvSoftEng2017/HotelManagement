@@ -31,7 +31,7 @@ public class EditReservationFrame extends JDialog {
         initComponents();
         
         dupRL = new ArrayList<Reservation>();
-        for (Reservation res: ReservationList.RL.getRL()) {
+        for (Reservation res: ReservationList.INSTANCE.getRL()) {
             if (!res.equals(r)) {
                 dupRL.add(res);
             }
@@ -73,7 +73,7 @@ public class EditReservationFrame extends JDialog {
             }
             Reservation newRes = new Reservation(fromDate, toDate, this.r.getcID(), this.r.getrID());
             // keep only available rooms in the list
-            for (Reservation res: ReservationList.RL.getRL()) {
+            for (Reservation res: ReservationList.INSTANCE.getRL()) {
                 Date resFromDate = res.getStart();
                 Date resToDate = res.getEnd();
                 Room resRoom = RoomList.RL.getRoom(res.getrID());
@@ -106,7 +106,7 @@ public class EditReservationFrame extends JDialog {
         this.r.updatePrice();
         int rv = DBManager.updateReservation(this.r);
         if (rv == 0) {
-            ReservationList.RL.update();
+            ReservationList.INSTANCE.update();
             ReservationListView.getInstance().updateTable();
             this.dispose();
         } else {

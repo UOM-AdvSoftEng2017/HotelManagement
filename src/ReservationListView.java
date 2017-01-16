@@ -61,7 +61,7 @@ public class ReservationListView extends JFrame {
         int row = tableReservations.getSelectedRow();
         if (row != -1) { // -1 means nothing is selected
             int resID = Integer.parseInt(tableReservations.getValueAt(row, 0).toString());
-            Reservation r = ReservationList.RL.getReservation(resID);
+            Reservation r = ReservationList.INSTANCE.getReservation(resID);
             EditReservationFrame erf = new EditReservationFrame(this, r);
             erf.setModal(true);
             erf.show();
@@ -69,7 +69,7 @@ public class ReservationListView extends JFrame {
     }
 
     public void updateTable() {
-        ReservationList rl = ReservationList.RL;
+        ReservationList rl = ReservationList.INSTANCE;
         ClientList cl = ClientList.INSTANCE;
         RoomList rooms = RoomList.RL;
         // define table structure
@@ -107,7 +107,7 @@ public class ReservationListView extends JFrame {
         int row = tableReservations.getSelectedRow();
         if (row != -1) { // -1 means nothing is selected
             int resID = Integer.parseInt(tableReservations.getValueAt(row, 0).toString());
-            Reservation r = ReservationList.RL.getReservation(resID);
+            Reservation r = ReservationList.INSTANCE.getReservation(resID);
             r.setPaid(!r.isPaid());
             int rv = DBManager.updateReservation(r);
             if (rv == 0) {

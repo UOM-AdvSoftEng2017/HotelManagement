@@ -85,7 +85,7 @@ public class AddReservationFrame extends JDialog {
             } else {
                 int rv = DBManager.addReservation(r);
                 if (rv == 0) {
-                    ReservationList.RL.update();
+                    ReservationList.INSTANCE.update();
                     ReservationListView.getInstance().updateTable();
                     this.dispose();
                 } else {

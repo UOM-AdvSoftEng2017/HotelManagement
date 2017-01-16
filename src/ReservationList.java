@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public enum ReservationList {
-	RL;
+	INSTANCE;
 	
 	private ArrayList<Reservation> rl;
 	
@@ -15,7 +15,7 @@ public enum ReservationList {
 	}
 	
 	public Reservation getReservation(int id) {
-	    for (Reservation r: RL.rl) {
+	    for (Reservation r: INSTANCE.rl) {
 	        if (id == r.getId()) return r;
 	    }
 	    return null;
@@ -28,7 +28,7 @@ public enum ReservationList {
 	
 	public static void main(String[] args) {
 		// testing
-		for (Reservation r: RL.rl) {
+		for (Reservation r: INSTANCE.rl) {
 			System.out.println(r);
 		}
 	}

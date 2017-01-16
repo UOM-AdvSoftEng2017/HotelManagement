@@ -19,7 +19,7 @@ public class ReservationDeleteConfirmDialog extends JDialog {
         super(owner);
         initComponents();
         
-        r = ReservationList.RL.getReservation(reservationID);
+        r = ReservationList.INSTANCE.getReservation(reservationID);
         Room room = RoomList.RL.getRoom(r.getrID());
         Client c = ClientList.INSTANCE.getClient(r.getcID());
         String from = r.getStartDateString();
@@ -36,7 +36,7 @@ public class ReservationDeleteConfirmDialog extends JDialog {
             JOptionPane.showMessageDialog(null, "Error deleting reservation from DB", "Error",
                     JOptionPane.ERROR_MESSAGE);
         } else {
-            ReservationList.RL.update();
+            ReservationList.INSTANCE.update();
             ReservationListView.getInstance().updateTable();
             this.dispose();
         }
