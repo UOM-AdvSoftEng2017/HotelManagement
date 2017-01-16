@@ -41,7 +41,7 @@ public class Reservation {
 	
 	public void updatePrice() {
 	    Room room = RoomList.INSANCE.getRoom(this.rID);
-	    RoomType roomType = RoomTypeList.RTL.getRoomType(room.getType());
+	    RoomType roomType = RoomTypeList.INSTANCE.getRoomType(room.getType());
 	    long pricePerNight = roomType.getPrice();
 	    int timeDiff = (int) Math.ceil((this.end.getTime() - this.start.getTime()) / (1000 * 60 * 60 * 24));
 	    this.price = pricePerNight * timeDiff;

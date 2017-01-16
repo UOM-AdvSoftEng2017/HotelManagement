@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public enum RoomTypeList {
-    RTL;
+    INSTANCE;
     
     private ArrayList<RoomType> rtl;
     
@@ -15,7 +15,7 @@ public enum RoomTypeList {
     }
     
     public RoomType getRoomType(int id) {
-        for (RoomType rt: RTL.rtl) {
+        for (RoomType rt: INSTANCE.rtl) {
             if (id == rt.getId()) return rt;
         }
         return null;
@@ -28,7 +28,7 @@ public enum RoomTypeList {
     
     public static void main(String[] args) {
         // testing
-        for (RoomType rt: RTL.rtl) {
+        for (RoomType rt: INSTANCE.rtl) {
             System.out.println(rt);
         }
     }
