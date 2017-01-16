@@ -19,13 +19,8 @@ import com.github.lgooddatepicker.components.*;
 
 /**
  * @author George Vlahavas
- * @param <datePickerTo>
  */
-<<<<<<< HEAD
-public class AddReservationFrame<datePickerTo> extends JFrame {
-=======
 public class AddReservationFrame extends JDialog {
->>>>>>> e55fcfeee97abe9eff0d9537d0a38cfc5d74ebf8
     
     public AddReservationFrame(Frame owner) {
         super(owner);

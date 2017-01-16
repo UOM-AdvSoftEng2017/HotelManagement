@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry exported="true" kind="lib" path="sqlite-jdbc-3.15.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="jdatepicker-1.3.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/mktn/HotelManagement/sqlite-jdbc-3.15.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/mktn/HotelManagement/jdatepicker-1.3.4.jar"/>
-	<classpathentry kind="lib" path="LGoodDatePicker-8.3.0-executable-demo.jar"/>
-	<classpathentry kind="lib" path="/home/mktn/HotelManagement/LGoodDatePicker-8.3.0-executable-demo.jar"/>
-	<classpathentry kind="lib" path="lib/jgoodies-forms.jar" sourcepath="lib/jgoodies-forms-sources.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/HotelManagement/lib/jgoodies-forms-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/jgoodies-common.jar" sourcepath="lib/jgoodies-common-sources.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/HotelManagement/lib/jgoodies-common-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="sqlite-jdbc-3.15.1.jar"/>
+	<classpathentry kind="lib" path="LGoodDatePicker-8.3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
