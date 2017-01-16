@@ -5,3 +5,4 @@ HotelManagement.iml
 hotel.db
 HotelManagement.eml
 bin/*
+/bin/
