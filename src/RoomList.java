@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public enum RoomList {
-	RL;
+	INSANCE;
 	
 	private ArrayList<Room> rl;
 	
@@ -15,7 +15,7 @@ public enum RoomList {
 	}
 	
 	public Room getRoom(String roomID) {
-	    for (Room r: RL.rl) {
+	    for (Room r: INSANCE.rl) {
 	        if (roomID.equals(r.getId())) return r;
 	    }
 	    return null;
@@ -28,7 +28,7 @@ public enum RoomList {
 	
 	public static void main(String[] args) {
 		// testing
-		for (Room r: RL.rl) {
+		for (Room r: INSANCE.rl) {
 			System.out.println(r);
 		}
 	}

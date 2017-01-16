@@ -71,7 +71,7 @@ public class ReservationListView extends JFrame {
     public void updateTable() {
         ReservationList rl = ReservationList.INSTANCE;
         ClientList cl = ClientList.INSTANCE;
-        RoomList rooms = RoomList.RL;
+        RoomList rooms = RoomList.INSANCE;
         // define table structure
         Object columnNames[] = {"Reservation ID", "Client", "Room", "Arrival", "Departure", "Total Price", "Paid"};
         Object rowData[][] = new Object[rl.getRL().size()][7];

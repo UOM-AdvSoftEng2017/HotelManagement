@@ -74,7 +74,7 @@ public class AddReservationFrame extends JDialog {
             String clientID = textFieldClientID.getText();
             Client c = ClientList.INSTANCE.getClient(clientID);
             String roomID = comboBoxRoom.getSelectedItem().toString();
-            Room room = RoomList.RL.getRoom(roomID);
+            Room room = RoomList.INSANCE.getRoom(roomID);
             //(Date start, Date end, String cID, String rID)
             Date dateFrom = DateConverter.getDate(from);
             Date dateTo = DateConverter.getDate(to);
@@ -121,10 +121,10 @@ public class AddReservationFrame extends JDialog {
             if (to.isAfter(from)) {
                 // get a list of all rooms
                 ArrayList<Room> availableRooms = new ArrayList<Room>();
-                for (Room room: RoomList.RL.getRL()) {
+                for (Room room: RoomList.INSANCE.getRL()) {
                     availableRooms.add(room);
                 }
-                for (Room room: RoomList.RL.getRL()) {
+                for (Room room: RoomList.INSANCE.getRL()) {
                     Reservation res = new Reservation(fromDate, toDate, "test", room.getId());
                     if (!res.valid()) {
                         if (availableRooms.contains(room)) availableRooms.remove(room);

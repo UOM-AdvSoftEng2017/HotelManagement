@@ -20,7 +20,7 @@ public class ReservationDeleteConfirmDialog extends JDialog {
         initComponents();
         
         r = ReservationList.INSTANCE.getReservation(reservationID);
-        Room room = RoomList.RL.getRoom(r.getrID());
+        Room room = RoomList.INSANCE.getRoom(r.getrID());
         Client c = ClientList.INSTANCE.getClient(r.getcID());
         String from = r.getStartDateString();
         String to = r.getEndDateString();
