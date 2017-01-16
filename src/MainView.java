@@ -121,4 +121,9 @@ public class MainView extends JFrame {
     private JButton buttonClients;
     private JButton buttonRooms;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+    
+    public static void main(String[] args) {
+        MainView main = new MainView();
+        main.show();
+    }
 }
