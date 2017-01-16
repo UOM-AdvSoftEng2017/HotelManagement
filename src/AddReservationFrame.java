@@ -72,7 +72,7 @@ public class AddReservationFrame extends JDialog {
                     JOptionPane.ERROR_MESSAGE);
         } else {
             String clientID = textFieldClientID.getText();
-            Client c = ClientList.CL.getClient(clientID);
+            Client c = ClientList.INSTANCE.getClient(clientID);
             String roomID = comboBoxRoom.getSelectedItem().toString();
             Room room = RoomList.RL.getRoom(roomID);
             //(Date start, Date end, String cID, String rID)

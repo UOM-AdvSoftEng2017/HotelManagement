@@ -37,7 +37,7 @@ public class EditReservationFrame extends JDialog {
             }
         }        
         
-        Client c = ClientList.CL.getClient(r.getcID());
+        Client c = ClientList.INSTANCE.getClient(r.getcID());
         textFieldClient.setText(c.getName());
         selectedRoom = r.getrID();
         LocalDate from = DateConverter.getLocalDate(r.getStart());

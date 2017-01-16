@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public enum ClientList {
-    CL;
+    INSTANCE;
 
     private ArrayList<Client> cl;
 
@@ -15,7 +15,7 @@ public enum ClientList {
     }
 
     public Client getClient(String clientID) {
-        for (Client c: CL.cl) {
+        for (Client c: INSTANCE.cl) {
             if ((clientID.equals(c.getId()))) return c;
         }
         return null;
@@ -28,7 +28,7 @@ public enum ClientList {
 
     public static void main(String[] args) {
         // testing
-        for (Client c: CL.cl) {
+        for (Client c: INSTANCE.cl) {
             System.out.println(c);
         }
 

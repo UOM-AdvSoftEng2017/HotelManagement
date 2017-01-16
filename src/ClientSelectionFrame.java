@@ -24,7 +24,7 @@ public class ClientSelectionFrame extends JDialog {
         this.textFieldClientName = textFieldClientName;
         initComponents();
         
-        ArrayList<Client> cl = ClientList.CL.getCL();
+        ArrayList<Client> cl = ClientList.INSTANCE.getCL();
         // create client table structure
         Object rowData[][] = new Object[cl.size()][2];
         Object columnNames[] = { "Client Id", "Name"};
