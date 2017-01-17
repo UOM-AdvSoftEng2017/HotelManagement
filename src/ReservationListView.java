@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -63,7 +64,7 @@ public class ReservationListView extends JFrame {
     private void buttonEditActionPerformed(ActionEvent e) {
         int row = tableReservations.getSelectedRow();
         if (row != -1) { // -1 means nothing is selected
-            int resID = Integer.parseInt(tableReservations.getValueAt(row, 0).toString());
+            int resID = reservationsIds.get(row);
             Reservation r = ReservationList.INSTANCE.getReservation(resID);
             EditReservationFrame erf = new EditReservationFrame(this, r);
             erf.setModal(true);
@@ -85,8 +86,12 @@ public class ReservationListView extends JFrame {
         for (int i = 0; i < rl.getRL().size(); i++) {
             // rowData[i][0] = rl.getRL().get(i).getId();
 
-            // if (past)
-            //   if ()
+             if (!showPastToo) {
+              Date endDate = rl.getRL().get(i).getEnd();
+              Date currentDate = new Date();
+                 if (currentDate.compareTo(endDate)>0)
+                     continue;
+             }
 
             if (showPaidOnly)
                 if (!rl.getRL().get(i).isPaid())
