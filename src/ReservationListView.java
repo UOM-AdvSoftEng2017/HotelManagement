@@ -74,7 +74,7 @@ public class ReservationListView extends JFrame {
 
     public void updateTable() {
         boolean showPastToo = checkBox1.isSelected();
-        boolean showPaidOnly = checkBox2.isSelected();
+        boolean showPaidToo = checkBox2.isSelected();
 
         ReservationList rl = ReservationList.INSTANCE;
         ClientList cl = ClientList.INSTANCE;
@@ -93,8 +93,8 @@ public class ReservationListView extends JFrame {
                      continue;
              }
 
-            if (showPaidOnly)
-                if (!rl.getRL().get(i).isPaid())
+            if (!showPaidToo)
+                if (rl.getRL().get(i).isPaid())
                     continue;
 
             tmpArray.add(rl.getRL().get(i));
@@ -163,8 +163,13 @@ public class ReservationListView extends JFrame {
         updateTable();
     }
 
+    private void checkBox1PropertyChange(PropertyChangeEvent e) {
+        // TODO add your code here
+    }
+
 
     private void initComponents() {
+        reservationsIds = new ArrayList<>();
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Manos kakogian
         dialogPane = new JPanel();
@@ -179,7 +184,6 @@ public class ReservationListView extends JFrame {
         buttonPaid = new JButton();
         checkBox1 = new JCheckBox();
         checkBox2 = new JCheckBox();
-        reservationsIds = new ArrayList<>();
 
         //======== this ========
         setTitle("Reservation List");
@@ -199,7 +203,7 @@ public class ReservationListView extends JFrame {
             // JFormDesigner evaluation mark
             dialogPane.setBorder(new javax.swing.border.CompoundBorder(
                 new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                    "", javax.swing.border.TitledBorder.CENTER,
                     javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
                     java.awt.Color.red), dialogPane.getBorder())); dialogPane.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
@@ -253,13 +257,16 @@ public class ReservationListView extends JFrame {
             //---- checkBox1 ----
             checkBox1.setText("Past reservations");
             checkBox1.setSelected(true);
+            checkBox1.addPropertyChangeListener("selected", e -> checkBox1PropertyChange(e));
             checkBox1.addChangeListener(e -> checkBox1StateChanged(e));
             dialogPane.add(checkBox1);
             checkBox1.setBounds(new Rectangle(new Point(360, 10), checkBox1.getPreferredSize()));
 
             //---- checkBox2 ----
             checkBox2.setText("Paid reservations");
+            checkBox2.setSelected(true);
             checkBox2.addChangeListener(e -> checkBox1StateChanged(e));
+
             dialogPane.add(checkBox2);
             checkBox2.setBounds(new Rectangle(new Point(210, 10), checkBox2.getPreferredSize()));
 
@@ -281,6 +288,8 @@ public class ReservationListView extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
+
+
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -297,6 +306,7 @@ public class ReservationListView extends JFrame {
     private JButton buttonPaid;
     private JCheckBox checkBox1;
     private JCheckBox checkBox2;
-    private ArrayList<Integer> reservationsIds;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+    private ArrayList<Integer> reservationsIds;
 }

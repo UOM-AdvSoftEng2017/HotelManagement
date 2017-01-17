@@ -94,6 +94,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JCheckBox" ) {
 					name: "checkBox2"
 					"text": "Paid reservations"
+					"selected": true
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 210
 					"y": 10
@@ -107,3 +108,4 @@ new FormModel {
 		} )
 	}
 }
+
