@@ -40,7 +40,7 @@ public class ClientSelectionFrame extends JDialog {
                 return false;
             }
         };
-        scrollPaneClients.setViewportView(tableClientList);
+        scrollPane1.setViewportView(tableClientList);
     }
 
     private void okButtonActionPerformed(ActionEvent e) {
@@ -68,7 +68,7 @@ public class ClientSelectionFrame extends JDialog {
         // Generated using JFormDesigner Evaluation license - Manos kakogian
         dialogPane = new JPanel();
         contentPanel = new JPanel();
-        scrollPaneClients = new JScrollPane();
+        scrollPane1 = new JScrollPane();
         tableClientList = new JTable();
         buttonBar = new JPanel();
         okButton = new JButton();
@@ -89,6 +89,13 @@ public class ClientSelectionFrame extends JDialog {
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
 
+            // JFormDesigner evaluation mark
+            dialogPane.setBorder(new javax.swing.border.CompoundBorder(
+                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                    java.awt.Color.red), dialogPane.getBorder())); dialogPane.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+
             dialogPane.setLayout(new BorderLayout());
 
             //======== contentPanel ========
@@ -97,10 +104,10 @@ public class ClientSelectionFrame extends JDialog {
 
                 //======== scrollPane1 ========
                 {
-                    scrollPaneClients.setViewportView(tableClientList);
+                    scrollPane1.setViewportView(tableClientList);
                 }
-                contentPanel.add(scrollPaneClients);
-                scrollPaneClients.setBounds(5, 5, scrollPaneClients.getPreferredSize().width, 345);
+                contentPanel.add(scrollPane1);
+                scrollPane1.setBounds(5, 5, scrollPane1.getPreferredSize().width, 345);
 
                 { // compute preferred size
                     Dimension preferredSize = new Dimension();
@@ -144,7 +151,7 @@ public class ClientSelectionFrame extends JDialog {
     // Generated using JFormDesigner Evaluation license - Manos kakogian
     private JPanel dialogPane;
     private JPanel contentPanel;
-    private JScrollPane scrollPaneClients;
+    private JScrollPane scrollPane1;
     private JTable tableClientList;
     private JPanel buttonBar;
     private JButton okButton;

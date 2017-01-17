@@ -73,25 +73,25 @@ public class ReservationListView extends JFrame {
         ClientList cl = ClientList.INSTANCE;
         RoomList rooms = RoomList.INSANCE;
         // define table structure
-        Object columnNames[] = {"Reservation ID", "Client", "Room", "Arrival", "Departure", "Total Price", "Paid"};
+        Object columnNames[] = { "Client", "Room", "Arrival", "Departure", "Total Price", "Paid"};
         Object rowData[][] = new Object[rl.getRL().size()][7];
         // add data to table
         for (int i = 0; i < rl.getRL().size(); i++) {
-            rowData[i][0] = rl.getRL().get(i).getId();
+           // rowData[i][0] = rl.getRL().get(i).getId();
             String clientID = rl.getRL().get(i).getcID();
             Client c = cl.getClient(clientID);
-            rowData[i][1] = c.getName();
+            rowData[i][0] = c.getName();
             
             String roomID = rl.getRL().get(i).getrID();
             Room room = rooms.getRoom(roomID);
-            rowData[i][2] = room.getId();
+            rowData[i][1] = room.getId();
             
-            rowData[i][3] = rl.getRL().get(i).getStartDateString();
-            rowData[i][4] = rl.getRL().get(i).getEndDateString();
-            rowData[i][5] = rl.getRL().get(i).getPrice();
+            rowData[i][2] = rl.getRL().get(i).getStartDateString();
+            rowData[i][3] = rl.getRL().get(i).getEndDateString();
+            rowData[i][4] = rl.getRL().get(i).getPrice();
             String paid = "No";
             if (rl.getRL().get(i).isPaid()) paid = "Yes";
-            rowData[i][6] = paid;
+            rowData[i][5] = paid;
         }
         tableReservations = new JTable(rowData, columnNames) {
             // make table cells non-editable
@@ -121,7 +121,7 @@ public class ReservationListView extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - George Vlahavas
+        // Generated using JFormDesigner Evaluation license - Manos kakogian
         dialogPane = new JPanel();
         buttonBar = new JPanel();
         buttonOK = new JButton();
@@ -148,6 +148,13 @@ public class ReservationListView extends JFrame {
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
+
+            // JFormDesigner evaluation mark
+            dialogPane.setBorder(new javax.swing.border.CompoundBorder(
+                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                    java.awt.Color.red), dialogPane.getBorder())); dialogPane.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
             dialogPane.setLayout(null);
 
@@ -227,7 +234,7 @@ public class ReservationListView extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - George Vlahavas
+    // Generated using JFormDesigner Evaluation license - Manos kakogian
     private JPanel dialogPane;
     private JPanel buttonBar;
     private JButton buttonOK;
