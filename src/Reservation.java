@@ -17,7 +17,7 @@ public class Reservation {
 	// been created by the DB
 	public Reservation(Date start, Date end, String cID, String rID) {
 		this.id = -1;
-		initVars(start, end, cID, rID);
+		initVars(start, end, cID, rID, false);
         updatePrice();
 	}
 
@@ -27,16 +27,16 @@ public class Reservation {
         this.price = price;
         if (paid == 0) this.paid = false;
         else this.paid = true;
-        initVars(start, end, cID, rID);
+        initVars(start, end, cID, rID, this.paid);
     }
 	
 	// initialize common variables. To be used in the different constructors.
-	private void initVars(Date start, Date end, String cID, String rID) {
+	private void initVars(Date start, Date end, String cID, String rID, boolean paid) {
 	    this.start = start;
         this.end = end;
         this.cID = cID;
         this.rID = rID;
-        this.paid = false;
+        this.paid = paid;
 	}
 	
 	public void updatePrice() {
