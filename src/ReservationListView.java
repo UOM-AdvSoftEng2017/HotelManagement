@@ -1,13 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.beans.*;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
-import javax.swing.table.DefaultTableCellRenderer;
 /*
  * Created by JFormDesigner on Thu Jan 12 15:30:38 EET 2017
  */
