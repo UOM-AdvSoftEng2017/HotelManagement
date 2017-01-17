@@ -1,9 +1,12 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.*;
+import javax.swing.table.DefaultTableCellRenderer;
 /*
  * Created by JFormDesigner on Thu Jan 12 15:30:38 EET 2017
  */
@@ -69,28 +72,54 @@ public class ReservationListView extends JFrame {
     }
 
     public void updateTable() {
+        boolean showPastToo = checkBox1.isSelected();
+        boolean showPaidOnly = checkBox2.isSelected();
+
         ReservationList rl = ReservationList.INSTANCE;
         ClientList cl = ClientList.INSTANCE;
         RoomList rooms = RoomList.INSANCE;
         // define table structure
-        Object columnNames[] = { "Client", "Room", "Arrival", "Departure", "Total Price", "Paid"};
-        Object rowData[][] = new Object[rl.getRL().size()][7];
-        // add data to table
+
+        ArrayList<Reservation> tmpArray = new ArrayList<>();
+
         for (int i = 0; i < rl.getRL().size(); i++) {
-           // rowData[i][0] = rl.getRL().get(i).getId();
-            String clientID = rl.getRL().get(i).getcID();
+            // rowData[i][0] = rl.getRL().get(i).getId();
+
+            // if (past)
+            //   if ()
+
+            if (showPaidOnly)
+                if (!rl.getRL().get(i).isPaid())
+                    continue;
+
+            tmpArray.add(rl.getRL().get(i));
+        }
+
+
+        Object columnNames[] = { "Client", "Room", "Arrival", "Departure", "Total Price", "Paid"};
+        Object rowData[][] = new Object[tmpArray.size()][6];
+        // add data to table
+
+
+
+
+        for (int i = 0; i < tmpArray.size(); i++) {
+
+            reservationsIds.add(tmpArray.get(i).getId());
+
+            String clientID = tmpArray.get(i).getcID();
             Client c = cl.getClient(clientID);
             rowData[i][0] = c.getName();
             
-            String roomID = rl.getRL().get(i).getrID();
+            String roomID = tmpArray.get(i).getrID();
             Room room = rooms.getRoom(roomID);
             rowData[i][1] = room.getId();
             
-            rowData[i][2] = rl.getRL().get(i).getStartDateString();
-            rowData[i][3] = rl.getRL().get(i).getEndDateString();
-            rowData[i][4] = rl.getRL().get(i).getPrice();
+            rowData[i][2] = tmpArray.get(i).getStartDateString();
+            rowData[i][3] = tmpArray.get(i).getEndDateString();
+            rowData[i][4] = tmpArray.get(i).getPrice();
             String paid = "No";
-            if (rl.getRL().get(i).isPaid()) paid = "Yes";
+            if (tmpArray.get(i).isPaid()) paid = "Yes";
             rowData[i][5] = paid;
         }
         tableReservations = new JTable(rowData, columnNames) {
@@ -99,14 +128,18 @@ public class ReservationListView extends JFrame {
                 return false;
             }
         };
-       
+
         scrollPaneReservations.setViewportView(tableReservations);
+
+
+
+
     }
 
     private void buttonPaidActionPerformed(ActionEvent e) {
         int row = tableReservations.getSelectedRow();
         if (row != -1) { // -1 means nothing is selected
-            int resID = Integer.parseInt(tableReservations.getValueAt(row, 0).toString());
+            int resID = reservationsIds.get(row);
             Reservation r = ReservationList.INSTANCE.getReservation(resID);
             r.setPaid(!r.isPaid());
             int rv = DBManager.updateReservation(r);
@@ -119,11 +152,17 @@ public class ReservationListView extends JFrame {
         }
     }
 
+
+
+    private void checkBox1StateChanged(ChangeEvent e) {
+        updateTable();
+    }
+
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Manos kakogian
         dialogPane = new JPanel();
-        buttonBar = new JPanel();
         buttonOK = new JButton();
         scrollPaneReservations = new JScrollPane();
         tableReservations = new JTable();
@@ -133,6 +172,9 @@ public class ReservationListView extends JFrame {
         buttonEdit = new JButton();
         separator1 = new JSeparator();
         buttonPaid = new JButton();
+        checkBox1 = new JCheckBox();
+        checkBox2 = new JCheckBox();
+        reservationsIds = new ArrayList<>();
 
         //======== this ========
         setTitle("Reservation List");
@@ -158,16 +200,6 @@ public class ReservationListView extends JFrame {
 
             dialogPane.setLayout(null);
 
-            //======== buttonBar ========
-            {
-                buttonBar.setBorder(new EmptyBorder(12, 0, 0, 0));
-                buttonBar.setLayout(new GridBagLayout());
-                ((GridBagLayout)buttonBar.getLayout()).columnWidths = new int[] {0, 80};
-                ((GridBagLayout)buttonBar.getLayout()).columnWeights = new double[] {1.0, 0.0};
-            }
-            dialogPane.add(buttonBar);
-            buttonBar.setBounds(12, 228, 364, buttonBar.getPreferredSize().height);
-
             //---- buttonOK ----
             buttonOK.setText("OK");
             buttonOK.addActionListener(e -> buttonOKActionPerformed(e));
@@ -179,7 +211,7 @@ public class ReservationListView extends JFrame {
                 scrollPaneReservations.setViewportView(tableReservations);
             }
             dialogPane.add(scrollPaneReservations);
-            scrollPaneReservations.setBounds(15, 35, 480, 410);
+            scrollPaneReservations.setBounds(15, 35, 479, 410);
 
             //---- label1 ----
             label1.setText("Reservation List");
@@ -213,6 +245,19 @@ public class ReservationListView extends JFrame {
             dialogPane.add(buttonPaid);
             buttonPaid.setBounds(505, 150, 90, buttonPaid.getPreferredSize().height);
 
+            //---- checkBox1 ----
+            checkBox1.setText("Past reservations");
+            checkBox1.setSelected(true);
+            checkBox1.addChangeListener(e -> checkBox1StateChanged(e));
+            dialogPane.add(checkBox1);
+            checkBox1.setBounds(new Rectangle(new Point(360, 10), checkBox1.getPreferredSize()));
+
+            //---- checkBox2 ----
+            checkBox2.setText("Paid reservations");
+            checkBox2.addChangeListener(e -> checkBox1StateChanged(e));
+            dialogPane.add(checkBox2);
+            checkBox2.setBounds(new Rectangle(new Point(210, 10), checkBox2.getPreferredSize()));
+
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
                 for(int i = 0; i < dialogPane.getComponentCount(); i++) {
@@ -236,7 +281,6 @@ public class ReservationListView extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Manos kakogian
     private JPanel dialogPane;
-    private JPanel buttonBar;
     private JButton buttonOK;
     private JScrollPane scrollPaneReservations;
     private JTable tableReservations;
@@ -246,5 +290,8 @@ public class ReservationListView extends JFrame {
     private JButton buttonEdit;
     private JSeparator separator1;
     private JButton buttonPaid;
+    private JCheckBox checkBox1;
+    private JCheckBox checkBox2;
+    private ArrayList<Integer> reservationsIds;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

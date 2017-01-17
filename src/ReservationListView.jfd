@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.2.5.0.333" Java: "1.8.0_91" encoding: "UTF-8"
+JFDML JFormDesigner: "5.2.5.1.342" Java: "1.8.0_112-release" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -10,19 +10,6 @@ new FormModel {
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-					"$columnSpecs": "0:1.0, 80"
-					"$rowSpecs": "0"
-					"$hGap": 5
-					"$vGap": 5
-				} ) {
-					name: "buttonBar"
-					"border": new javax.swing.border.EmptyBorder( 12, 0, 0, 0 )
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 12
-					"y": 228
-					"width": 364
-				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buttonOK"
 					"text": "OK"
@@ -41,7 +28,7 @@ new FormModel {
 					"x": 15
 					"y": 35
 					"height": 410
-					"width": 480
+					"width": 479
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
@@ -93,6 +80,23 @@ new FormModel {
 					"x": 505
 					"y": 150
 					"width": 90
+				} )
+				add( new FormComponent( "javax.swing.JCheckBox" ) {
+					name: "checkBox1"
+					"text": "Past reservations"
+					"selected": true
+					addEvent( new FormEvent( "java.beans.PropertyChangeListener", "propertyChange", "checkBox1PropertyChange", true, "selected" ) )
+					addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "checkBox1StateChanged", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 360
+					"y": 10
+				} )
+				add( new FormComponent( "javax.swing.JCheckBox" ) {
+					name: "checkBox2"
+					"text": "Paid reservations"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 210
+					"y": 10
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
