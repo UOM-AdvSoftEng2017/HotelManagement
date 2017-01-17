@@ -164,10 +164,6 @@ public class ReservationListView extends JFrame {
         updateTable();
     }
 
-    private void checkBox1PropertyChange(PropertyChangeEvent e) {
-        // TODO add your code here
-    }
-
     private void checkBox2StateChanged(ChangeEvent e) {
         updateTable();
     }
@@ -262,7 +258,6 @@ public class ReservationListView extends JFrame {
             //---- checkBox1 ----
             checkBox1.setText("Past reservations");
             checkBox1.setSelected(true);
-            checkBox1.addPropertyChangeListener("selected", e -> checkBox1PropertyChange(e));
             checkBox1.addChangeListener(e -> checkBox1StateChanged(e));
             dialogPane.add(checkBox1);
             checkBox1.setBounds(new Rectangle(new Point(360, 10), checkBox1.getPreferredSize()));
