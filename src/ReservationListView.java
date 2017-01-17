@@ -54,7 +54,7 @@ public class ReservationListView extends JFrame {
     private void buttonDeleteActionPerformed(ActionEvent e) {
         int row = tableReservations.getSelectedRow();
         if (row != -1) { // -1 means nothing is selected
-            int resID = Integer.parseInt(tableReservations.getValueAt(row, 0).toString());
+            int resID = reservationsIds.get(row);
             ReservationDeleteConfirmDialog rdcd = new ReservationDeleteConfirmDialog(this, resID);
             rdcd.setModal(true);
             rdcd.show();
