@@ -90,7 +90,7 @@ public class ReservationListView extends JFrame {
              if (!showPastToo) {
               Date endDate = rl.getRL().get(i).getEnd();
               Date currentDate = new Date();
-                 if (currentDate.compareTo(endDate)>0)
+                 if (DateConverter.compareDates(currentDate, endDate) > 0)
                      continue;
              }
 
