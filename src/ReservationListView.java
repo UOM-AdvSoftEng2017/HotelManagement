@@ -167,6 +167,10 @@ public class ReservationListView extends JFrame {
         // TODO add your code here
     }
 
+    private void checkBox2StateChanged(ChangeEvent e) {
+        updateTable();
+    }
+
 
     private void initComponents() {
         reservationsIds = new ArrayList<>();
@@ -265,8 +269,7 @@ public class ReservationListView extends JFrame {
             //---- checkBox2 ----
             checkBox2.setText("Paid reservations");
             checkBox2.setSelected(true);
-            checkBox2.addChangeListener(e -> checkBox1StateChanged(e));
-
+            checkBox2.addChangeListener(e -> checkBox2StateChanged(e));
             dialogPane.add(checkBox2);
             checkBox2.setBounds(new Rectangle(new Point(210, 10), checkBox2.getPreferredSize()));
 

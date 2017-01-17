@@ -95,6 +95,7 @@ new FormModel {
 					name: "checkBox2"
 					"text": "Paid reservations"
 					"selected": true
+					addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "checkBox2StateChanged", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 210
 					"y": 10
@@ -108,4 +109,3 @@ new FormModel {
 		} )
 	}
 }
-
