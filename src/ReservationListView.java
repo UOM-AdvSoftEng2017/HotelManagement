@@ -78,7 +78,7 @@ public class ReservationListView extends JFrame {
 
         ReservationList rl = ReservationList.INSTANCE;
         ClientList cl = ClientList.INSTANCE;
-        RoomList rooms = RoomList.INSANCE;
+        RoomList rooms = RoomList.INSTANCE;
         // define table structure
 
         ArrayList<Reservation> tmpArray = new ArrayList<>();

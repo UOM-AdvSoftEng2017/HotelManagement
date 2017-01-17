@@ -68,7 +68,7 @@ public class EditReservationFrame extends JDialog {
             Date toDate = DateConverter.getDate(to);
             // get a list of all rooms
             ArrayList<Room> availableRooms = new ArrayList<Room>();
-            for (Room room: RoomList.INSANCE.getRL()) {
+            for (Room room: RoomList.INSTANCE.getRL()) {
                 availableRooms.add(room);
             }
             Reservation newRes = new Reservation(fromDate, toDate, this.r.getcID(), this.r.getrID());
@@ -76,7 +76,7 @@ public class EditReservationFrame extends JDialog {
             for (Reservation res: ReservationList.INSTANCE.getRL()) {
                 Date resFromDate = res.getStart();
                 Date resToDate = res.getEnd();
-                Room resRoom = RoomList.INSANCE.getRoom(res.getrID());
+                Room resRoom = RoomList.INSTANCE.getRoom(res.getrID());
                 if ((res.getId() != this.r.getId()) && (res.dateConflicts(newRes)) && availableRooms.contains(resRoom)) {
                     availableRooms.remove(resRoom);
                 }
