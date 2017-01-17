@@ -73,6 +73,7 @@ public class ReservationListView extends JFrame {
     }
 
     public void updateTable() {
+        reservationsIds = new ArrayList<>();
         boolean showPastToo = checkBox1.isSelected();
         boolean showPaidToo = checkBox2.isSelected();
 
