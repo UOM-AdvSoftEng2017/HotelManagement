@@ -13,7 +13,7 @@ import javax.swing.border.*;
  */
 public class RoomListView extends JFrame {
     
-    // the ReservationListView is a singleton, so that it's impossible to get multiple
+    // the RoomListView is a singleton, so that it's impossible to get multiple
     // windows of the same kind
     private static RoomListView INSTANCE = null;
     
