@@ -103,7 +103,6 @@ public class MainView extends JFrame {
         buttonRoomTypes.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
         buttonRoomTypes.setActionCommand("RoomTypes");
         buttonRoomTypes.addActionListener(e -> {
-			buttonRoomsActionPerformed(e);
 			buttonRoomTypesActionPerformed(e);
 		});
         contentPane.add(buttonRoomTypes);
