@@ -72,7 +72,14 @@ public class RoomListView extends JFrame {
     }
 
     private void buttonDeleteActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        int row = tableRooms.getSelectedRow();
+        if (row != -1) { // -1 means nothing is selected
+            String roomID = tableRooms.getValueAt(row, 0).toString();
+            Room selected = RoomList.INSTANCE.getRoom(roomID);
+            RoomDeleteConfirmDialog rdcd = new RoomDeleteConfirmDialog(this, selected.getId());
+            rdcd.setModal(true);
+            rdcd.show();
+        }
     }
     
     private void initComponents() {
