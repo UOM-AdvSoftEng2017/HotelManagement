@@ -131,7 +131,7 @@ public final class ClientListView extends JFrame {
         scrollPane1.setBounds(10, 40, 490, 365);
 
         //---- button1 ----
-        button1.setText("New");
+        button1.setText("Add");
         button1.addActionListener(e -> button1ActionPerformed(e));
         contentPane.add(button1);
         button1.setBounds(525, 40, 90, button1.getPreferredSize().height);
@@ -194,10 +194,8 @@ public final class ClientListView extends JFrame {
                 else
                     currentRow = rowIndex;
 
-                if (columnIndex==0)
-                    return false;
-                else
-                    return  true;
+
+                return  true;
             }
         });
         //======== scrollPane1 ========
