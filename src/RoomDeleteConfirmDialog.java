@@ -36,8 +36,10 @@ public class RoomDeleteConfirmDialog extends JDialog {
     private void okButtonActionPerformed(ActionEvent e) {
         boolean conflict = false; // are there any reservations for this room?
         for (Reservation r : ReservationList.INSTANCE.getRL()) {
-            if (r.getrID().equals(this.r.getId())) conflict = true;
-            break;
+            if (r.getrID().equals(this.r.getId())) {
+                conflict = true;
+                break;
+            }
         }
         if (!conflict) {
             int rv = DBManager.deleteRoom(r);
