@@ -34,14 +34,23 @@ public class RoomDeleteConfirmDialog extends JDialog {
     }
 
     private void okButtonActionPerformed(ActionEvent e) {
-        int rv = DBManager.deleteRoom(r);
-        if (rv != 0) {
-            JOptionPane.showMessageDialog(null, "Error deleting reservation from DB", "Error",
-                    JOptionPane.ERROR_MESSAGE);
+        boolean conflict = false; // are there any reservations for this room?
+        for (Reservation r : ReservationList.INSTANCE.getRL()) {
+            if (r.getrID().equals(this.r.getId())) conflict = true;
+        }
+        if (!conflict) {
+            int rv = DBManager.deleteRoom(r);
+            if (rv != 0) {
+                JOptionPane.showMessageDialog(null, "Error deleting reservation from DB", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                RoomList.INSTANCE.update();
+                RoomListView.getInstance().updateTable();
+                this.dispose();
+            }
         } else {
-            RoomList.INSTANCE.update();
-            RoomListView.getInstance().updateTable();
-            this.dispose();
+            JOptionPane.showMessageDialog(null, "Cannot delete room. It is used in one or more reservations", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
