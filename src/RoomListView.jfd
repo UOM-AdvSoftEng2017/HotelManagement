@@ -1,0 +1,102 @@
+JFDML JFormDesigner: "5.2.5.0.333" Java: "1.8.0_91" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"title": "Room List"
+			"resizable": false
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "thisWindowClosing", true ) )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "dialogPane"
+				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) {
+					"vgap": 10
+				} ) {
+					name: "contentPanel"
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPaneRoomList"
+						add( new FormComponent( "javax.swing.JTable" ) {
+							name: "tableRooms"
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "West"
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 12
+					"y": 27
+					"width": 468
+					"height": 378
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "buttonBar"
+					"border": new javax.swing.border.EmptyBorder( 12, 0, 0, 0 )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "okButton"
+						"text": "OK"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "okButtonActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 475
+						"y": 10
+						"width": 90
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 10
+					"y": 405
+					"width": 568
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Room List"
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 12
+					"y": 12
+					"width": 549
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel1"
+					"border": new javax.swing.border.EmptyBorder( 5, 5, 5, 5 )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "buttonAdd"
+						"text": "Add"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 10
+						"width": 90
+						"y": 0
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "buttonEdit"
+						"text": "Edit"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonEditActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 10
+						"y": 30
+						"width": 90
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "buttonDelete"
+						"text": "Delete"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonDeleteActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 10
+						"y": 60
+						"width": 90
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"height": 206
+					"x": 475
+					"y": 25
+					"width": 105
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 10, 45 )
+			"size": new java.awt.Dimension( 590, 465 )
+		} )
+	}
+}
