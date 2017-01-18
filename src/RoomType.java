@@ -5,13 +5,13 @@ public class RoomType {
     private String name;
     private double price;
     
-    public RoomType(String name, long price) {
+    public RoomType(String name, double price) {
         this.id = -1;
         this.name = name;
         this.price = price;
     }
     
-    public RoomType(int id, String name, long price) {
+    public RoomType(int id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;
