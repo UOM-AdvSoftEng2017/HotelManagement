@@ -38,6 +38,11 @@ public class MainView extends JFrame {
         resList.show();
     }
 
+    private void buttonRoomsActionPerformed(ActionEvent e) {
+        RoomListView roomList = RoomListView.getInstance();
+        roomList.show();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Manos kakogian
@@ -83,6 +88,7 @@ public class MainView extends JFrame {
         //---- buttonRooms ----
         buttonRooms.setText("Rooms");
         buttonRooms.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
+        buttonRooms.addActionListener(e -> buttonRoomsActionPerformed(e));
         contentPane.add(buttonRooms);
         buttonRooms.setBounds(115, 290, 250, 50);
 
