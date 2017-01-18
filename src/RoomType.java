@@ -3,7 +3,7 @@ public class RoomType {
 
     private int id;
     private String name;
-    private long price;
+    private double price;
     
     public RoomType(String name, long price) {
         this.id = -1;
@@ -51,7 +51,7 @@ public class RoomType {
         this.name = name;
     }
     
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
     

@@ -10,7 +10,7 @@ public class Reservation {
 	private Date end;
 	private String cID; // client ID
 	private String rID; // room ID
-	private long price;
+	private double price;
 	private boolean paid;
 	
 	// used when creating a reservation. The reservation ID has not yet
@@ -22,7 +22,7 @@ public class Reservation {
 	}
 
 	// used when reading a reservation from the DB
-	public Reservation(int id, Date start, Date end, String cID, String rID, long price, int paid) {
+	public Reservation(int id, Date start, Date end, String cID, String rID, double price, int paid) {
         this.id = id;
         this.price = price;
         if (paid == 0) this.paid = false;
@@ -42,7 +42,7 @@ public class Reservation {
 	public void updatePrice() {
 	    Room room = RoomList.INSTANCE.getRoom(this.rID);
 	    RoomType roomType = RoomTypeList.INSTANCE.getRoomType(room.getType());
-	    long pricePerNight = roomType.getPrice();
+	    double pricePerNight = roomType.getPrice();
 	    int timeDiff = (int) Math.ceil((this.end.getTime() - this.start.getTime()) / (1000 * 60 * 60 * 24));
 	    this.price = pricePerNight * timeDiff;
 	}
@@ -151,7 +151,7 @@ public class Reservation {
 		this.rID = rID;
 	}
 	
-	public long getPrice() {
+	public double getPrice() {
         return price;
     }
 
