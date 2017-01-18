@@ -194,10 +194,8 @@ public final class ClientListView extends JFrame {
                 else
                     currentRow = rowIndex;
 
-                if (columnIndex==0)
-                    return false;
-                else
-                    return  true;
+
+                return  true;
             }
         });
         //======== scrollPane1 ========

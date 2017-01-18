@@ -34,9 +34,9 @@ new FormModel {
 				"text": "Some stats:100"
 				"font": new java.awt.Font( ".SF NS Text", 0, 14 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 40
+				"x": 60
 				"y": 395
-				"width": 460
+				"width": 440
 				"height": 35
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {

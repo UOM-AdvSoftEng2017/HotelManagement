@@ -76,7 +76,7 @@ public class MainView extends JFrame {
         label2.setText("Some stats:100");
         label2.setFont(new Font(".SF NS Text", Font.PLAIN, 14));
         contentPane.add(label2);
-        label2.setBounds(40, 395, 460, 35);
+        label2.setBounds(60, 395, 440, 35);
 
         //---- buttonClients ----
         buttonClients.setText("Clients");
