@@ -43,6 +43,11 @@ public class MainView extends JFrame {
         roomList.show();
     }
 
+    private void buttonRoomTypesActionPerformed(ActionEvent e) {
+        RoomTypeListView roomTypeList = RoomTypeListView.getInstance();
+        roomTypeList.show();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Manos kakogian
@@ -51,6 +56,7 @@ public class MainView extends JFrame {
         label2 = new JLabel();
         buttonClients = new JButton();
         buttonRooms = new JButton();
+        buttonRoomTypes = new JButton();
 
         //======== this ========
         setTitle("Hotel Management");
@@ -76,7 +82,7 @@ public class MainView extends JFrame {
         label2.setText("Some stats:100");
         label2.setFont(new Font(".SF NS Text", Font.PLAIN, 14));
         contentPane.add(label2);
-        label2.setBounds(40, 395, 460, 35);
+        label2.setBounds(40, 465, 460, 35);
 
         //---- buttonClients ----
         buttonClients.setText("Clients");
@@ -91,6 +97,17 @@ public class MainView extends JFrame {
         buttonRooms.addActionListener(e -> buttonRoomsActionPerformed(e));
         contentPane.add(buttonRooms);
         buttonRooms.setBounds(115, 290, 250, 50);
+
+        //---- buttonRoomTypes ----
+        buttonRoomTypes.setText("Room Types");
+        buttonRoomTypes.setFont(new Font(".SF NS Text", Font.PLAIN, 22));
+        buttonRoomTypes.setActionCommand("RoomTypes");
+        buttonRoomTypes.addActionListener(e -> {
+			buttonRoomsActionPerformed(e);
+			buttonRoomTypesActionPerformed(e);
+		});
+        contentPane.add(buttonRoomTypes);
+        buttonRoomTypes.setBounds(115, 380, 250, 50);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -126,6 +143,7 @@ public class MainView extends JFrame {
     private JLabel label2;
     private JButton buttonClients;
     private JButton buttonRooms;
+    private JButton buttonRoomTypes;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     
     public static void main(String[] args) {
