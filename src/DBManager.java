@@ -218,7 +218,7 @@ public enum DBManager {
         StringBuilder s = new StringBuilder();
         s.append("update roomtype set name = \"");
         s.append(rt.getName());
-        s.append("\", price = ");
+        s.append("\", price = \"");
         s.append(rt.getPrice());
         s.append("\" where rtid == \"");
         s.append(rt.getId());
