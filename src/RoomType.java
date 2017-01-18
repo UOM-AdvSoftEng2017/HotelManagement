@@ -32,9 +32,11 @@ public class RoomType {
         return DBManager.deleteRoomType(this);
     }
 
+    // This isn't only for testing. We're actually using it to show the id and name
+    // in room type selection comboboxes.
     @Override
     public String toString() {
-        return "RoomType [id=" + id + ", name=" + name + ", price=" + price + "]";
+        return "(" + id + ") " + name;
     }
 
     public int getId() {
