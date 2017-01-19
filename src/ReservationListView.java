@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.*;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -166,11 +167,15 @@ public class ReservationListView extends JFrame {
         updateTable();
     }
 
+    private void checkBox1PropertyChange(PropertyChangeEvent e) {
+        // TODO add your code here
+    }
+
 
     private void initComponents() {
         reservationsIds = new ArrayList<>();
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Manos kakogian
+        // Generated using JFormDesigner Evaluation license - George Vlahavas
         dialogPane = new JPanel();
         buttonOK = new JButton();
         scrollPaneReservations = new JScrollPane();
@@ -186,6 +191,7 @@ public class ReservationListView extends JFrame {
 
         //======== this ========
         setTitle("Reservation List");
+        setResizable(false);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -205,14 +211,14 @@ public class ReservationListView extends JFrame {
             buttonOK.setText("OK");
             buttonOK.addActionListener(e -> buttonOKActionPerformed(e));
             dialogPane.add(buttonOK);
-            buttonOK.setBounds(505, 430, 90, buttonOK.getPreferredSize().height);
+            buttonOK.setBounds(790, 440, 90, buttonOK.getPreferredSize().height);
 
             //======== scrollPaneReservations ========
             {
                 scrollPaneReservations.setViewportView(tableReservations);
             }
             dialogPane.add(scrollPaneReservations);
-            scrollPaneReservations.setBounds(15, 35, 479, 410);
+            scrollPaneReservations.setBounds(15, 35, 745, 410);
 
             //---- label1 ----
             label1.setText("Reservation List");
@@ -224,41 +230,42 @@ public class ReservationListView extends JFrame {
             buttonAdd.setText("Add");
             buttonAdd.addActionListener(e -> buttonAddActionPerformed(e));
             dialogPane.add(buttonAdd);
-            buttonAdd.setBounds(505, 35, 90, buttonAdd.getPreferredSize().height);
+            buttonAdd.setBounds(790, 35, 90, buttonAdd.getPreferredSize().height);
 
             //---- buttonDelete ----
             buttonDelete.setText("Delete");
             buttonDelete.addActionListener(e -> buttonDeleteActionPerformed(e));
             dialogPane.add(buttonDelete);
-            buttonDelete.setBounds(505, 105, 90, buttonDelete.getPreferredSize().height);
+            buttonDelete.setBounds(790, 100, 90, buttonDelete.getPreferredSize().height);
 
             //---- buttonEdit ----
             buttonEdit.setText("Edit");
             buttonEdit.addActionListener(e -> buttonEditActionPerformed(e));
             dialogPane.add(buttonEdit);
-            buttonEdit.setBounds(505, 70, 90, buttonEdit.getPreferredSize().height);
+            buttonEdit.setBounds(790, 70, 90, buttonEdit.getPreferredSize().height);
             dialogPane.add(separator1);
-            separator1.setBounds(505, 140, 90, separator1.getPreferredSize().height);
+            separator1.setBounds(790, 135, 90, separator1.getPreferredSize().height);
 
             //---- buttonPaid ----
             buttonPaid.setText("Paid");
             buttonPaid.addActionListener(e -> buttonPaidActionPerformed(e));
             dialogPane.add(buttonPaid);
-            buttonPaid.setBounds(505, 150, 90, buttonPaid.getPreferredSize().height);
+            buttonPaid.setBounds(790, 150, 90, buttonPaid.getPreferredSize().height);
 
             //---- checkBox1 ----
             checkBox1.setText("Past reservations");
             checkBox1.setSelected(true);
+            checkBox1.addPropertyChangeListener("selected", e -> checkBox1PropertyChange(e));
             checkBox1.addChangeListener(e -> checkBox1StateChanged(e));
             dialogPane.add(checkBox1);
-            checkBox1.setBounds(new Rectangle(new Point(360, 10), checkBox1.getPreferredSize()));
+            checkBox1.setBounds(new Rectangle(new Point(620, 10), checkBox1.getPreferredSize()));
 
             //---- checkBox2 ----
             checkBox2.setText("Paid reservations");
             checkBox2.setSelected(true);
             checkBox2.addChangeListener(e -> checkBox2StateChanged(e));
             dialogPane.add(checkBox2);
-            checkBox2.setBounds(new Rectangle(new Point(210, 10), checkBox2.getPreferredSize()));
+            checkBox2.setBounds(new Rectangle(new Point(470, 10), checkBox2.getPreferredSize()));
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -283,7 +290,7 @@ public class ReservationListView extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Manos kakogian
+    // Generated using JFormDesigner Evaluation license - George Vlahavas
     private JPanel dialogPane;
     private JButton buttonOK;
     private JScrollPane scrollPaneReservations;

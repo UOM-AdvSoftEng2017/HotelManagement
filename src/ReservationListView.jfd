@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.2.5.1.342" Java: "1.8.0_112-release" encoding: "UTF-8"
+JFDML JFormDesigner: "5.2.5.0.333" Java: "1.8.0_91" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -6,6 +6,7 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
 			"title": "Reservation List"
+			"resizable": false
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "thisWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "dialogPane"
@@ -16,8 +17,8 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonOKActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 90
-					"x": 505
-					"y": 430
+					"x": 790
+					"y": 440
 				} )
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 					name: "scrollPaneReservations"
@@ -28,7 +29,7 @@ new FormModel {
 					"x": 15
 					"y": 35
 					"height": 410
-					"width": 479
+					"width": 745
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
@@ -43,7 +44,7 @@ new FormModel {
 					"text": "Add"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 505
+					"x": 790
 					"y": 35
 					"width": 90
 				} )
@@ -52,8 +53,8 @@ new FormModel {
 					"text": "Delete"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonDeleteActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 505
-					"y": 105
+					"x": 790
+					"y": 100
 					"width": 90
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -61,15 +62,15 @@ new FormModel {
 					"text": "Edit"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonEditActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 505
+					"x": 790
 					"y": 70
 					"width": 90
 				} )
 				add( new FormComponent( "javax.swing.JSeparator" ) {
 					name: "separator1"
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 505
-					"y": 140
+					"x": 790
+					"y": 135
 					"width": 90
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -77,7 +78,7 @@ new FormModel {
 					"text": "Paid"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonPaidActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 505
+					"x": 790
 					"y": 150
 					"width": 90
 				} )
@@ -88,7 +89,7 @@ new FormModel {
 					addEvent( new FormEvent( "java.beans.PropertyChangeListener", "propertyChange", "checkBox1PropertyChange", true, "selected" ) )
 					addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "checkBox1StateChanged", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 360
+					"x": 620
 					"y": 10
 				} )
 				add( new FormComponent( "javax.swing.JCheckBox" ) {
@@ -97,7 +98,7 @@ new FormModel {
 					"selected": true
 					addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "checkBox2StateChanged", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 210
+					"x": 470
 					"y": 10
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
@@ -105,7 +106,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 610, 485 )
+			"size": new java.awt.Dimension( 900, 500 )
 		} )
 	}
 }
