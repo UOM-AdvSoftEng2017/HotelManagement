@@ -189,7 +189,7 @@ public enum DBManager {
             while (rs.next() ) {
                 int id = rs.getInt("rtid");
                 String name = rs.getString("name");
-                long price = rs.getLong("price");
+                double price = rs.getDouble("price");
                 RoomType rt = new RoomType(id, name, price);
                 rtl.add(rt);
             }
