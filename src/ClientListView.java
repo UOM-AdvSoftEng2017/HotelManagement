@@ -56,7 +56,14 @@ public final class ClientListView extends JFrame {
 
     // edit button action
     private void buttonEditActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        int row = this.table1.getSelectedRow();
+        if (row != -1) { // -1 means nothing is selected
+            String clientID = this.table1.getValueAt(row, 0).toString();
+            Client selected = ClientList.INSTANCE.getClient(clientID);
+            EditClientFrame ecf = new EditClientFrame(this, selected);
+            ecf.setModal(true);
+            ecf.show();
+        }
     }
 
     private void thisWindowClosing(WindowEvent e) {
