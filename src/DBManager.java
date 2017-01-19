@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -251,9 +252,9 @@ public enum DBManager {
 				Date end = format.parse(sEnd);
 				String cID = rs.getString("Clientid");
 				String rID = rs.getString("roomid");
-				long price = rs.getLong("Price");
+				BigDecimal price = new BigDecimal(Float.toString(rs.getFloat("Price")));
 				int paid = rs.getInt("Paid");
-				Reservation r = new Reservation(id, start, end, cID, rID, price, paid);
+				Reservation r = new Reservation(id, start, end, cID, rID, price.doubleValue(), paid);
 				rl.add(r);
 			}
 			rs.close();
