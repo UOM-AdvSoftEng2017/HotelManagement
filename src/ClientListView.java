@@ -21,39 +21,23 @@ public final class ClientListView extends JFrame {
     ArrayList<String> clintsDbIds ;
 
     private ClientListView() {
-
-        addWindowListener(new WindowAdapter()
-        {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.out.println("Closed");
-
-                if (currentRow!=-1)
-                saveThePreviewsCollumn();
-                e.getWindow().dispose();
-
-            }
-        });
-
-
         initComponents();
     }
 
     public static ClientListView getInstance() {
         if (INSTANCE == null) INSTANCE = new ClientListView();
+        INSTANCE.updateTable();
         return INSTANCE;
     }
 
+    // add button action
     private void button1ActionPerformed(ActionEvent e) {
-        Long tsLong = System.currentTimeMillis() / 1000;
-        Client c = new Client(""+tsLong,"",0);
-        int rv = DBManager.addClient(c);
-        if (rv != 0)
-            JOptionPane.showMessageDialog(null, "Unable to create new Client", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        loadTable();
+        AddClientFrame acf = new AddClientFrame(this);
+        acf.setModal(true);
+        acf.show();
     }
 
+    // delete button action
     private void button2ActionPerformed(ActionEvent e) {
 
         int selected = table1.getSelectedRow();
@@ -72,40 +56,21 @@ public final class ClientListView extends JFrame {
                 currentRow =-1;
 
         }
-        loadTable();
+        updateTable();
     }
 
+    // ok button action
     private void button3ActionPerformed(ActionEvent e) {
+        this.dispose();
+    }
 
-        int selected = table1.getSelectedRow();
-        if (selected!=-1) {
-            String selctedClintId = clintsDbIds.get(selected);
-            String selctedClintName = table1.getValueAt(selected, 1).toString();
+    // edit button action
+    private void buttonEditActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
 
-            try {
-                int selctedClintPhone = (table1.getValueAt(selected, 2).toString().isEmpty() ? 0 : Integer.parseInt(table1.getValueAt(selected, 2).toString()));
-                Client c = new Client(selctedClintId, selctedClintName, selctedClintPhone);
-                int rv = DBManager.updateClient(c);
-                if (rv != 0)
-                    JOptionPane.showMessageDialog(null, "Unable to update selected Client", "Error",
-                            JOptionPane.ERROR_MESSAGE);
-
-                dispose();
-            }
-            catch ( Exception e1){
-                JOptionPane.showMessageDialog(null, "Phone number can be only integer!" , "Error",
-                        JOptionPane.WARNING_MESSAGE);
-                // table1.setValueAt("0",currentRow,2);
-            }
-
-
-        }
-        else
-            dispose();
-
-
-
-
+    private void thisWindowClosing(WindowEvent e) {
+        // TODO add your code here
     }
 
     private void initComponents() {
@@ -113,14 +78,21 @@ public final class ClientListView extends JFrame {
         // Generated using JFormDesigner Evaluation license - George Vlahavas
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
-        button1 = new JButton();
-        button2 = new JButton();
+        buttonAdd = new JButton();
+        buttonDelete = new JButton();
         button3 = new JButton();
         label1 = new JLabel();
+        buttonEdit = new JButton();
 
         //======== this ========
         setTitle("Client List");
         setResizable(false);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                thisWindowClosing(e);
+            }
+        });
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
@@ -131,17 +103,17 @@ public final class ClientListView extends JFrame {
         contentPane.add(scrollPane1);
         scrollPane1.setBounds(10, 40, 620, 345);
 
-        //---- button1 ----
-        button1.setText("Add");
-        button1.addActionListener(e -> button1ActionPerformed(e));
-        contentPane.add(button1);
-        button1.setBounds(640, 40, 90, button1.getPreferredSize().height);
+        //---- buttonAdd ----
+        buttonAdd.setText("Add");
+        buttonAdd.addActionListener(e -> button1ActionPerformed(e));
+        contentPane.add(buttonAdd);
+        buttonAdd.setBounds(640, 40, 90, buttonAdd.getPreferredSize().height);
 
-        //---- button2 ----
-        button2.setText("Delete");
-        button2.addActionListener(e -> button2ActionPerformed(e));
-        contentPane.add(button2);
-        button2.setBounds(640, 75, 90, button2.getPreferredSize().height);
+        //---- buttonDelete ----
+        buttonDelete.setText("Delete");
+        buttonDelete.addActionListener(e -> button2ActionPerformed(e));
+        contentPane.add(buttonDelete);
+        buttonDelete.setBounds(640, 110, 90, buttonDelete.getPreferredSize().height);
 
         //---- button3 ----
         button3.setText("Ok");
@@ -155,16 +127,22 @@ public final class ClientListView extends JFrame {
         contentPane.add(label1);
         label1.setBounds(10, 20, 117, 17);
 
+        //---- buttonEdit ----
+        buttonEdit.setText("Edit");
+        buttonEdit.addActionListener(e -> buttonEditActionPerformed(e));
+        contentPane.add(buttonEdit);
+        buttonEdit.setBounds(640, 75, 90, buttonEdit.getPreferredSize().height);
+
         contentPane.setPreferredSize(new Dimension(750, 440));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
 
-        loadTable();
+        updateTable();
 
     }
 
-    private void loadTable() {
+    public void updateTable() {
         clintsDbIds = new ArrayList<>();
         ArrayList<Client> cl;
         cl = DBManager.getClientList();
@@ -183,20 +161,7 @@ public final class ClientListView extends JFrame {
                 rowData,
                 columnNames) {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-
-                if (currentRow!=-1){
-
-                    if (currentRow!=rowIndex){
-                        saveThePreviewsCollumn();
-                        currentRow = rowIndex;
-                    }
-
-                }
-                else
-                    currentRow = rowIndex;
-
-
-                return  true;
+                return false;
             }
         });
         //======== scrollPane1 ========
@@ -230,10 +195,11 @@ public final class ClientListView extends JFrame {
     // Generated using JFormDesigner Evaluation license - George Vlahavas
     private JScrollPane scrollPane1;
     private JTable table1;
-    private JButton button1;
-    private JButton button2;
+    private JButton buttonAdd;
+    private JButton buttonDelete;
     private JButton button3;
     private JLabel label1;
+    private JButton buttonEdit;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 
