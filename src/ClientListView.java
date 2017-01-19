@@ -70,7 +70,7 @@ public final class ClientListView extends JFrame {
     }
 
     private void thisWindowClosing(WindowEvent e) {
-        // TODO add your code here
+        this.dispose();
     }
 
     private void initComponents() {
