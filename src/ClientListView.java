@@ -39,24 +39,14 @@ public final class ClientListView extends JFrame {
 
     // delete button action
     private void button2ActionPerformed(ActionEvent e) {
-
-        int selected = table1.getSelectedRow();
-
-        if (selected == -1){
-            JOptionPane.showMessageDialog(null, "Please first select one Client from table!", "Error",
-                    JOptionPane.WARNING_MESSAGE);
+        int row = this.table1.getSelectedRow();
+        if (row != -1) { // -1 means nothing is selected
+            String clientID = this.table1.getValueAt(row, 0).toString();
+            Client selected = ClientList.INSTANCE.getClient(clientID);
+            ClientDeleteConfirmDialog cdcd = new ClientDeleteConfirmDialog(this, selected);
+            cdcd.setModal(true);
+            cdcd.show();
         }
-        else {
-            String selctedClintId = clintsDbIds.get(selected);
-            int rv = DBManager.deleteClient(selctedClintId);
-            if (rv != 0)
-                JOptionPane.showMessageDialog(null, "Unable to delete selected Client", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            else
-                currentRow =-1;
-
-        }
-        updateTable();
     }
 
     // ok button action
