@@ -44,7 +44,7 @@ public class RoomDeleteConfirmDialog extends JDialog {
         if (!conflict) {
             int rv = DBManager.deleteRoom(r);
             if (rv != 0) {
-                JOptionPane.showMessageDialog(null, "Error deleting room type from DB", "Error",
+                JOptionPane.showMessageDialog(null, "Error deleting room from DB", "Error",
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 RoomList.INSTANCE.update();
