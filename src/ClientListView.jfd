@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.2.5.1.342" Java: "1.8.0_112-release" encoding: "UTF-8"
+JFDML JFormDesigner: "5.2.5.0.333" Java: "1.8.0_91" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -8,6 +8,7 @@ new FormModel {
 		} ) {
 			name: "this"
 			"title": "Client List"
+			"resizable": false
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTable" ) {
@@ -16,15 +17,15 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 10
 				"y": 40
-				"width": 490
-				"height": 365
+				"width": 620
+				"height": 345
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "Add"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 525
+				"x": 640
 				"y": 40
 				"width": 90
 			} )
@@ -33,7 +34,7 @@ new FormModel {
 				"text": "Delete"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button2ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 525
+				"x": 640
 				"y": 75
 				"width": 90
 			} )
@@ -42,7 +43,7 @@ new FormModel {
 				"text": "Ok"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button3ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 525
+				"x": 640
 				"y": 385
 				"width": 90
 			} )
@@ -58,7 +59,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 635, 440 )
+			"size": new java.awt.Dimension( 750, 440 )
 		} )
 	}
 }

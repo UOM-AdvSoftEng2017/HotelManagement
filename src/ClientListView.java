@@ -110,7 +110,7 @@ public final class ClientListView extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Manos kakogian
+        // Generated using JFormDesigner Evaluation license - George Vlahavas
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         button1 = new JButton();
@@ -120,6 +120,7 @@ public final class ClientListView extends JFrame {
 
         //======== this ========
         setTitle("Client List");
+        setResizable(false);
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
@@ -128,25 +129,25 @@ public final class ClientListView extends JFrame {
             scrollPane1.setViewportView(table1);
         }
         contentPane.add(scrollPane1);
-        scrollPane1.setBounds(10, 40, 490, 365);
+        scrollPane1.setBounds(10, 40, 620, 345);
 
         //---- button1 ----
         button1.setText("Add");
         button1.addActionListener(e -> button1ActionPerformed(e));
         contentPane.add(button1);
-        button1.setBounds(525, 40, 90, button1.getPreferredSize().height);
+        button1.setBounds(640, 40, 90, button1.getPreferredSize().height);
 
         //---- button2 ----
         button2.setText("Delete");
         button2.addActionListener(e -> button2ActionPerformed(e));
         contentPane.add(button2);
-        button2.setBounds(525, 75, 90, button2.getPreferredSize().height);
+        button2.setBounds(640, 75, 90, button2.getPreferredSize().height);
 
         //---- button3 ----
         button3.setText("Ok");
         button3.addActionListener(e -> button3ActionPerformed(e));
         contentPane.add(button3);
-        button3.setBounds(525, 385, 90, button3.getPreferredSize().height);
+        button3.setBounds(640, 385, 90, button3.getPreferredSize().height);
 
         //---- label1 ----
         label1.setText("Client List");
@@ -154,7 +155,7 @@ public final class ClientListView extends JFrame {
         contentPane.add(label1);
         label1.setBounds(10, 20, 117, 17);
 
-        contentPane.setPreferredSize(new Dimension(635, 440));
+        contentPane.setPreferredSize(new Dimension(750, 440));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -226,7 +227,7 @@ public final class ClientListView extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Manos kakogian
+    // Generated using JFormDesigner Evaluation license - George Vlahavas
     private JScrollPane scrollPane1;
     private JTable table1;
     private JButton button1;
