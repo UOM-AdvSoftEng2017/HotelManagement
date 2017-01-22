@@ -167,27 +167,6 @@ public final class ClientListView extends JFrame {
         }
     }
 
-    private void saveThePreviewsCollumn() {
-        String selctedClintId = clintsDbIds.get(currentRow);
-        String selctedClintName = table1.getValueAt(currentRow, 1).toString();
-
-        try {
-            int  selctedClintPhone = (table1.getValueAt(currentRow, 2).toString().isEmpty() ? 0 : Integer.parseInt(table1.getValueAt(currentRow, 2).toString()));
-            Client c = new Client( selctedClintId,selctedClintName,selctedClintPhone);
-            int rv = DBManager.updateClient(c);
-            if (rv != 0)
-                JOptionPane.showMessageDialog(null, "Unable to update Client: "+selctedClintName , "Error",
-                        JOptionPane.ERROR_MESSAGE);
-        }
-        catch ( Exception e){
-            JOptionPane.showMessageDialog(null, "Phone number can be only integer!" , "Error",
-                    JOptionPane.WARNING_MESSAGE);
-           // table1.setValueAt("0",currentRow,2);
-        }
-
-
-    }
-
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - George Vlahavas
     private JScrollPane scrollPane1;
