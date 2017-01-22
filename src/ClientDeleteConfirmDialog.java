@@ -36,8 +36,8 @@ public class ClientDeleteConfirmDialog extends JDialog {
 
     private void okButtonActionPerformed(ActionEvent e) {
         boolean conflict = false; // are there any reservations for this user?
-        for (Client c : ClientList.INSTANCE.getCL()) {
-            if (c.getId().equals(this.client.getId())) {
+        for (Reservation r : ReservationList.INSTANCE.getRL()) {
+            if (r.getcID().equals(this.client.getId())) {
                 conflict = true;
                 break;
             }
