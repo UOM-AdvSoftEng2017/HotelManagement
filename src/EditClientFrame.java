@@ -31,14 +31,7 @@ public class EditClientFrame extends JDialog {
 
     private void okButtonActionPerformed(ActionEvent e) {
         boolean proceed = true;
-        int phone = -1;
-        try {
-            phone = Integer.parseInt(this.textFieldPhone.getText());
-        } catch (java.lang.NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(null, "Phone number is not a number!", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-            proceed = false;
-        }
+        String phone = this.textFieldPhone.getText();
         String name = this.textFieldName.getText();
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(null, "The client name cannot be empty!", "Error",

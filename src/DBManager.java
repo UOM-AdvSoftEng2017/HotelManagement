@@ -81,7 +81,7 @@ public enum DBManager {
 			while (rs.next() ) {
 				String id = rs.getString("cid");
 				String name = rs.getString("name");
-				int phone = rs.getInt("phone");
+				String phone = rs.getString("phone");
 				Client c = new Client(id, name, phone);
 				cl.add(c);
 			}
@@ -101,9 +101,9 @@ public enum DBManager {
 		s.append(c.getId());
 		s.append("\", \"");
 		s.append(c.getName());
-		s.append("\", ");
+		s.append("\", \"");
 		s.append(c.getPhone());
-		s.append(");");
+		s.append("\");");
 		return run(new String(s));
 	}
 
@@ -112,9 +112,9 @@ public enum DBManager {
 		StringBuilder s = new StringBuilder();
 		s.append("update Client set name = \"");
 		s.append(c.getName());
-		s.append("\", phone = ");
+		s.append("\", phone = \"");
 		s.append(c.getPhone());
-		s.append(" where cid == \"");
+		s.append("\" where cid == \"");
 		s.append(c.getId());
 		s.append("\";");
 		return DBManager.run(new String(s));

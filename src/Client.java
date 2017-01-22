@@ -2,9 +2,9 @@ public class Client {
 
     private String id;
     private String name;
-    private int phone;
+    private String phone;
 
-    public Client(String id, String name, int phone) {
+    public Client(String id, String name, String phone) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -41,11 +41,11 @@ public class Client {
         this.name = name;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -53,7 +53,7 @@ public class Client {
         // testing
         int retval;
         System.out.println("Creating a new Client:");
-        Client c = new Client("XZ123546", "Mat", 12354313);
+        Client c = new Client("XZ123546", "Mat", "12354313");
         retval = c.addToDB();
         if (retval == 0) {
             System.out.println("OK");
@@ -71,7 +71,7 @@ public class Client {
         }
         System.out.println(c);
         System.out.println("Changing the phone number:");
-        c.setPhone(987123653);
+        c.setPhone("987123653");
         retval = c.updateDB();
         if (retval == 0) {
             System.out.println("OK");
